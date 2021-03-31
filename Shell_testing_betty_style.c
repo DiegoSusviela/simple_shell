@@ -15,12 +15,13 @@ void shell(void)
 	char *envp[] = {"PATH=/bin", 0};
 	char *argv[100] = {"/bin/ls", "-l", NULL};
 	struct stat stats;
-
+	char *command;
 
 	printf ("$ ");
 	scanf("%s", str);
+	command = strcat( "/bin/", str);
 	/*printf("Current working dir: %s\n", current_path);*/
-	if(stat("/bin/ls", &stats) == 0)
+	if(stat(command, &stats) == 0)
 	{
 		int p_ppid = getpid();
 		printf("%i\n", p_ppid);
