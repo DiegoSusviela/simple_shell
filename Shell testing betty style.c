@@ -15,8 +15,8 @@ void main(void)
 	printf("\n");
 
 	if (str == "ls")
-		printf("folder empty");
+		printf("folder empty\n");
 	else
-		printf("unknown command");
+		printf("unknown command\n");
 	return (1);
 }
