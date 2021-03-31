@@ -12,7 +12,7 @@ void shell(void)
 	char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
 	char *envp[] = {"PATH=/bin", 0};
-	char *argv[100];
+	char *argv[99];
 	argv[99] = NULL;
 	argv[98] = current_path;
 	argv[97] = "/bin/ls";
