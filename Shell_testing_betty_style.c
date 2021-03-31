@@ -29,7 +29,7 @@ void shell(void)
 		{
 			int p_pid = getppid();
 			printf("%i\n", p_pid);
-			execve(argv[0], argv, NULL);
+			execve(command, argv, NULL);
 		}
 		wait(NULL);
 	}
