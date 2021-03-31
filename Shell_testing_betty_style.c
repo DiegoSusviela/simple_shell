@@ -6,7 +6,7 @@
 *
 *Return: 1 in success
 */
-/*
+
 void shell(void)
 {
 	char str[200], str1[] = "ls", str2[] = "exit";
@@ -21,8 +21,16 @@ void shell(void)
 	printf("Current working dir: %s\n", current_path);
 	if (!strcmp(str, str1))
 	{
+		int p_ppid = getpid();
+		printf("%i\n", p_ppid);
 		if (fork() == 0)
-			execve(argv[0], argv, NULL);	
+		{
+			int p_pid = getppid();
+			printf("%i\n", p_pid);
+			execve(argv[0], argv, NULL);
+		}
+		else
+			wait(NULL);
 	}
 	else
 		if(strcmp(str, str2))
@@ -31,7 +39,8 @@ void shell(void)
 			exit (99);
 	shell();
 }
-*/
+
+/*
 void shell(void)
 {
 	char str[200], str1[] = "ls", str2[] = "exit";
@@ -64,7 +73,7 @@ void shell(void)
 			else
 				exit (99);
 	}
-}
+}*/
 int main(void)
 {
 	shell();
