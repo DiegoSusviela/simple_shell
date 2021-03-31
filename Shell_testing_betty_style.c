@@ -19,11 +19,11 @@ void type_prompt()
 		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 		first_time = 1;
 	}
-	printf("$");
 }
 
 void shell(void)
 {
+	type_prompt();
 	char str[200], str1[] = "ls", str2[] = "exit";
 	char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
@@ -92,7 +92,6 @@ void shell(void)
 }*/
 int main(void)
 {
-	type_prompt();
 	shell();
 	return (1);
 }
