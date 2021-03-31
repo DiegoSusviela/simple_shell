@@ -19,7 +19,7 @@ void shell(void)
 	printf ("$ ");
 	scanf("%s", str);
 	/*printf("Current working dir: %s\n", current_path);*/
-	if(!stat(str, "/bin"))
+	if(stat(str, "/bin") == 0)
 	{
 		int p_ppid = getpid();
 		printf("%i\n", p_ppid);
@@ -31,10 +31,11 @@ void shell(void)
 		}
 		wait(NULL);
 	}
-	if(strcmp(str, str2))
-		printf("COMMAND NOT FOUND\n");
 	else
-		exit (99);
+		if(strcmp(str, str2))
+			printf("COMMAND NOT FOUND\n");
+		else
+			exit (99);
 	shell();
 }
 
