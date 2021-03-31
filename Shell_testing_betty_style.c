@@ -29,8 +29,35 @@ void shell(void)
 			printf("%i\n", p_pid);
 			execve(argv[0], argv, NULL);
 		}
-		else
-			wait(NULL);
+		wait(NULL);
+		if (fork() == 0)
+		{
+			int p_pid = getppid();
+			printf("%i\n", p_pid);
+			execve(argv[0], argv, NULL);
+		}
+		wait(NULL);
+		if (fork() == 0)
+		{
+			int p_pid = getppid();
+			printf("%i\n", p_pid);
+			execve(argv[0], argv, NULL);
+		}
+		wait(NULL);
+		if (fork() == 0)
+		{
+			int p_pid = getppid();
+			printf("%i\n", p_pid);
+			execve(argv[0], argv, NULL);
+		}
+		wait(NULL);
+		if (fork() == 0)
+		{
+			int p_pid = getppid();
+			printf("%i\n", p_pid);
+			execve(argv[0], argv, NULL);
+		}
+		wait(NULL);
 	}
 	else
 		if(strcmp(str, str2))
