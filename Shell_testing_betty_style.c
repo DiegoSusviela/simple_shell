@@ -13,7 +13,7 @@ void shell(void)
 	char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
 	char *envp[] = {"PATH=/bin", 0};
-	char *argv[] = {"/bin/ls", "-l", "-a", "t",current_path, NULL};
+	char *argv[] = {"/bin/ls", "-l", "-a", "-t",current_path, NULL};
 
 
 	printf ("$ ");
@@ -27,6 +27,7 @@ void shell(void)
 		else
 			exit (99);
 	shell();
+	
 }
 
 int main(void)
