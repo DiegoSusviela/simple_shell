@@ -16,5 +16,5 @@ int main(void)
 	printf("\n");
 	free(buffer);
 
-	return (strlen(str1));
+	return (0);
 }
