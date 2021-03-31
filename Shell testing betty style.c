@@ -14,7 +14,7 @@ int main(void)
 	scanf("%s", str);
 	printf("\n");
 
-	if (str == "ls")
+	if (str == 'ls')
 		printf("folder empty\n");
 	else
 		printf("unknown command\n");
