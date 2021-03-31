@@ -1,5 +1,5 @@
 #include "header.h"
-#include <limits.h>
+
 
 /*
 * main: this is a test for shell
@@ -20,7 +20,7 @@ void shell(void)
 	scanf("%s", str);
 	printf("Current working dir: %s\n", current_path);
 	if (!strcmp(str, str1))
-		execve(argv[0], argv, 1);
+		execve(argv[0], argv, NULL);
 	else
 		if(strcmp(str, str2))
 			printf("unknown command\n");
