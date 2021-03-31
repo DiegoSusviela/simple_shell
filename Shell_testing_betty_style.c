@@ -32,5 +32,6 @@ void shell(void)
 int main(void)
 {
 	shell();
+	main();
 	return (1);
 }
