@@ -23,7 +23,6 @@ void type_prompt()
 
 void shell(void)
 {
-	type_prompt();
 	char str[200], str1[] = "ls", str2[] = "exit";
 	char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
@@ -92,6 +91,7 @@ void shell(void)
 }*/
 int main(void)
 {
+	type_prompt();
 	shell();
 	return (1);
 }
