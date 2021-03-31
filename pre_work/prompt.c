@@ -4,12 +4,13 @@
 int main(void)
 {
 	char *buffer;
+	size_t bufsize = 64;
 	size_t str1;
 
-    buffer = (char *)malloc(BUFSIZE * sizeof(char));
+    buffer = (char *)malloc(bufsize * sizeof(char));
 
 	printf("$ ");
-	str1 = getline(&buffer,BUFSIZE,stdin);
+	str1 = getline(&buffer,&bufsize,stdin);
 	printf("\n");
 	printf("%s", str1);
 	printf("\n");

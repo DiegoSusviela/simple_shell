@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include<string.h>
 
-
+/*
 #define BUFSIZE 64
-
+*/
 #endif
