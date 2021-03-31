@@ -18,11 +18,11 @@ void shell(void)
 		printf("folder empty\n");
 	else
 		printf("unknown command\n");
-	shell;
+	shell();
 }
 
 int main(void)
 {
-	shell;
+	shell();
 	return (1);
 }
