@@ -13,12 +13,11 @@ void shell(void)
 	char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
 	char *envp[] = {"PATH=/bin", 0};
-	char *argv[] = {"/bin/ls", current_path, NULL};
+	char *argv[] = {"/bin/ls", "-l", "-a",current_path, NULL};
 
 
 	printf ("$ ");
 	scanf("%s", str);
-	printf("\n");
 	printf("Current working dir: %s\n", current_path);
 	if (!strcmp(str, str1))
 		execve(argv[0], argv, NULL);
