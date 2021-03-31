@@ -20,7 +20,7 @@ void shell(void)
 	scanf("%s", str);
 	printf("Current working dir: %s\n", current_path);
 	if (!strcmp(str, str1))
-		execve(argv[0], argv, NULL);
+		execve(argv[0], argv, 1);
 	else
 		if(strcmp(str, str2))
 			printf("unknown command\n");
@@ -32,6 +32,5 @@ void shell(void)
 int main(void)
 {
 	shell();
-	main();
 	return (1);
 }
