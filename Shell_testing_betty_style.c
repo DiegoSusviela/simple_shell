@@ -47,8 +47,14 @@ void shell(void)
 		printf("Current working dir: %s\n", current_path);
 		if (!strcmp(str, str1))
 		{
+			int p_ppid = getppid();
+			printf("%i\n", p_ppid);
 			if (fork() == 0)
-				execve(argv[0], argv, NULL);	
+			{
+				int p_pid = getppid();
+				printf("%i\n", p_pid);
+				execve(argv[0], argv, NULL);
+			}
 			else
 				wait(NULL);
 		}
