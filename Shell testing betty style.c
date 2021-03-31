@@ -6,7 +6,7 @@
 *Return: 1 in success
 */
 
-void main(void)
+int main(void)
 {
 	char *str;
 
