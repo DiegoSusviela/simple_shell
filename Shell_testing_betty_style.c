@@ -21,7 +21,7 @@ void shell(void)
 	printf("\n");
 	printf("Current working dir: %s\n", current_path);
 	if (!strcmp(str, str1))
-		execve(argv[0], argv, NULL);
+		execve(argv[0], argv, envp);
 	else
 		if(strcmp(str, str2))
 			printf("unknown command\n");
