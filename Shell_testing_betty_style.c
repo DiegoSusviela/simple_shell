@@ -20,7 +20,7 @@ void shell(void)
 	printf ("$ ");
 	scanf("%s", str);
 	/*printf("Current working dir: %s\n", current_path);*/
-	if(!stat("/bin/ls", &stats))
+	if(stat("/bin/ls", &stats) == 0)
 	{
 		int p_ppid = getpid();
 		printf("%i\n", p_ppid);
