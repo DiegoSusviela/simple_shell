@@ -18,5 +18,6 @@ int main(void)
 		printf("folder empty\n");
 	else
 		printf("unknown command\n");
+	main;
 	return (1);
 }
