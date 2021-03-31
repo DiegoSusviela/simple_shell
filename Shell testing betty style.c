@@ -6,7 +6,7 @@
 *Return: 1 in success
 */
 
-int main(void)
+void shell(void)
 {
 	char str[200], str1[] = "ls";
 
@@ -18,6 +18,11 @@ int main(void)
 		printf("folder empty\n");
 	else
 		printf("unknown command\n");
-	main;
+	shell;
+}
+
+int main(void)
+{
+	shell;
 	return (1);
 }
