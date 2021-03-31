@@ -48,10 +48,9 @@ void shell(void)
 		if (!strcmp(str, str1))
 		{
 			if (fork() == 0)
-			{
 				execve(argv[0], argv, NULL);	
+			else
 				wait(NULL);
-			}
 		}
 		else
 			if(strcmp(str, str2))
