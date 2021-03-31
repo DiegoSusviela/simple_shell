@@ -51,7 +51,7 @@ void shell(void)
 			printf("%i\n", p_ppid);
 			if (fork() == 0)
 			{
-				int p_pid = getppid();
+				int p_pid = getpid();
 				printf("%i\n", p_pid);
 				execve(argv[0], argv, NULL);
 			}
