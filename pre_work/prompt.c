@@ -12,7 +12,7 @@ int main(void)
 	printf("$ ");
 	str1 = getline(&buffer,&bufsize,stdin);
 	printf("\n");
-	printf("%s", str1);
+	printf("%zu", str1);
 	printf("\n");
 	free(buffer);
 
