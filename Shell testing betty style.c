@@ -8,16 +8,19 @@
 
 void shell(void)
 {
-	char str[200], str1[] = "ls";
+	char str[200], str1[] = "ls", str2[] = "exit";
 
 	printf ("$ ");
 	scanf("%s", str);
 	printf("\n");
 
-	if (strcmp(str, str1))
+	if (!strcmp(str, str1))
 		printf("folder empty\n");
 	else
-		printf("unknown command\n");
+		if(strcmp(str, str2))
+			printf("unknown command\n");
+		else
+			exit (99);
 	shell();
 }
 
