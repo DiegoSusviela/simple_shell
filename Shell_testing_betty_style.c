@@ -7,6 +7,21 @@
 *Return: 1 in success
 */
 
+
+void type_prompt()
+{
+	static int first_time = 1;
+	const char *CLEAR_SCREEN_ANSI;
+
+	if (first_time)
+	{
+		CLEAR_SCREEN_ANSI = "\e[1;1H[2J";
+		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
+		first_time = 1;
+	}
+	printf("$");
+}
+
 void shell(void)
 {
 	char str[200], str1[] = "ls", str2[] = "exit";
@@ -77,6 +92,7 @@ void shell(void)
 }*/
 int main(void)
 {
+	type_prompt();
 	shell();
 	return (1);
 }
