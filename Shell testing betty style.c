@@ -8,6 +8,15 @@
 
 void main(void)
 {
-	printf ("TESTING");
+	char *str;
+
+	printf ("$ ");
+	scanf("%s", str);
+	printf("\n");
+
+	if (str == "ls")
+		printf("folder empty");
+	else
+		printf("unknown command");
 	return (1);
 }
