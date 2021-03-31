@@ -11,9 +11,7 @@ int main(void)
 
 	printf("$ ");
 	str1 = getline(&buffer,&bufsize,stdin);
-	printf("\n");
 	printf("%s", buffer);
-	printf("\n");
 	free(buffer);
 
 	return (str1);
