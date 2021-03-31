@@ -10,6 +10,6 @@
 #include<string.h>
 
 
-#define BUFSIZE = 64
+#define BUFSIZE 64
 
 #endif
