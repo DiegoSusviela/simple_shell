@@ -13,7 +13,7 @@ void shell(void)
 	char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
 	char *envp[] = {"PATH=/bin", 0};
-	char *argv[100] = {"/bin/ls", "-l", NULL};
+	char *argv[100] = {"/bin/", NULL};
 	struct stat stats;
 	char command[] = "/bin/";
 
@@ -21,7 +21,7 @@ void shell(void)
 	scanf("%s", str);
 	strcat(command, str);
 	/*printf("Current working dir: %s\n", current_path);*/
-	if(stat(command, &stats) == 0)
+	if(!stat(command, &stats))
 	{
 		int p_ppid = getpid();
 		printf("%i\n", p_ppid);
