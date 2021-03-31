@@ -15,11 +15,11 @@ void shell(void)
 	char *envp[] = {"PATH=/bin", 0};
 	char *argv[100] = {"/bin/ls", "-l", NULL};
 	struct stat stats;
-	char *command;
+	char command[] = "/bin/";
 
 	printf ("$ ");
 	scanf("%s", str);
-	command = strcat( "/bin/", str);
+	strcat(command, str);
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(stat(command, &stats) == 0)
 	{
