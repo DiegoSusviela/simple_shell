@@ -8,13 +8,13 @@
 
 int main(void)
 {
-	char *str;
+	char str[200], str1[] = "ls";
 
 	printf ("$ ");
 	scanf("%s", str);
 	printf("\n");
 
-	if (str == 'ls')
+	if (strcmp(str, str1))
 		printf("folder empty\n");
 	else
 		printf("unknown command\n");
