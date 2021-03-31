@@ -18,8 +18,8 @@ void shell(void)
 
 	printf ("$ ");
 	scanf("%s", str);
-	printf("Current working dir: %s\n", current_path);
-	if (!strcmp(str, str1))
+	/*printf("Current working dir: %s\n", current_path);*/
+	if(!stat(str, "/bin"))
 	{
 		int p_ppid = getpid();
 		printf("%i\n", p_ppid);
@@ -30,40 +30,11 @@ void shell(void)
 			execve(argv[0], argv, NULL);
 		}
 		wait(NULL);
-		if (fork() == 0)
-		{
-			int p_pid = getppid();
-			printf("%i\n", p_pid);
-			execve(argv[0], argv, NULL);
-		}
-		wait(NULL);
-		if (fork() == 0)
-		{
-			int p_pid = getppid();
-			printf("%i\n", p_pid);
-			execve(argv[0], argv, NULL);
-		}
-		wait(NULL);
-		if (fork() == 0)
-		{
-			int p_pid = getppid();
-			printf("%i\n", p_pid);
-			execve(argv[0], argv, NULL);
-		}
-		wait(NULL);
-		if (fork() == 0)
-		{
-			int p_pid = getppid();
-			printf("%i\n", p_pid);
-			execve(argv[0], argv, NULL);
-		}
-		wait(NULL);
 	}
+	if(strcmp(str, str2))
+		printf("COMMAND NOT FOUND\n");
 	else
-		if(strcmp(str, str2))
-			printf("unknown command\n");
-		else
-			exit (99);
+		exit (99);
 	shell();
 }
 
