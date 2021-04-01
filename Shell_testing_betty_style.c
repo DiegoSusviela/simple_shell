@@ -48,7 +48,7 @@ void shell(void)
 		if (!stat(command2, &stats))
 		{
 			if (fork() == 0)
-				execve(command2, argv2, NULL);
+				execve(str, argv2, NULL);
 			wait(NULL);
 		}
 		else 
