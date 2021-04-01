@@ -39,14 +39,8 @@ void shell(void)
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
-		int p_ppid = getpid();
-		printf("%i\n", p_ppid);
 		if (fork() == 0)
-		{
-			int p_pid = getppid();
-			printf("%i\n", p_pid);
 			execve(command, argv, NULL);
-		}
 		wait(NULL);
 	}
 	else
@@ -55,11 +49,11 @@ void shell(void)
 			if (fork() == 0)
 				execve(command, argv, NULL);
 			wait(NULL);
-			if(strcmp(str, str2))
-				printf("COMMAND NOT FOUND\n");
-			else
-				exit (99);
 		}
+	if(strcmp(str, str2))
+		printf("COMMAND NOT FOUND\n");
+	else
+		exit (99);
 	shell();
 }
 
