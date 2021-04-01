@@ -28,7 +28,10 @@ char *_getenv(const char *name)
 
 	while(environ[i]) 
 		if (!strcmp(environ[i], name))
+		{	
+			printf("%s", environ[i]);
 			return (environ[i]);
+		}
 		else
 			i++;
 	return (NULL);
@@ -50,8 +53,6 @@ void shell(void)
 	scanf("%s", str);
 	strcat(command, str);
 	strcat(command2, str);
-	if (_getenv)
-		printf("%s\n", *_getenv);
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
