@@ -31,6 +31,7 @@ void shell(void)
 	struct stat stats;
 	char command[] = "/bin/";
 	char command2[] = "/usr/bin/";
+	char *argv2[100] = {"/usr/bin/", NULL};
 
 	printf ("$ ");
 	scanf("%s", str);
@@ -47,7 +48,7 @@ void shell(void)
 		if (!stat(command2, &stats))
 		{
 			if (fork() == 0)
-				execve(command2, argv, NULL);
+				execve(command2, argv2, NULL);
 			wait(NULL);
 		}
 		else 
