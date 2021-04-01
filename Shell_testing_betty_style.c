@@ -49,7 +49,7 @@ void shell(void)
 
 	printf ("$ ");
 	scanf("%s", str);
-	str1 = str;
+	strcpy(str1, str);
 	strcat(command, str);
 	strcat(command2, str);
 
