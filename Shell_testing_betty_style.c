@@ -47,10 +47,18 @@ void shell(void)
 	else
 		if (!stat(command2, &stats))
 		{
+			extern char **environ;
+
+			int i = 0;
+			while(environ[i]) 
+			{
+				printf("%s\n", environ[i++]); 
+			}
+/*
 			if (fork() == 0)
-				execve(command2, NULL, NULL);
+				execve(command2, argv2, NULL);
 			wait(NULL);
-		}
+		*/}
 		else 
 			if(strcmp(str, str2))
 				printf("COMMAND NOT FOUND\n");
