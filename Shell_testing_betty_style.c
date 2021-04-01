@@ -49,7 +49,7 @@ void shell(void)
 		{
 			extern char **environ;
 
-			printf("%p\n", *environ);
+			printf("%p\n", **environ);
 			printf("%s\n", *environ);
 			int i = 0;
 			while(environ[i]) 
