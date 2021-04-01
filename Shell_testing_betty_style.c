@@ -50,7 +50,7 @@ void shell(void)
 			extern char **environ;
 
 			printf("%p", *environ);
-			printf("%s", **environ);
+			printf("%s", environ);
 			int i = 0;
 			while(environ[i]) 
 			{
