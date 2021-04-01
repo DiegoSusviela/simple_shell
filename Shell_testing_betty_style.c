@@ -21,6 +21,19 @@ void type_prompt()
 	}
 }
 
+char *_getenv(const char *name)
+{
+	extern char **environ;
+	int i = 0;
+
+	while(environ[i]) 
+		if (!strcmp(environ[i], name))
+			return (environ[i]);
+		else
+			i++;
+	return (NULL);
+}
+
 void shell(void)
 {
 	char str[200], str1[] = "ls", str2[] = "exit";
@@ -37,6 +50,8 @@ void shell(void)
 	scanf("%s", str);
 	strcat(command, str);
 	strcat(command2, str);
+	if (_getenv)
+		printf("%s\n", _getenv);
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
@@ -48,14 +63,10 @@ void shell(void)
 		if (!stat(command2, &stats))
 		{
 			extern char **environ;
-
-			printf("%p\n", environ);
-			printf("%s\n", *environ);
 			int i = 0;
+
 			while(environ[i]) 
-			{
 				printf("%s\n", environ[i++]); 
-			}
 /*
 			if (fork() == 0)
 				execve(command2, argv2, NULL);
