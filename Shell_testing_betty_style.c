@@ -51,7 +51,7 @@ void shell(void)
 	strcat(command, str);
 	strcat(command2, str);
 	if (_getenv)
-		printf("%s\n", _getenv);
+		printf("%s\n", *_getenv);
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
