@@ -49,12 +49,12 @@ void shell(void)
 
 	printf ("$ ");
 	scanf("%s", str);
-	strcpy(str1, str);
+	/*strcpy(str1, str);
 	strcat(command, str);
-	strcat(command2, str);
+	strcat(command2, str);*/
 
-	if (_getenv(str1))
-		printf("%s\n", _getenv(str1));
+	if (_getenv(str))
+		printf("%s\n", _getenv(str));
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
