@@ -26,6 +26,7 @@ char *_getenv(const char *name)
 	extern char **environ;
 	int i = 0;
 	printf("%s\n", environ[i]);
+	printf("%s\n", name);
 	while(environ[i]) 
 		if (!strcmp(environ[i], name))
 			return (environ[i]);
