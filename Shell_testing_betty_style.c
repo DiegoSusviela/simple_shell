@@ -37,7 +37,7 @@ char *_getenv(const char *name)
 
 void shell(void)
 {
-	char str[200], str1[] = "ls", str2[] = "exit";
+	char str[200], str1, str2[] = "exit";
 	char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
 	char *envp[] = {"PATH=/bin", 0};
@@ -49,10 +49,12 @@ void shell(void)
 
 	printf ("$ ");
 	scanf("%s", str);
+	str1 = str;
 	strcat(command, str);
 	strcat(command2, str);
-	if (_getenv(str))
-		printf("%s\n", _getenv(str));
+
+	if (_getenv(str1))
+		printf("%s\n", _getenv(str1));
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
