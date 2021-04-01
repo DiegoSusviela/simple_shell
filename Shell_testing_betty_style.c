@@ -30,10 +30,12 @@ void shell(void)
 	char *argv[100] = {"/bin/", NULL};
 	struct stat stats;
 	char command[] = "/bin/";
+	char command2[] = "/usr/bin/";
 
 	printf ("$ ");
 	scanf("%s", str);
 	strcat(command, str);
+	strcat(command2, str);
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
@@ -48,47 +50,19 @@ void shell(void)
 		wait(NULL);
 	}
 	else
-		if(strcmp(str, str2))
-			printf("COMMAND NOT FOUND\n");
-		else
-			exit (99);
+		if (!stat(command2, &stats))
+		{
+			if (fork() == 0)
+				execve(command, argv, NULL);
+			wait(NULL);
+			if(strcmp(str, str2))
+				printf("COMMAND NOT FOUND\n");
+			else
+				exit (99);
+		}
 	shell();
 }
 
-/*
-void shell(void)
-{
-	char str[200], str1[] = "ls", str2[] = "exit";
-	char current_path[PATH_MAX];
-	getcwd(current_path, sizeof(current_path));
-	char *envp[] = {"PATH=/bin", 0};
-	char *argv[100] = {"/bin/ls", current_path, NULL};
-
-	while (1)
-	{
-		printf ("$ ");
-		scanf("%s", str);
-		printf("Current working dir: %s\n", current_path);
-		if (!strcmp(str, str1))
-		{
-			int p_ppid = getpid();
-			printf("%i\n", p_ppid);
-			if (fork() == 0)
-			{
-				int p_pid = getppid();
-				printf("%i\n", p_pid);
-				execve(argv[0], argv, NULL);
-			}
-			else
-				wait(NULL);
-		}
-		else
-			if(strcmp(str, str2))
-				printf("unknown command\n");
-			else
-				exit (99);
-	}
-}*/
 int main(void)
 {
 	type_prompt();
