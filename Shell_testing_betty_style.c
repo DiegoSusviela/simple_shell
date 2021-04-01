@@ -47,13 +47,14 @@ void shell(void)
 		if (!stat(command2, &stats))
 		{
 			if (fork() == 0)
-				execve(command, argv, NULL);
+				execve(command2, argv, NULL);
 			wait(NULL);
 		}
-	if(strcmp(str, str2))
-		printf("COMMAND NOT FOUND\n");
-	else
-		exit (99);
+		else 
+			if(strcmp(str, str2))
+				printf("COMMAND NOT FOUND\n");
+			else
+				exit (99);
 	shell();
 }
 
