@@ -55,8 +55,12 @@ char *find_path(char *usr_input)
 
 int find_and_run_command(char *usr_input)
 {
+	/*
 	char *pathname;
-	pathname = "/bin/";/*find_path(usr_input);*/
+	pathname = find_path(usr_input);
+	*/
+
+	char pathname[] = "/bin/";
 	char *argv[100] = {pathname, NULL};
 
 	strcat(pathname, usr_input);
