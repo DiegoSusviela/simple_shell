@@ -20,11 +20,10 @@ void start_new_promtp(void)
 char *take_user_input()
 {
 	int imput_lines;
-	ssize_t bufsize = 64;
+	ssize_t bufsize = 0;
 	char *input;
 
-	input = (char *)malloc(bufsize * sizeof(char));
-	if (geline(&input, &bufsize, stdin) == -1)
+	if (getline(&input, &bufsize, stdin) == -1)
 	{
 		if (feof(stdin))
 			exit(EXIT_SUCCESS);
