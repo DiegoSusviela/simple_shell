@@ -70,12 +70,9 @@ int find_and_run_command(char *usr_input)
 	char pathname[] = "/bin/";
 	char *argv[100] = {pathname, NULL};
 	argv[0] = pathname;
-	printf("%s\n", usr_input);
 	strcat(pathname, usr_input);
-	printf("%s\n", pathname);
 	if(stat(pathname, &stats))
 	{
-		printf("%s\n", pathname);
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
