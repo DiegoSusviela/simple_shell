@@ -19,8 +19,10 @@ void start_new_promtp(void)
 
 char *take_user_input()
 {
-	ssize_t bufsize = 0;
+	ssize_t bufsize = BUFFSIZE;
 	char *input;
+
+	input = (char *) malloc (bufsize);
 
 	if (getline(&input, &bufsize, stdin) == -1)
 	{
@@ -58,16 +60,6 @@ int find_and_run_command(char *usr_input)
 	char *pathname;
 	pathname = find_path(usr_input);
 	*/
-	char str1[200];
-	scanf("%s", str1);
-	if (!strcmp(str1, usr_input))
-		printf("son iguales");
-	else
-		printf("no son iguales");
-
-
-
-
 	struct stat stats;
 	char pathname[] = "/bin/";
 	char *argv[100] = {pathname, NULL};
