@@ -59,10 +59,23 @@ int validate_usr_in(char *usr_input)
 	return(1);
 }
 
-char *find_path(char *usr_input)
+char *find_path(char **env)
 {
-	/*char *test[] = "/bin/"; */
-	return (0);
+	/*
+	char *path = "PATH=";
+	unsigned int i = 0, j;
+
+	while(env[i])
+	{
+		for (j = 0; j < 5; j++)
+			if (path[j] != env[i][j])
+				break;
+		if (j == 5)
+			break;
+		i++;
+	}
+	return (env[i]);
+	*/
 }
 
 int find_and_run_command(char *usr_input)
