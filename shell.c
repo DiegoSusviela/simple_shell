@@ -62,7 +62,7 @@ int find_and_run_command(char *usr_input)
 	*/
 	struct stat stats;
 	char pathname[] = "/bin/";
-	char *argv[100] = {pathname, NULL};
+	char *argv[100] = {"/bin/", NULL};
 
 	strcat(pathname, usr_input);
 	if(!stat(pathname, &stats))
