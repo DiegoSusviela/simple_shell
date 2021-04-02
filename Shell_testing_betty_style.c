@@ -16,7 +16,7 @@ void type_prompt()
 	{
 		CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
 		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-		first_time = 0;
+		first_time = 1;
 	}
 }
 
@@ -48,12 +48,12 @@ void shell(void)
 
 	printf ("$ ");
 	scanf("%s", str);
-	strcpy(str1, str);
+	/*strcpy(str1, str);*/
 	strcat(command, str);
 	strcat(command2, str);
 
-	if (_getenv(str))
-		printf("%s\n", _getenv(str));
+	/*if (_getenv(str))
+		printf("%s\n", _getenv(str));*/
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
