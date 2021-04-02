@@ -59,19 +59,17 @@ void start_shell(void)
 	usr_input = take_user_input();
 	if (validate_usr_in(usr_input))
 	{
-		printf("validacion correcta");
+		printf("validacion correcta\n");
 		if (!find_and_run_command(usr_input))
 		{
-			printf("Unkown command, error 98");
+			printf("Unkown command, error 98\n");
 			free(usr_input);
-			exit(98);
 		}
 	}
 	else
 	{
 		printf("Invalid command, error 99");
 		free(usr_input);
-		exit(99);
 	}
 	start_shell();
 }
