@@ -19,22 +19,31 @@ void start_new_promtp(void)
 
 char *take_user_input()
 {
-	ssize_t bufsize = 1024;
-	char *input;
+	ssize_t bufsize = 0;
+	char *input = NULL;
+	ssize_t readcount = 0;
+	int i = 0;
 
-	input = (char *)malloc(bufsize * sizeof(char));
-
-	if (getline(&input, &bufsize, stdin) == -1)
+	readcount = getline(&input, &bufsize, stdin);
+	if (readcount == -1)
 	{
-		if (feof(stdin))
-			exit(EXIT_SUCCESS);
-		else
+		free(input);
+		if (isatty(STDIN_FILENO) != 0)
+			write(STDOUT_FILENO, "\n", 1);
+		exit(0);
+		if (input[readcount - 1] == '\n' || input[readcount - 1] == '\t')
+			input[readcount - 1] = '\0';
+		i = 0;
+		while (input[i])
 		{
-			perror("readline");
-			exit(EXIT_FAILURE);
+			if (input[i] == '#' && input[i - 1] == ' ')
+			{
+				input[i] = '\0';
+				break;
+			}
+			i++;
 		}
 	}
-	input[strlen(input) - 1] = '\0';
 	return (input);
 } 
 
