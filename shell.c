@@ -49,7 +49,7 @@ int validate_usr_in(char *usr_input)
 
 char *find_path(char *usr_input)
 {
-	char test[] = "/bin/"; 
+	char *test[] = "/bin/"; 
 	return (test);
 }
 
