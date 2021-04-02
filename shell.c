@@ -47,10 +47,26 @@ int validate_usr_in(char *usr_input)
 	return(1);
 }
 
-int find_and_run_command(char *use_input)
+char *find_path(char *usr_input)
 {
+	char test[] = "/bin/"; 
+	return (test);
+}
+
+int find_and_run_command(char *usr_input)
+{
+	char *pathname;
+	pathname = find_path(usr_input);
+	char *argv[100] = {pathname, NULL};
+
+	strcat(pathname, usr_input);
+
+	if (fork() == 0)
+		execve(pathname, argv, NULL);
+	wait(NULL);
 	return (0);
 }
+
 void start_shell(void)
 {
 	char *usr_input;
@@ -68,7 +84,7 @@ void start_shell(void)
 	}
 	else
 	{
-		printf("Invalid command, error 99");
+		printf("Invalid command, error 99\n");
 		free(usr_input);
 	}
 	start_shell();
