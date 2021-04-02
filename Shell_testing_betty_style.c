@@ -7,7 +7,6 @@
 *Return: 1 in success
 */
 
-
 void type_prompt()
 {
 	static int first_time = 1;
@@ -49,9 +48,9 @@ void shell(void)
 
 	printf ("$ ");
 	scanf("%s", str);
-	/*strcpy(str1, str);
+	strcpy(str1, str);
 	strcat(command, str);
-	strcat(command2, str);*/
+	strcat(command2, str);
 
 	if (_getenv(str))
 		printf("%s\n", _getenv(str));
