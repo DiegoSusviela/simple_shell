@@ -67,7 +67,7 @@ int find_and_run_command(char *usr_input)
 	if(!stat(usr_input, &stats))
 	{
 		strcat(pathname, usr_input);
-			printf("%s\n", usr_input);
+			printf("%s\n", pathname);
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
