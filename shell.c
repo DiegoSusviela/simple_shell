@@ -89,14 +89,13 @@ void start_shell(void)
 		if (!find_and_run_command(usr_input))
 		{
 			printf("Unkown command, error 98\n");
-			free(usr_input);
 		}
 	}
 	else
 	{
 		printf("Invalid command, error 99\n");
-		free(usr_input);
 	}
+	free(usr_input);
 	start_shell();
 }
 
