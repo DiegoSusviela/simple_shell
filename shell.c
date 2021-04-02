@@ -19,7 +19,7 @@ void start_new_promtp(void)
 
 char *take_user_input()
 {
-	ssize_t bufsize = 2;
+	ssize_t bufsize = 0;
 	char *input;
 
 	input = (char *)malloc(bufsize * sizeof(char));
