@@ -24,6 +24,7 @@ char *take_user_input()
 	ssize_t readcount = 0;
 	int i = 0;
 
+	input = (char *)malloc(bufsize * sizeof(char));
 	readcount = getline(&input, &bufsize, stdin);
 	if (readcount == -1)
 	{
