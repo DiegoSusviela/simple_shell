@@ -59,16 +59,20 @@ int find_and_run_command(char *usr_input)
 	char *pathname;
 	pathname = find_path(usr_input);
 	*/
-
+	struct stat stats;
 	char pathname[] = "/bin/";
 	char *argv[100] = {pathname, NULL};
 
 	strcat(pathname, usr_input);
-
-	if (fork() == 0)
-		execve(pathname, argv, NULL);
-	wait(NULL);
-	return (0);
+	if(!stat(usr_input, &stats))
+	{
+		if (fork() == 0)
+			execve(pathname, argv, NULL);
+		wait(NULL);
+		return (1);
+	}
+	else
+		return (0);
 }
 
 void start_shell(void)
