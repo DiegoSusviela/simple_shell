@@ -59,7 +59,7 @@ int find_and_run_command(char *usr_input)
 	pathname = find_path(usr_input);
 	*/
 	char *str1;
-	scanf(str1);
+	scanf("%s", str1);
 	if (strcmp(str1, usr_input))
 		printf("son iguales");
 
