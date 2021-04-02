@@ -19,10 +19,10 @@ void start_new_promtp(void)
 
 char *take_user_input()
 {
-	ssize_t bufsize = BUFFSIZE;
+	ssize_t bufsize = 64;
 	char *input;
 
-	input = (char *) malloc (bufsize);
+	input = (char *)malloc(bufsize * sizeof(char));
 
 	if (getline(&input, &bufsize, stdin) == -1)
 	{
