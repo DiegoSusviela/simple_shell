@@ -1,6 +1,8 @@
 #ifndef HEADER_H
 #define HEADER_H
 
+#define BUFFSIZE 1024
+
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>

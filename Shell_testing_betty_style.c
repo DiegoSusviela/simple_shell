@@ -62,7 +62,7 @@ void shell(void)
 		wait(NULL);
 	}
 	else
-		/*if (!stat(command2, &stats))
+		if (!stat(command2, &stats))
 		{
 			extern char **environ;
 			int i = 0;
@@ -73,7 +73,7 @@ void shell(void)
 				execve(command2, argv2, NULL);
 			wait(NULL);
 		}
-		else */
+		else
 			if(strcmp(str, str2))
 				printf("COMMAND NOT FOUND\n");
 			else
