@@ -49,14 +49,14 @@ int validate_usr_in(char *usr_input)
 
 char *find_path(char *usr_input)
 {
-	char *test[] = "/bin/"; 
-	return (test);
+	/*char *test[] = "/bin/"; */
+	return (0);
 }
 
 int find_and_run_command(char *usr_input)
 {
 	char *pathname;
-	pathname = find_path(usr_input);
+	pathname = "/bin/";/*find_path(usr_input);*/
 	char *argv[100] = {pathname, NULL};
 
 	strcat(pathname, usr_input);
