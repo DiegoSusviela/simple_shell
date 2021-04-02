@@ -62,10 +62,12 @@ int find_and_run_command(char *usr_input)
 	struct stat stats;
 	char pathname[] = "/bin/";
 	char *argv[100] = {pathname, NULL};
-
+	argv[0] = pathname;
+	printf("%s\n", usr_input);
 	if(!stat(usr_input, &stats))
 	{
 		strcat(pathname, usr_input);
+			printf("%s\n", usr_input);
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
