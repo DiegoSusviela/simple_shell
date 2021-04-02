@@ -52,15 +52,15 @@ char *find_path(char *usr_input)
 	return (0);
 }
 
-int find_and_run_command(const char *usr_input)
+int find_and_run_command(char *usr_input)
 {
 	/*
 	char *pathname;
 	pathname = find_path(usr_input);
 	*/
-	const char *str1;
+	char *str1;
 	scanf("%s", str1);
-	if (strcmp(str1, usr_input))
+	if (!strcmp(str1, usr_input))
 		printf("son iguales");
 
 
