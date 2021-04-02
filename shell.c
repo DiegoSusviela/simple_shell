@@ -74,9 +74,11 @@ int find_and_run_command(char *usr_input)
 	struct stat stats;
 	char pathname[] = "/bin/";
 	char *argv[100] = {"/bin/", NULL};
-
+	
+	printf("%zi", strlen(usr_input));
 	strcat(pathname, usr_input);
 	printf("%s", pathname);
+	printf("%zi", strlen(usr_input));
 	if(!stat(pathname, &stats))
 	{
 		if (fork() == 0)
