@@ -62,11 +62,10 @@ int find_and_run_command(char *usr_input)
 	scanf("%s", str1);
 		printf("%s\n", str1);
 	printf("%s\n", usr_input);
-
+/*
 	if (!strcmp(str1, usr_input))
 		printf("son iguales");
-
-
+*/
 
 
 	struct stat stats;
