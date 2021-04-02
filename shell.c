@@ -90,7 +90,7 @@ void start_shell(void)
 	usr_input = take_user_input();
 
 
-	char *str1[210];
+	char str1[210];
 	scanf("%s", str1);
 		printf("%s\n", str1);
 	printf("%s\n", usr_input);
