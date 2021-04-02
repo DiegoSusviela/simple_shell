@@ -58,10 +58,6 @@ int find_and_run_command(char *usr_input)
 	char *pathname;
 	pathname = find_path(usr_input);
 	*/
-	char *str1;
-	scanf("%s", str1);
-		printf("%s\n", str1);
-	printf("%s\n", usr_input);
 /*
 	if (!strcmp(str1, usr_input))
 		printf("son iguales");
@@ -92,7 +88,11 @@ void start_shell(void)
 
 	printf("$ ");
 	usr_input = take_user_input();
+	
 
+	char *str1;
+	scanf("%s", str1);
+		printf("%s\n", str1);
 	printf("%s\n", usr_input);
 
 
