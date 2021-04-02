@@ -32,18 +32,18 @@ char *take_user_input()
 		if (isatty(STDIN_FILENO) != 0)
 			write(STDOUT_FILENO, "\n", 1);
 		exit(0);
-		if (input[readcount - 1] == '\n' || input[readcount - 1] == '\t')
-			input[readcount - 1] = '\0';
-		i = 0;
-		while (input[i])
+	}
+	if (input[readcount - 1] == '\n' || input[readcount - 1] == '\t')
+		input[readcount - 1] = '\0';
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '#' && input[i - 1] == ' ')
 		{
-			if (input[i] == '#' && input[i - 1] == ' ')
-			{
-				input[i] = '\0';
-				break;
-			}
-			i++;
+			input[i] = '\0';
+			break;
 		}
+		i++;
 	}
 	return (input);
 } 
@@ -74,7 +74,7 @@ int find_and_run_command(char *usr_input)
 	struct stat stats;
 	char pathname[] = "/bin/";
 	char *argv[100] = {"/bin/", NULL};
-	
+
 	printf("%zi", strlen(usr_input));
 	strcat(pathname, usr_input);
 	printf("%s", pathname);
