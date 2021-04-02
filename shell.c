@@ -92,6 +92,10 @@ void start_shell(void)
 
 	printf("$ ");
 	usr_input = take_user_input();
+
+	printf("%s\n", usr_input);
+
+
 	if (validate_usr_in(usr_input))
 	{
 		printf("validacion correcta\n");
