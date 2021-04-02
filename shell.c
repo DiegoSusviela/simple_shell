@@ -65,6 +65,8 @@ int find_and_run_command(char *usr_input)
 	char *argv[100] = {"/bin/", NULL};
 
 	printf("%zi\n", strlen(usr_input));
+	usr_input[strlen(usr_input)] = '\0';
+	printf("%zi\n", strlen(usr_input));
 	strcat(pathname, usr_input);
 	printf("%s", pathname);
 	if(!stat(pathname, &stats))
