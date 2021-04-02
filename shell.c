@@ -19,7 +19,6 @@ void start_new_promtp(void)
 
 char *take_user_input()
 {
-	int imput_lines;
 	ssize_t bufsize = 0;
 	char *input;
 
@@ -66,7 +65,7 @@ int find_and_run_command(char *usr_input)
 	printf("%s\n", usr_input);
 	strcat(pathname, usr_input);
 	printf("%s\n", pathname);
-	if(!stat(pathname, &stats))
+	if(stat(pathname, &stats))
 	{
 		printf("%s\n", pathname);
 		if (fork() == 0)
