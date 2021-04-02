@@ -16,7 +16,7 @@ void type_prompt()
 	{
 		CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
 		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-		first_time = 1;
+		first_time = 0;
 	}
 }
 
