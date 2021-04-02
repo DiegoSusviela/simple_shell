@@ -14,9 +14,9 @@ void type_prompt()
 
 	if (first_time)
 	{
-		CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
+		CLEAR_SCREEN_ANSI = " \e[1;1H\e[2J";
 		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-		first_time = 1;
+		first_time = 0;
 	}
 }
 
@@ -26,7 +26,7 @@ char *_getenv(const char *name)
 	int i = 0;
 	printf("%s\n", environ[i]);
 	printf("%s\n", name);
-	while(environ[i]) 
+	while(environ[i])
 		if (!strcmp(environ[i], name))
 			return (environ[i]);
 		else
@@ -46,7 +46,7 @@ void shell(void)
 	char command2[] = "/usr/bin/";
 	char *argv2[100] = {"/usr/bin/", NULL};
 
-	printf ("$ ");
+	printf("$");
 	scanf("%s", str);
 	strcpy(str1, str);
 	strcat(command, str);
@@ -67,14 +67,14 @@ void shell(void)
 			extern char **environ;
 			int i = 0;
 
-			while(environ[i]) 
-				printf("%s\n", environ[i++]); 
+			while(environ[i])
+				printf("%s\n", environ[i++]);
 /*
 			if (fork() == 0)
 				execve(command2, argv2, NULL);
 			wait(NULL);
 		*/}
-		else 
+		else
 			if(strcmp(str, str2))
 				printf("COMMAND NOT FOUND\n");
 			else
