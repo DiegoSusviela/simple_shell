@@ -62,6 +62,8 @@ int find_and_run_command(char *usr_input)
 	scanf("%s", str1);
 	if (!strcmp(str1, usr_input))
 		printf("son iguales");
+	else
+		printf("no son iguales");
 
 
 
