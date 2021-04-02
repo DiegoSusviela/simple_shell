@@ -58,6 +58,14 @@ int find_and_run_command(char *usr_input)
 	char *pathname;
 	pathname = find_path(usr_input);
 	*/
+	char *str1;
+	scanf(str1);
+	if (strcmp(str1, usr_input))
+		printf("son iguales");
+
+
+
+
 	struct stat stats;
 	char pathname[] = "/bin/";
 	char *argv[100] = {pathname, NULL};
@@ -73,8 +81,7 @@ int find_and_run_command(char *usr_input)
 		wait(NULL);
 		return (1);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 void start_shell(void)
