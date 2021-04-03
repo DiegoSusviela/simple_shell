@@ -136,34 +136,28 @@ int find_and_run_command()
 	pathname = malloc(1);
 	while (pathfinder[pos][0])
 	{
-		printf("free will break\n");
 		free(pathname);
-		printf("free didnt break\n");
 		pathname = strdup(pathfinder[pos][0]); /*remmember to free this memory*/
 		strcat(pathname, buffer);
-		printf("%s\n", pathname);
 		if (!stat(pathname, &stats))
 			break;
 		pos++;
 	}
 	if (!pathfinder[pos][0])
 	{
-		printf("entro1\n");
+		free(pathname);
 		if(strcmp(buffer, str2))
-			printf("COMMAND NOT FOUND\n");
-		else
-			exit (99);
+			return (0);
+		exit (99);
 	}
 	else
 	{
-		printf("entro2\n");
-		printf("%s\n", pathname);
 		if (fork() == 0)
 			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
+		free(pathname);
 		return (1);
 	}
-	return (0);
 }
 
 void start_shell(void)
