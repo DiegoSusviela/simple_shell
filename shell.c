@@ -27,6 +27,28 @@ int validate_usr_in(char *usr_input)
 	return(1);
 }
 
+char *space_remover(char *to_remove)
+{
+	int pos_rem = 0, flag = 0, pos_cont = 0;
+	char *word_container, *words;
+
+	/*word_container = malloc(sizeof(words) * amount_words(to_remove));*/
+	word_container = malloc(BUFFSIZE);
+	while(to_remove[pos_rem])
+	{
+		word_container[pos_cont] = to_remove[pos_rem];
+		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
+			pos_rem++;
+		while (to_remove[pos_rem] == ' ')
+		{
+			to_remove[pos_rem] = '\0';
+			pos_rem++;
+		}
+		pos_cont++;
+	}
+	return (word_container);
+}
+
 char *find_path(char **env)
 {
 	/*
@@ -48,9 +70,9 @@ char *find_path(char **env)
 
 int find_and_run_command()
 {
-	int pos = 0;
+	int pos = 0, i = 0;
 	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit";
+	char *pathname, *tmp, str2[] = "exit", *buffer = NULL, *buffer_holder;
 	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
 		{"/usr/local/bin/", NULL},
@@ -61,8 +83,6 @@ int find_and_run_command()
 		{NULL, NULL}
 	};	
 	ssize_t bufsize = 1024, readcount = 0;
-	char *buffer = NULL;
-	int i = 0;
 
 	readcount = getline(&buffer, &bufsize, stdin);
 	if (readcount == -1)
@@ -82,6 +102,8 @@ int find_and_run_command()
 		}
 		i++;
 	}
+	buffer_holder = space_remover(buffer);
+	buffer = buffer_holder[0];
 	pos = 0;
 	while (pathfinder[pos][0])
 	{
