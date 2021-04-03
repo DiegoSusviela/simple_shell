@@ -73,7 +73,6 @@ int find_and_run_command()
 	int pos = 0, i = 0;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL; 
-	int *aux;
 	int *buffer_holder;
 	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
@@ -104,9 +103,27 @@ int find_and_run_command()
 		}
 		i++;
 	}
-	buffer_holder = space_remover(buffer);
-	aux = buffer_holder[0];
-	buffer = *aux;
+
+
+	int pos_rem = 0, flag = 0, pos_cont = 0;
+	int *word_container[5], *words;
+
+	/*word_container = malloc(sizeof(words) * amount_words(to_remove));*/
+	/*word_container = malloc(BUFFSIZE);*/
+	while(buffer[pos_rem])
+	{
+		word_container[pos_cont] = &buffer[pos_rem];
+		while (buffer[pos_rem] !=  ' ' && buffer[pos_rem])
+			pos_rem++;
+		while (buffer[pos_rem] == ' ')
+		{
+			buffer[pos_rem] = '\0';
+			pos_rem++;
+		}
+		pos_cont++;
+	}
+
+	
 	pos = 0;
 	while (pathfinder[pos][0])
 	{
