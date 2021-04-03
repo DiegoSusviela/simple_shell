@@ -27,7 +27,10 @@ int validate_usr_in(char *usr_input)
 	return(1);
 }
 
-void space_remover(char *to_remove, int *word_container)
+
+
+
+void space_remover(char *to_remove, char **word_container)
 {
 	int pos_rem = 0, flag = 0, pos_cont = 0;
 	char *words;
@@ -36,7 +39,7 @@ void space_remover(char *to_remove, int *word_container)
 	word_container = malloc(BUFFSIZE);
 	while(to_remove[pos_rem])
 	{
-		word_container[pos_cont] = pos_rem;
+		*word_container[pos_cont] = &to_remove[pos_rem];
 		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
 			pos_rem++;
 		while (to_remove[pos_rem] == ' ')
@@ -72,7 +75,7 @@ int find_and_run_command()
 	int pos = 0, i = 0;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
-	int *word_container;
+	char **word_container;
 
 	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
@@ -104,10 +107,11 @@ int find_and_run_command()
 		i++;
 	}
 
-	/**word_container = malloc(sizeof(int) * 10);*/
+	word_container = malloc(sizeof(int) * 10);
 	space_remover(buffer, word_container);
 	pos = 0;
-	/*printf("%c\n", buffer[word_container[1]]);*/
+	buffer = *word_container[0];
+	printf("%s\n", buffer);
 	while (pathfinder[pos][0])
 	{
 		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
