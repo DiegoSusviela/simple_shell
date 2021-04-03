@@ -57,12 +57,12 @@ char *take_user_input()
 
 int validate_usr_in(char *usr_input)
 {
-	/*int pos = 0;
+	int pos = 0;
 
 	while(usr_input[pos] && usr_input[pos] != ' ')
 		pos++;
 	if (usr_input[pos])
-		return (0);*/
+		return (0);
 	return(1);
 }
 
@@ -85,20 +85,43 @@ char *find_path(char **env)
 	*/
 }
 
-int find_and_run_command(char *usr_input)
+int find_and_run_command()
 {
-	/*
-	char *pathname;
-	pathname = find_path(usr_input);
-	*/
 	struct stat stats;
-	char pathname[] = "/bin/", str2[] = "exit";
-	char *argv[100] = {"/bin/", NULL};
+	char pathname[] = "/bin/", pathname2[] = "/usr/bin/", str2[] = "exit";
+	char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};
+	ssize_t bufsize = 1024, readcount = 0;
+	char *buffer = NULL;
+	int i = 0;
 
-	printf("%zi", strlen(usr_input));
-	strcat(pathname, usr_input);
-	printf("%s", pathname);
-	printf("%zi", strlen(usr_input));
+	buffer = (char *)malloc(bufsize * sizeof(char));
+	if (!buffer)
+	{
+		printf("No mem, error 97\n");
+		exit (97);
+	}
+	readcount = getline(&buffer, &bufsize, stdin);
+	/*printf("%zu\n", bufsize);
+	printf("%zu\n", strlen(buffer));*/
+	if (readcount == -1)
+	{
+		free(buffer);
+		if (isatty(STDIN_FILENO) != 0)
+			write(STDOUT_FILENO, "\n", 1);
+		exit(0);
+	}
+	if (buffer[readcount - 1] == '\n' || buffer[readcount - 1] == '\t')
+		buffer[readcount - 1] = '\0';
+	while (buffer[i])
+	{
+		if (buffer[i] == '#' && buffer[i - 1] == ' ')
+		{
+			buffer[i] = '\0';
+			break;
+		}
+		i++;
+	}
+	strcat(pathname, buffer);
 	if(!stat(pathname, &stats))
 	{
 		if (fork() == 0)
@@ -107,7 +130,7 @@ int find_and_run_command(char *usr_input)
 		return (1);
 	}
 	else
-		if(strcmp(usr_input, str2))
+		if(strcmp(buffer, str2))
 			printf("COMMAND NOT FOUND\n");
 		else
 			exit (99);
@@ -116,23 +139,23 @@ int find_and_run_command(char *usr_input)
 
 void start_shell(void)
 {
-	char *usr_input;
+	/*char *usr_input;*/
 
 	printf("$ ");
-	usr_input = take_user_input();
+	/*usr_input = take_user_input();
 	if (validate_usr_in(usr_input))
 	{
-		printf("validacion correcta\n");
-		if (!find_and_run_command(usr_input))
+		printf("validacion correcta\n");*/
+		if (!find_and_run_command())
 		{
 			printf("Unkown command, error 98\n");
 		}
-	}
+	/*}
 	else
 	{
 		printf("Invalid command, error 99\n");
 	}
-	/*free(usr_input);*/
+	free(usr_input);*/
 	start_shell();
 }
 
