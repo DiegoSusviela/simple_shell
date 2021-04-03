@@ -105,16 +105,9 @@ int find_and_run_command()
 	char *buffer = NULL;
 	int i = 0;
 
-	/*buffer = malloc(bufsize * sizeof(char));
-	if (!buffer)
-	{
-		printf("No mem, error 97\n");
-		exit (97);
-	}*/
 	readcount = getline(&buffer, &bufsize, stdin);
 	if (readcount == -1)
 	{
-		/*free(buffer);*/
 		if (isatty(STDIN_FILENO) != 0)
 			write(STDOUT_FILENO, "\n", 1);
 		exit(0);
@@ -130,19 +123,22 @@ int find_and_run_command()
 		}
 		i++;
 	}
-	pathname = malloc(1);
 	while (pathfinder[pos][0])
 	{
-		free(pathname);
-		pathname = strdup(pathfinder[pos][0]); /*remmember to free this memory*/
+		pathname = strdup(pathfinder[pos][0]);
+		if (!pathname)
+		{
+			printf("NO mem\n");
+			return(0);
+		}
 		strcat(pathname, buffer);
 		if (!stat(pathname, &stats))
 			break;
 		pos++;
+		free(pathname);
 	}
 	if (!pathfinder[pos][0])
 	{
-		free(pathname);
 		if(strcmp(buffer, str2))
 		{
 			free(buffer);
