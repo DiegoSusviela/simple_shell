@@ -85,6 +85,9 @@ char *find_path(char **env)
 	*/
 }
 
+/* /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin */
+
+
 int find_and_run_command()
 {
 	struct stat stats;
@@ -101,8 +104,6 @@ int find_and_run_command()
 		exit (97);
 	}
 	readcount = getline(&buffer, &bufsize, stdin);
-	/*printf("%zu\n", bufsize);
-	printf("%zu\n", strlen(buffer));*/
 	if (readcount == -1)
 	{
 		free(buffer);
@@ -139,23 +140,9 @@ int find_and_run_command()
 
 void start_shell(void)
 {
-	/*char *usr_input;*/
-
 	printf("$ ");
-	/*usr_input = take_user_input();
-	if (validate_usr_in(usr_input))
-	{
-		printf("validacion correcta\n");*/
-		if (!find_and_run_command())
-		{
-			printf("Unkown command, error 98\n");
-		}
-	/*}
-	else
-	{
-		printf("Invalid command, error 99\n");
-	}
-	free(usr_input);*/
+	if (!find_and_run_command())
+		printf("Unkown command, error 98\n");
 	start_shell();
 }
 
