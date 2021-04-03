@@ -107,7 +107,7 @@ int find_and_run_command()
 	/**word_container = malloc(sizeof(int) * 10);*/
 	space_remover(buffer, word_container);
 	pos = 0;
-	printf("%s\n", buffer[word_container[1]]);
+	printf("%c\n", buffer[word_container[1]]);
 	while (pathfinder[pos][0])
 	{
 		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
