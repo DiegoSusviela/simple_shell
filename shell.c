@@ -96,7 +96,14 @@ int find_and_run_command()
 	/*[] = "/bin/", pathname2[] = "/usr/bin/", str2[] = "exit";*/
 	/*char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};*/
 
-	char pathfinder[6] = {"/usr/local/sbin/", "/usr/local/bin/", "/usr/sbin/", "/usr/bin/", "/sbin/", "/bin/"};
+	char *pathfinder[6][2] = {
+		{"/usr/local/sbin/", NULL},
+		{"/usr/local/bin/", NULL},
+		{"/usr/sbin/", NULL},
+		{"/usr/bin/", NULL},
+		{"/sbin/", NULL},
+		{"/bin/", NULL},
+	};
 	
 	ssize_t bufsize = 1024, readcount = 0;
 	char *buffer = NULL;
@@ -127,16 +134,16 @@ int find_and_run_command()
 		i++;
 	}
 
-	while (pathfinder[pos])
+	while (pathfinder[pos][0])
 	{
 		free(pathname);
-		pathname = strdup(pathfinder[pos]);/*remmember to free this memory*/
+		pathname = strdup(pathfinder[pos][0]);/*remmember to free this memory*/
 		strcat(pathname, buffer);
 		if (stat(pathname, &stats))
 			break;
 		pos++;
 	}
-	if (!pathfinder[pos])
+	if (!pathfinder[pos][0])
 	{
 		if(strcmp(buffer, str2))
 			printf("COMMAND NOT FOUND\n");
