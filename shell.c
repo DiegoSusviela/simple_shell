@@ -72,7 +72,8 @@ int find_and_run_command()
 {
 	int pos = 0, i = 0;
 	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer = NULL, *buffer_holder;
+	char *pathname, *tmp, str2[] = "exit", *buffer = NULL; 
+	int *buffer_holder;
 	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
 		{"/usr/local/bin/", NULL},
