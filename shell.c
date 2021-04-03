@@ -39,7 +39,7 @@ void space_remover(char *to_remove, char **word_container)
 	word_container = malloc(BUFFSIZE);
 	while(to_remove[pos_rem])
 	{
-		*word_container[pos_cont] = &to_remove[pos_rem];
+		word_container[pos_cont] = to_remove[pos_rem];
 		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
 			pos_rem++;
 		while (to_remove[pos_rem] == ' ')
@@ -110,7 +110,7 @@ int find_and_run_command()
 	word_container = malloc(sizeof(int) * 10);
 	space_remover(buffer, word_container);
 	pos = 0;
-	buffer = *word_container[0];
+	buffer = word_container[0];
 	printf("%s\n", buffer);
 	while (pathfinder[pos][0])
 	{
