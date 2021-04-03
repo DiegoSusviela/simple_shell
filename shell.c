@@ -110,7 +110,7 @@ int find_and_run_command()
 	word_container = malloc(sizeof(int) * 10);
 	space_remover(buffer, word_container);
 	pos = 0;
-	buffer = word_container[0];
+	/*buffer = word_container[0];*/
 	/*printf("%s\n", buffer);*/
 	while (pathfinder[pos][0])
 	{
