@@ -32,7 +32,7 @@ char *take_user_input()
 	}
 	readcount = getline(&buffer, &bufsize, stdin);
 	printf("%zu\n", readcount);
-	printf("%i\n", strlen(buffer));
+	printf("%zu\n", strlen(buffer));
 	if (readcount == -1)
 	{
 		free(buffer);
@@ -51,7 +51,7 @@ char *take_user_input()
 		}
 		i++;
 	}
-	printf("%i\n", strlen(buffer));
+	printf("%zu\n", strlen(buffer));
 	return (buffer);
 } 
 
