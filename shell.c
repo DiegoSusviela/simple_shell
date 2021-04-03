@@ -90,14 +90,26 @@ char *find_path(char **env)
 
 int find_and_run_command()
 {
+	int pos = 0;
 	struct stat stats;
-	char pathname[] = "/bin/", pathname2[] = "/usr/bin/", str2[] = "exit";
-	char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};
+	char *pathname, str2[] = "exit";
+	/*[] = "/bin/", pathname2[] = "/usr/bin/", str2[] = "exit";*/
+	/*char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};*/
+
+	loc_t pathfinder[] = {
+		{"/usr/local/sbin/", NULL},
+		{"/usr/local/bin/", NULL},
+		{"/usr/sbin/", NULL},
+		{"/usr/bin/", NULL},
+		{"/sbin/", NULL},
+		{"/bin/", NULL},
+		{NULL},
+	};
+	
 	ssize_t bufsize = 1024, readcount = 0;
 	char *buffer = NULL;
 	int i = 0;
-
-	buffer = (char *)malloc(bufsize * sizeof(char));
+	buffer = malloc(bufsize * sizeof(char));
 	if (!buffer)
 	{
 		printf("No mem, error 97\n");
@@ -122,11 +134,16 @@ int find_and_run_command()
 		}
 		i++;
 	}
+	
+	while (pathfinder[pos].path && stat(pathfinder[pos].path, buffer))
+		pos++;
+	if (pathfinder[pos].path)
+		pathname = pathfinder[pos].path;
 	strcat(pathname, buffer);
 	if(!stat(pathname, &stats))
 	{
 		if (fork() == 0)
-			execve(pathname, argv, NULL);
+			execve(pathname, pathfinder[pos].path, NULL);
 		wait(NULL);
 		return (1);
 	}
