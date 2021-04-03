@@ -144,7 +144,10 @@ int find_and_run_command()
 	{
 		free(pathname);
 		if(strcmp(buffer, str2))
+		{
+			free(buffer);
 			return (0);
+		}
 		exit (99);
 	}
 	else
