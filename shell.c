@@ -96,7 +96,7 @@ int find_and_run_command()
 	/*[] = "/bin/", pathname2[] = "/usr/bin/", str2[] = "exit";*/
 	/*char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};*/
 
-	char *pathfinder[6] = {"/usr/local/sbin/", "/usr/local/bin/", "/usr/sbin/", "/usr/bin/", "/sbin/", "/bin/"};
+	char pathfinder[6] = {"/usr/local/sbin/", "/usr/local/bin/", "/usr/sbin/", "/usr/bin/", "/sbin/", "/bin/"};
 	
 	ssize_t bufsize = 1024, readcount = 0;
 	char *buffer = NULL;
