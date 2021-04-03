@@ -131,7 +131,7 @@ int find_and_run_command()
 			printf("NO mem\n");
 			return(0);
 		}
-		realloc(pathname, BUFFSIZE);
+		pathname = realloc(pathname, BUFFSIZE);
 		if (!pathname)							/*check if reallocation was posible*/
 		{
 			printf("NO mem\n");
