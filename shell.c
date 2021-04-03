@@ -93,13 +93,14 @@ int find_and_run_command()
 	int pos = 0;
 	struct stat stats;
 	char *pathname, str2[] = "exit";
-	char *pathfinder[6][2] = {
+	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
 		{"/usr/local/bin/", NULL},
 		{"/usr/sbin/", NULL},
 		{"/usr/bin/", NULL},
 		{"/sbin/", NULL},
 		{"/bin/", NULL},
+		{NULL, NULL}
 	};	
 	ssize_t bufsize = 1024, readcount = 0;
 	char *buffer = NULL;
