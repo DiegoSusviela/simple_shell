@@ -27,7 +27,7 @@ int validate_usr_in(char *usr_input)
 	return(1);
 }
 
-char *space_remover(char *to_remove)
+int *space_remover(char *to_remove)
 {
 	int pos_rem = 0, flag = 0, pos_cont = 0;
 	char *word_container, *words;
