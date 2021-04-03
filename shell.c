@@ -97,12 +97,12 @@ int find_and_run_command()
 	/*char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};*/
 
 	loc_t pathfinder[] = {
-		{"/usr/local/sbin/", NULL},
-		{"/usr/local/bin/", NULL},
-		{"/usr/sbin/", NULL},
-		{"/usr/bin/", NULL},
-		{"/sbin/", NULL},
-		{"/bin/", NULL},
+		{{"/usr/local/sbin/", NULL}},
+		{{"/usr/local/bin/", NULL}},
+		{{"/usr/sbin/", NULL}},
+		{{"/usr/bin/", NULL}},
+		{{"/sbin/", NULL}},
+		{{"/bin/", NULL}},
 		{NULL},
 	};
 	
