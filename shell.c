@@ -132,7 +132,7 @@ int find_and_run_command()
 		free(pathname);
 		pathname = strdup(pathfinder[pos]);/*remmember to free this memory*/
 		strcat(pathname, buffer);
-		if (stat(pathname, &stat))
+		if (stat(pathname, &stats))
 			break;
 		pos++;
 	}
