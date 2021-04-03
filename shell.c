@@ -141,6 +141,7 @@ int find_and_run_command()
 		printf("free didnt break\n");
 		pathname = strdup(pathfinder[pos][0]); /*remmember to free this memory*/
 		strcat(pathname, buffer);
+		printf("%s\n", pathname);
 		if (stat(pathname, &stats))
 			break;
 		pos++;
@@ -156,6 +157,7 @@ int find_and_run_command()
 	else
 	{
 		printf("entro2\n");
+		printf("%s\n", pathname);
 		if (fork() == 0)
 			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
