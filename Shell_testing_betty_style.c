@@ -40,7 +40,7 @@ void shell(void)
 	/*char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
 	char *envp[] = {"PATH=/bin", 0};*/
-	char *argv[100] = {"/bin/", "/usr/bin/", NULL};
+	char *argv[100] = {"/bin/", NULL};
 	struct stat stats;
 	char command[] = "/bin/", command2[] = "/usr/bin/";
 	char *argv2[100] = {"/usr/bin/", NULL};
