@@ -136,8 +136,10 @@ int find_and_run_command()
 
 	while (pathfinder[pos][0])
 	{
+		printf("free will break\n");
 		free(pathname);
-		pathname = strdup(pathfinder[pos][0]);/*remmember to free this memory*/
+		printf("free didnt break\n");
+		pathname = strdup(pathfinder[pos][0]); /*remmember to free this memory*/
 		strcat(pathname, buffer);
 		if (stat(pathname, &stats))
 			break;
