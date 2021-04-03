@@ -31,7 +31,7 @@ char *take_user_input()
 		exit (97);
 	}
 	readcount = getline(&buffer, &bufsize, stdin);
-	printf("%zu\n", readcount);
+	printf("%zu\n", bufsize);
 	printf("%zu\n", strlen(buffer));
 	if (readcount == -1)
 	{
@@ -92,7 +92,7 @@ int find_and_run_command(char *usr_input)
 	pathname = find_path(usr_input);
 	*/
 	struct stat stats;
-	char pathname[] = "/bin/";
+	char pathname[] = "/bin/", str2[] = "exit";
 	char *argv[100] = {"/bin/", NULL};
 
 	printf("%zi", strlen(usr_input));
@@ -106,16 +106,20 @@ int find_and_run_command(char *usr_input)
 		wait(NULL);
 		return (1);
 	}
+	else
+		if(strcmp(usr_input, str2))
+			printf("COMMAND NOT FOUND\n");
+		else
+			exit (99);
 	return (0);
 }
 
 void start_shell(void)
 {
-	/*char *usr_input;*/
-	char usr_input[100];
+	char *usr_input;
 
 	printf("$ ");
-	/*usr_input = take_user_input();*/
+	usr_input = take_user_input();
 	scanf("%s", usr_input);
 	if (validate_usr_in(usr_input))
 	{
