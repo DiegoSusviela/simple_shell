@@ -93,9 +93,6 @@ int find_and_run_command()
 	int pos = 0;
 	struct stat stats;
 	char *pathname, str2[] = "exit";
-	/*[] = "/bin/", pathname2[] = "/usr/bin/", str2[] = "exit";*/
-	/*char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};*/
-
 	char *pathfinder[6][2] = {
 		{"/usr/local/sbin/", NULL},
 		{"/usr/local/bin/", NULL},
@@ -103,21 +100,21 @@ int find_and_run_command()
 		{"/usr/bin/", NULL},
 		{"/sbin/", NULL},
 		{"/bin/", NULL},
-	};
-	
+	};	
 	ssize_t bufsize = 1024, readcount = 0;
 	char *buffer = NULL;
 	int i = 0;
-	buffer = malloc(bufsize * sizeof(char));
+
+	/*buffer = malloc(bufsize * sizeof(char));
 	if (!buffer)
 	{
 		printf("No mem, error 97\n");
 		exit (97);
-	}
+	}*/
 	readcount = getline(&buffer, &bufsize, stdin);
 	if (readcount == -1)
 	{
-		free(buffer);
+		/*free(buffer);*/
 		if (isatty(STDIN_FILENO) != 0)
 			write(STDOUT_FILENO, "\n", 1);
 		exit(0);
