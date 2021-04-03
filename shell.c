@@ -147,6 +147,7 @@ int find_and_run_command()
 	}
 	if (!pathfinder[pos][0])
 	{
+		printf("entro1\n");
 		if(strcmp(buffer, str2))
 			printf("COMMAND NOT FOUND\n");
 		else
@@ -154,6 +155,7 @@ int find_and_run_command()
 	}
 	else
 	{
+		printf("entro2\n");
 		if (fork() == 0)
 			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
