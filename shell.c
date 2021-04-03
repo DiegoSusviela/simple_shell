@@ -57,12 +57,12 @@ char *take_user_input()
 
 int validate_usr_in(char *usr_input)
 {
-	int pos = 0;
+	/*int pos = 0;
 
 	while(usr_input[pos] && usr_input[pos] != ' ')
 		pos++;
 	if (usr_input[pos])
-		return (0);
+		return (0);*/
 	return(1);
 }
 
