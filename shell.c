@@ -30,13 +30,15 @@ int validate_usr_in(char *usr_input)
 int *space_remover(char *to_remove)
 {
 	int pos_rem = 0, flag = 0, pos_cont = 0;
-	int *word_container, *words;
+	int *word_container[5], *words;
+	char *aux;
 
 	/*word_container = malloc(sizeof(words) * amount_words(to_remove));*/
-	word_container = malloc(BUFFSIZE);
+	/*word_container = malloc(BUFFSIZE);*/
 	while(to_remove[pos_rem])
 	{
-		word_container[pos_cont] = &to_remove[pos_rem];
+		aux = to_remove[pos_rem];
+		word_container[pos_cont] = &aux;
 		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
 			pos_rem++;
 		while (to_remove[pos_rem] == ' ')
