@@ -39,7 +39,7 @@ void space_remover(char *to_remove, char **word_container)
 	word_container = malloc(BUFFSIZE);
 	while(to_remove[pos_rem])
 	{
-		word_container[pos_cont] = to_remove[pos_rem];
+		word_container[pos_cont] = &to_remove[pos_rem];
 		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
 			pos_rem++;
 		while (to_remove[pos_rem] == ' ')
