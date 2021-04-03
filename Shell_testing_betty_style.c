@@ -86,8 +86,8 @@ void shell(void)
 
 
 	/*strcpy(str1, str);*/
-	strcat(command, str);
-	strcat(command2, str);
+	strcat(command, buffer);
+	strcat(command2, buffer);
 
 	/*if (_getenv(str))
 		printf("%s\n", _getenv(str));*/
@@ -106,7 +106,7 @@ void shell(void)
 			wait(NULL);
 		}
 		else
-			if(strcmp(str, str2))
+			if(strcmp(buffer, str2))
 				printf("COMMAND NOT FOUND\n");
 			else
 				exit (99);
