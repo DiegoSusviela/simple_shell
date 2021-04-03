@@ -19,7 +19,7 @@ void start_new_promtp(void)
 
 char *take_user_input()
 {
-	ssize_t bufsize = 32;
+	ssize_t bufsize = 1024;
 	char *buffer = NULL;
 	ssize_t readcount = 0;
 	int i = 0;
