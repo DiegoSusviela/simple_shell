@@ -131,6 +131,8 @@ int find_and_run_command()
 	}
 	*/
 	printf("%i\n", index[1]);
+	printf("%i\n", index[2]);
+	printf("%i\n", index[3]);
 	while (pathfinder[pos][0])
 	{
 		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
