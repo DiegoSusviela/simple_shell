@@ -16,45 +16,6 @@ void start_new_promtp(void)
 	}
 }
 
-
-char *take_user_input()
-{
-	ssize_t bufsize = 1024;
-	char *buffer = NULL;
-	ssize_t readcount = 0;
-	int i = 0;
-
-	buffer = (char *)malloc(bufsize * sizeof(char));
-	if (!buffer)
-	{
-		printf("No mem, error 97\n");
-		exit (97);
-	}
-	readcount = getline(&buffer, &bufsize, stdin);
-	/*printf("%zu\n", bufsize);
-	printf("%zu\n", strlen(buffer));*/
-	if (readcount == -1)
-	{
-		free(buffer);
-		if (isatty(STDIN_FILENO) != 0)
-			write(STDOUT_FILENO, "\n", 1);
-		exit(0);
-	}
-	if (buffer[readcount - 1] == '\n' || buffer[readcount - 1] == '\t')
-		buffer[readcount - 1] = '\0';
-	while (buffer[i])
-	{
-		if (buffer[i] == '#' && buffer[i - 1] == ' ')
-		{
-			buffer[i] = '\0';
-			break;
-		}
-		i++;
-	}
-	/*printf("%zu\n", strlen(buffer));*/
-	return (buffer);
-} 
-
 int validate_usr_in(char *usr_input)
 {
 	int pos = 0;
@@ -85,14 +46,11 @@ char *find_path(char **env)
 	*/
 }
 
-/* /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin */
-
-
 int find_and_run_command()
 {
 	int pos = 0;
 	struct stat stats;
-	char *pathname, str2[] = "exit";
+	char *pathname, *tmp, str2[] = "exit";
 	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
 		{"/usr/local/bin/", NULL},
@@ -133,24 +91,27 @@ int find_and_run_command()
 			printf("NO mem\n");
 			return(0);
 		}
-		pathname = realloc(pathname, BUFFSIZE);
+		tmp = realloc(pathname, BUFFSIZE);
 		if (!pathname)							/*check if reallocation was posible*/
 		{
 			printf("NO mem\n");
 			return(0);
 		}
+		pathname = tmp;
 		strcat(pathname, buffer);				/*appends the second string to the first*/
 		if (!stat(pathname, &stats))
 			break;
 		pos++;
-		free(pathname);
+		free(pathname);							/*free in each while occurency, and if unkown command*/
 	}
 	if (!pathfinder[pos][0])
 	{
 		if(strcmp(buffer, str2))
 		{
+					free(buffer);
 			return (0);
 		}
+		free(buffer);
 		exit (99);
 	}
 	else
@@ -158,7 +119,8 @@ int find_and_run_command()
 		if (fork() == 0)
 			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
-		free(pathname);
+		free(pathname);							/*free in case command is found*/
+		free(buffer);
 		return (1);
 	}
 }
