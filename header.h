@@ -12,10 +12,4 @@
 #include <string.h> 
 #include <limits.h>
 
-typedef struct locations
-{
-	char *path;
-	/*char *argv;*/
-} loc_t;
-
 #endif

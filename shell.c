@@ -96,15 +96,7 @@ int find_and_run_command()
 	/*[] = "/bin/", pathname2[] = "/usr/bin/", str2[] = "exit";*/
 	/*char *argv[100] = {"/bin/", NULL}, *argv2[100] = {"/usr/bin/", NULL};*/
 
-	loc_t pathfinder[] = {
-		{{"/usr/local/sbin/", NULL}},
-		{{"/usr/local/bin/", NULL}},
-		{{"/usr/sbin/", NULL}},
-		{{"/usr/bin/", NULL}},
-		{{"/sbin/", NULL}},
-		{{"/bin/", NULL}},
-		{NULL},
-	};
+	char pathfinder[] = {"/usr/local/sbin/", "/usr/local/bin/", "/usr/sbin/", "/usr/bin/", "/sbin/", "/bin/"};
 	
 	ssize_t bufsize = 1024, readcount = 0;
 	char *buffer = NULL;
@@ -135,15 +127,15 @@ int find_and_run_command()
 		i++;
 	}
 	
-	while (pathfinder[pos].path && stat(pathfinder[pos].path, buffer))
+	while (pathfinder[pos] && stat(pathfinder[pos], buffer))
 		pos++;
-	if (pathfinder[pos].path)
-		pathname = pathfinder[pos].path;
+	if (pathfinder[pos])
+		pathname = strdup(pathfinder[pos]); /*remmember to free this memory*/
 	strcat(pathname, buffer);
 	if(!stat(pathname, &stats))
 	{
 		if (fork() == 0)
-			execve(pathname, pathfinder[pos].path, NULL);
+			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
 		return (1);
 	}
