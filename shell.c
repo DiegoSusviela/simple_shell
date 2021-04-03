@@ -126,24 +126,30 @@ int find_and_run_command()
 		}
 		i++;
 	}
-	
-	while (pathfinder[pos] && stat(pathfinder[pos], buffer))
+
+	while (pathfinder[pos])
+	{
+		free(pathname);
+		pathname = strdup(pathfinder[pos]);/*remmember to free this memory*/
+		strcat(pathname, buffer);
+		if (stat(pathname, &stat))
+			break;
 		pos++;
-	if (pathfinder[pos])
-		pathname = strdup(pathfinder[pos]); /*remmember to free this memory*/
-	strcat(pathname, buffer);
-	if(!stat(pathname, &stats))
+	}
+	if (!pathfinder[pos])
+	{
+		if(strcmp(buffer, str2))
+			printf("COMMAND NOT FOUND\n");
+		else
+			exit (99);
+	}
+	else
 	{
 		if (fork() == 0)
 			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
 		return (1);
 	}
-	else
-		if(strcmp(buffer, str2))
-			printf("COMMAND NOT FOUND\n");
-		else
-			exit (99);
 	return (0);
 }
 
