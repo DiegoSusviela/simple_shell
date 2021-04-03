@@ -125,23 +125,27 @@ int find_and_run_command()
 	}
 	while (pathfinder[pos][0])
 	{
-		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
-		if (!pathname)							/*check if allocation was posible*/
+		/*pathname = strdup(pathfinder[pos][0]);  Does a mnalloc 1 allocation each time it runs
+		if (!pathname)							check if allocation was posible
 		{
 			printf("NO mem\n");
 			return(0);
 		}
 		pathname = realloc(pathname, BUFFSIZE);
-		if (!pathname)							/*check if reallocation was posible*/
+		if (!pathname)							check if reallocation was posible
 		{
 			printf("NO mem\n");
 			return(0);
 		}
-		strcat(pathname, buffer);				/*appends the second string to the first*/
+		strcat(pathname, buffer);				appends the second string to the first
 		if (!stat(pathname, &stats))
 			break;
 		pos++;
-		free(pathname);
+		free(pathname);*/
+		strcat(pathfinder[pos][0], buffer);
+		if (!stat(pathname, &stats))
+			break;
+		pos++;
 	}
 	if (!pathfinder[pos][0])
 	{
