@@ -127,7 +127,7 @@ void start_shell(void)
 	{
 		printf("Invalid command, error 99\n");
 	}
-	free(usr_input);
+	/*free(usr_input);*/
 	start_shell();
 }
 
