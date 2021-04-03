@@ -31,8 +31,8 @@ char *take_user_input()
 		exit (97);
 	}
 	readcount = getline(&buffer, &bufsize, stdin);
-	printf("%zu\n", bufsize);
-	printf("%zu\n", strlen(buffer));
+	/*printf("%zu\n", bufsize);
+	printf("%zu\n", strlen(buffer));*/
 	if (readcount == -1)
 	{
 		free(buffer);
@@ -51,7 +51,7 @@ char *take_user_input()
 		}
 		i++;
 	}
-	printf("%zu\n", strlen(buffer));
+	/*printf("%zu\n", strlen(buffer));*/
 	return (buffer);
 } 
 
@@ -120,7 +120,6 @@ void start_shell(void)
 
 	printf("$ ");
 	usr_input = take_user_input();
-	scanf("%s", usr_input);
 	if (validate_usr_in(usr_input))
 	{
 		printf("validacion correcta\n");

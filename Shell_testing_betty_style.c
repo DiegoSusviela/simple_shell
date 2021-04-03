@@ -37,17 +37,54 @@ char *_getenv(const char *name)
 void shell(void)
 {
 	char str[200], *str1, str2[] = "exit";
-	char current_path[PATH_MAX];
+	/*char current_path[PATH_MAX];
 	getcwd(current_path, sizeof(current_path));
-	char *envp[] = {"PATH=/bin", 0};
+	char *envp[] = {"PATH=/bin", 0};*/
 	char *argv[100] = {"/bin/", NULL};
 	struct stat stats;
-	char command[] = "/bin/";
-	char command2[] = "/usr/bin/";
+	char command[] = "/bin/", command2[] = "/usr/bin/";
 	char *argv2[100] = {"/usr/bin/", NULL};
 
 	printf ("$ ");
-	scanf("%s", str);
+	/*scanf("%s", str);*/
+
+
+
+	ssize_t bufsize = 1024;
+	char *buffer = NULL;
+	ssize_t readcount = 0;
+	int i = 0;
+
+	buffer = (char *)malloc(bufsize * sizeof(char));
+	if (!buffer)
+	{
+		printf("No mem, error 97\n");
+		exit (97);
+	}
+	readcount = getline(&buffer, &bufsize, stdin);
+	/*printf("%zu\n", bufsize);
+	printf("%zu\n", strlen(buffer));*/
+	if (readcount == -1)
+	{
+		free(buffer);
+		if (isatty(STDIN_FILENO) != 0)
+			write(STDOUT_FILENO, "\n", 1);
+		exit(0);
+	}
+	if (buffer[readcount - 1] == '\n' || buffer[readcount - 1] == '\t')
+		buffer[readcount - 1] = '\0';
+	while (buffer[i])
+	{
+		if (buffer[i] == '#' && buffer[i - 1] == ' ')
+		{
+			buffer[i] = '\0';
+			break;
+		}
+		i++;
+	}
+
+
+
 	/*strcpy(str1, str);*/
 	strcat(command, str);
 	strcat(command2, str);
@@ -64,11 +101,6 @@ void shell(void)
 	else
 		if (!stat(command2, &stats))
 		{
-			extern char **environ;
-			int i = 0;
-
-			while(environ[i]) 
-				printf("%s\n", environ[i++]); 
 			if (fork() == 0)
 				execve(command2, argv2, NULL);
 			wait(NULL);
