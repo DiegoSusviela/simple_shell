@@ -112,6 +112,7 @@ int find_and_run_command(char *usr_input)
 void start_shell(void)
 {
 	char *usr_input;
+	char usr_input[100];
 
 	printf("$ ");
 	/*usr_input = take_user_input();*/
