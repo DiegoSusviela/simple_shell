@@ -133,7 +133,7 @@ int find_and_run_command()
 		}
 		i++;
 	}
-
+	pathname = malloc(1);
 	while (pathfinder[pos][0])
 	{
 		printf("free will break\n");
