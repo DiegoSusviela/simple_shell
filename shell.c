@@ -114,7 +114,8 @@ void start_shell(void)
 	char *usr_input;
 
 	printf("$ ");
-	usr_input = take_user_input();
+	/*usr_input = take_user_input();*/
+	scanf("%s", usr_input);
 	if (validate_usr_in(usr_input))
 	{
 		printf("validacion correcta\n");
