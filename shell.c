@@ -19,33 +19,40 @@ void start_new_promtp(void)
 
 char *take_user_input()
 {
-	ssize_t bufsize = 0;
-	char *input = NULL;
+	ssize_t bufsize = 32;
+	char *buffer = NULL;
 	ssize_t readcount = 0;
 	int i = 0;
 
-	/*input = (char *)malloc(bufsize * sizeof(char));*/
-	readcount = getline(&input, &bufsize, stdin);
+	buffer = (char *)malloc(bufsize * sizeof(char));
+	if (!buffer)
+	{
+		printf("No mem, error 97\n");
+		exit (97);
+	}
+	readcount = getline(&buffer, &bufsize, stdin);
+	printf("%zu\n", readcount);
+	printf("%i\n", strlen(buffer));
 	if (readcount == -1)
 	{
-		free(input);
+		free(buffer);
 		if (isatty(STDIN_FILENO) != 0)
 			write(STDOUT_FILENO, "\n", 1);
 		exit(0);
 	}
-	if (input[readcount - 1] == '\n' || input[readcount - 1] == '\t')
-		input[readcount - 1] = '\0';
-	i = 0;
-	while (input[i])
+	if (buffer[readcount - 1] == '\n' || buffer[readcount - 1] == '\t')
+		buffer[readcount - 1] = '\0';
+	while (buffer[i])
 	{
-		if (input[i] == '#' && input[i - 1] == ' ')
+		if (buffer[i] == '#' && buffer[i - 1] == ' ')
 		{
-			input[i] = '\0';
+			buffer[i] = '\0';
 			break;
 		}
 		i++;
 	}
-	return (input);
+	printf("%i\n", strlen(buffer));
+	return (buffer);
 } 
 
 int validate_usr_in(char *usr_input)
