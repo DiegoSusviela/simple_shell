@@ -145,9 +145,9 @@ int find_and_run_command()
 	}
 	if (!pathfinder[pos][0])
 	{
+		free(pathname);
 		if(strcmp(buffer, str2))
 		{
-			free(buffer);
 			return (0);
 		}
 		exit (99);
