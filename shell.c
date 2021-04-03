@@ -77,6 +77,8 @@ int find_and_run_command()
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **word_container;
 
+	char *aux;
+
 	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
 		{"/usr/local/bin/", NULL},
@@ -111,7 +113,7 @@ int find_and_run_command()
 	space_remover(buffer, word_container);
 	pos = 0;
 	/*buffer = word_container[0];*/
-	/*printf("%s\n", buffer);*/
+	printf("%s\n", word_container[1]);
 	while (pathfinder[pos][0])
 	{
 		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
