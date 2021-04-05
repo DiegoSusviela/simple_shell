@@ -29,9 +29,9 @@ char **ar(char *buffer, int *index)
 
 	argv = malloc(sizeof(char *) * largo(index));	
 
-	for (cont = 0; cont < index; cont++)
+	for (cont = 0; cont < largo(index); cont++)
 	{
-		aux = buffer[index[cont]];
+		aux = &buffer[index[cont]];
 		argv[cont] = malloc(sizeof(char) * largo_palabra(aux));
 		iter = 0;
 		while (buffer[index[cont] + iter])
@@ -39,7 +39,6 @@ char **ar(char *buffer, int *index)
 			argv[cont][iter] = buffer[index[cont] + iter];
 			iter++;
 		}
-		argv[cont][iter] = NULL;
 	}
 	return (argv);
 }
