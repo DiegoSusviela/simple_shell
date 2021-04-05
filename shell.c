@@ -90,7 +90,7 @@ int find_and_run_command()
 		{"/sbin/", NULL},
 		{"/bin/", NULL},
 		{NULL, NULL}
-	};	
+	};
 	ssize_t bufsize = 1024, readcount = 0;
 
 	readcount = getline(&buffer, &bufsize, stdin);
@@ -121,7 +121,7 @@ int find_and_run_command()
 	for(k = 0; k < amount_of_words; k++)
 	{
 		word_container[k] = &buffer[j];
-		if (k < (amount_of_words - 1))  
+		if (k < (amount_of_words - 1))
 		{
 			while(buffer[j])
 				j++;
@@ -142,7 +142,7 @@ int find_and_run_command()
 			return(0);
 		}
 		tmp = realloc(pathname, BUFFSIZE);
-		if (!pathname)							/*check if reallocation was posible*/
+		if (!tmp)							/*check if reallocation was posible*/
 		{
 			printf("NO mem\n");
 			return(0);
@@ -158,7 +158,7 @@ int find_and_run_command()
 	{
 		if(strcmp(buffer, str2))
 		{
-					free(buffer);
+			free(buffer);
 			return (0);
 		}
 		free(buffer);
