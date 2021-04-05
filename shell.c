@@ -112,6 +112,11 @@ int find_and_run_command()
 		}
 		i++;
 	}
+	if (buffer[0] == '\n')
+	{
+		printf("\n");
+		return (1);
+	}
 
 
 	index = space_remover(buffer);
