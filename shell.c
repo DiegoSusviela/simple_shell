@@ -115,7 +115,7 @@ int find_and_run_command()
 
 	index = space_remover(buffer);
 	pos = 0;
-
+/*
 	int iter = 0;
 
 	while (index[iter])
@@ -143,7 +143,7 @@ int find_and_run_command()
 		}	
 	}
 
-	printf("%c\n", arguments[0]);
+	printf("%c\n", arguments[0]);*/
 	printf("%i\n", index[2]);
 	printf("%i\n", index[3]);
 	while (pathfinder[pos][0])
