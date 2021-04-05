@@ -61,9 +61,8 @@ void shell(void)
 		printf("No mem, error 97\n");
 		exit (97);
 	}
-	readcount = getline(&buffer, &bufsize, stdin);
-	/*printf("%zu\n", bufsize);
-	printf("%zu\n", strlen(buffer));*/
+	scanf("%s", str);
+	/*readcount = getline(&buffer, &bufsize, stdin);
 	if (readcount == -1)
 	{
 		free(buffer);
@@ -81,16 +80,15 @@ void shell(void)
 			break;
 		}
 		i++;
-	}
+	}*/
 
 
 
 	/*strcpy(str1, str);*/
 	strcat(command, buffer);
 	strcat(command2, buffer);
-
-	/*if (_getenv(str))
-		printf("%s\n", _getenv(str));*/
+	if (_getenv(str))
+		printf("%s\n", _getenv(str));
 	/*printf("Current working dir: %s\n", current_path);*/
 	if(!stat(command, &stats))
 	{
