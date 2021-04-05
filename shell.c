@@ -83,14 +83,14 @@ int find_and_run_command()
 	char **word_container;
 	char *aux;
 
-	char *pathfinder[7][3] = {
-		{"/usr/local/sbin/", NULL, NULL},
-		{"/usr/local/bin/", NULL, NULL},
-		{"/usr/sbin/", NULL, NULL},
-		{"/usr/bin/", NULL, NULL},
-		{"/sbin/", NULL, NULL},
-		{"/bin/", NULL, NULL},
-		{NULL, NULL, NULL}
+	char *pathfinder[7][4] = {
+		{"/usr/local/sbin/", NULL, NULL, NULL},
+		{"/usr/local/bin/", NULL, NULL, NULL},
+		{"/usr/sbin/", NULL, NULL, NULL},
+		{"/usr/bin/", NULL, NULL, NULL},
+		{"/sbin/", NULL, NULL, NULL},
+		{"/bin/", NULL, NULL, NULL},
+		{NULL, NULL, NULL, NULL}
 	};
 	ssize_t bufsize = 1024, readcount = 0;
 
@@ -124,17 +124,22 @@ int find_and_run_command()
 		iter++;
 		amount_of_words++;
 	}
-	char arguments[100], *dirs;
-	int iter2 = 0;
-	int start, count;
+	char arguments[100], *dirs, directorios[100];
+	int iter2 = 0, flag = 0;
+	int start, count, pos_dir;
 		
 	if (amount_of_words > 1)
 	{
-		arguments[0] = '-';
 		start = 1;
+		pos_dir = 0;
 		for (iter = 1; iter < amount_of_words; iter++)
 		{
 			count = 0;
+			if (buffer[index[iter]] == '-' && flag == 0)
+			{
+				flag = 1;
+				arguments[0] = '-';
+			}
 			if (buffer[index[iter]] == '-' && buffer[index[iter] + 1] && buffer[index[iter] + 1] != ' ')
 			{
 				count++;
@@ -147,9 +152,19 @@ int find_and_run_command()
 				arguments[start] = '\0';
 			}
 			else
-				printf("falta agregar los dirs\n");
+			{
+				while (buffer[index[iter] + count])
+				{
+					directorios[pos_dir] = buffer[index[iter] + count];
+					pos_dir++;
+					count++;
+				}
+				directorios[pos_dir] = ' ';
+				pos_dir++;
+			}				
 		}
 		printf("%s\n", arguments);
+		printf("%s\n", directorios);
 	}
 	while(index[iter2])
 	{
@@ -191,6 +206,7 @@ int find_and_run_command()
 	else
 	{
 		pathfinder[pos][1] = arguments;
+		pathfinder[pos][2] = directorios;
 		if (fork() == 0)
 			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
