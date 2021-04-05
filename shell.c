@@ -161,6 +161,7 @@ int find_and_run_command()
 				}
 				directorios[pos_dir] = ' ';
 				pos_dir++;
+				directorios[pos_dir] = '\0';
 			}				
 		}
 		printf("%s\n", arguments);
