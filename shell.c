@@ -230,6 +230,7 @@ int find_and_run_command()
 			printf("argvs %i %s\n", toshi, argv[toshi]);
 			toshi++;
 		}
+		printf("pathname is %s", pathname);
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
