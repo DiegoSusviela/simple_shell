@@ -134,8 +134,9 @@ int find_and_run_command()
 			int start, count;
 			printf("llegue2\n");
 			start = count = 0;
-			while (arguments[start] = buffer[index[iter] + count])
+			while (buffer[index[iter] + count])
 			{
+				arguments[start] = buffer[index[iter] + count];
 				start++;
 				count++;
 				printf("insidewhile\n");
