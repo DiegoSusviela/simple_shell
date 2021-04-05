@@ -178,9 +178,6 @@ int find_and_run_command()
 
 	char **argv;
 	argv = ar(buffer, index);
-	printf("%s\n", argv[1]);
-    printf("%s\n", argv[2]);
-
 
 
 	while(index[iter2])
