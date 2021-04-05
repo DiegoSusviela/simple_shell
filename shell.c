@@ -215,6 +215,7 @@ int find_and_run_command()
 			pathfinder[pos][1] = arguments;
 		/*pathfinder[pos][2] = directorios;*/
 		int count_dirs;
+		printf("%i\n", am_dir);
 		if (am_dir > 0)
 			for (count_dirs = 0; count_dirs < am_dir; count_dirs++)
 			{
