@@ -148,7 +148,10 @@ int find_and_run_command()
 		printf("%s\n", arguments);
 	}
 	while(index[iter2])
+	{
 		index[iter2] = 0;
+		iter2++;
+	}
 	free(index);
 	while (pathfinder[pos][0])
 	{
