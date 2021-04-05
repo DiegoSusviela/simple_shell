@@ -31,6 +31,12 @@ char **ar(char *buffer, int *index)
 
 
 	argv = malloc(sizeof(char *) * largo(index));							/*we are not freeing this*/
+	if (!argv)								/*check if reallocation was posible*/
+	{
+		printf("NO mem\n");
+		return(0);
+	}
+	printf("%i", largo(index));
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
