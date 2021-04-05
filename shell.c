@@ -79,7 +79,7 @@ int find_and_run_command()
 	int pos = 0, i = 0, j = 0, k, *index;
 	int amount_of_words = 0;
 	struct stat stats;
-	char *pathname, *tmp, *buffer = NULL;
+	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **word_container;
 	char *aux;
 
@@ -198,7 +198,7 @@ int find_and_run_command()
 	}
 	if (!pathfinder[pos][0])
 	{
-		if(strcmp(buffer, 'exit'))
+		if(strcmp(buffer, "exit"))
 		{
 			free(buffer);
 			return (0);
