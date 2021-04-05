@@ -19,7 +19,46 @@ int largo_palabra(char *aux)
 	}
 	return (ret);
 }
-
+/*
+	if (amount_of_words > 1)
+	{
+		start = 1;
+		pos_dir = 0;
+		am_dir = 0;
+		for (iter = 1; iter < amount_of_words; iter++)
+		{
+			count = 0;
+			pos_dir = 0;
+	
+			if (buffer[index[iter]] == '-' && buffer[index[iter] + 1])
+			{
+				if (flag == 0)
+				{
+					flag = 1;
+					arguments[0] = '-';
+				}
+				count++;
+				while (buffer[index[iter] + count])
+				{
+					arguments[start] = buffer[index[iter] + count];
+					start++;
+					count++;
+				}
+				arguments[start] = '\0';
+			}
+			else
+			{
+				while (buffer[index[iter] + count])
+				{
+					directorios[am_dir][pos_dir] = buffer[index[iter] + count];
+					pos_dir++;
+					count++;
+				}
+				directorios[am_dir][pos_dir] = '\0';
+				am_dir++;
+			}				
+		}
+	}*/
 
 char **argv(char *buffer, int *index)
 {
