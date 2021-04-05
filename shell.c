@@ -128,7 +128,6 @@ int find_and_run_command()
 	int iter2 = 0, flag = 0;
 	int start, count, pos_dir, am_dir = 0;
 	char directorios[20][100];
-	flag = 0;
 	if (amount_of_words > 1)
 	{
 		start = 1;
@@ -200,7 +199,7 @@ int find_and_run_command()
 		pos++;
 		free(pathname);							/*free in each while occurency, and if unkown command*/
 	}
-	if (flag = 1)
+	if (flag == 1)
 		pathfinder[pos][1] = arguments;
 	else
 		arguments[0] = '\0';
