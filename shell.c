@@ -225,12 +225,14 @@ int find_and_run_command()
 	else
 	{
 		int toshi = 0;
+		printf("pathname is %s\n", pathname);
 		while (argv[toshi])
 		{
 			printf("argvs %i %s\n", toshi, argv[toshi]);
 			toshi++;
 		}
-		printf("pathname is %s", pathname);
+		
+
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
