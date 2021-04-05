@@ -30,12 +30,12 @@ char **ar(char *buffer, int *index)
 	int cont = 0, iter;
 
 
-	argv = malloc(sizeof(char *) * largo(index));	
-	printf("%i\n", largo(index));
+	argv = malloc(sizeof(char *) * largo(index));							/*we are not freeing this*/
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
-		argv[cont] = malloc(sizeof(char) * largo_palabra(aux));
+		argv[cont] = malloc(sizeof(char) * largo_palabra(aux));				/*we are not freeing this*/
+		printf("%i\n", largo_palabra(aux));
 		iter = 0;
 		while (buffer[index[cont] + iter])
 		{
@@ -127,14 +127,14 @@ int find_and_run_command()
 	char **word_container;
 	char *aux;
 
-	char *pathfinder[7][4] = {
-		{"/usr/local/sbin/", NULL, NULL, NULL},
-		{"/usr/local/bin/", NULL, NULL, NULL},
-		{"/usr/sbin/", NULL, NULL, NULL},
-		{"/usr/bin/", NULL, NULL, NULL},
-		{"/sbin/", NULL, NULL, NULL},
-		{"/bin/", NULL, NULL, NULL},
-		{NULL, NULL, NULL, NULL}
+	char *pathfinder[7][2] = {
+		{"/usr/local/sbin/", NULL},
+		{"/usr/local/bin/", NULL},
+		{"/usr/sbin/", NULL},
+		{"/usr/bin/", NULL},
+		{"/sbin/", NULL},
+		{"/bin/", NULL},
+		{NULL, NULL}
 	};
 	ssize_t bufsize = 1024, readcount = 0;
 
@@ -175,46 +175,6 @@ int find_and_run_command()
 	char arguments[100], *dirs;
 	int iter2 = 0, flag = 0;
 	int start, count, pos_dir, am_dir = 0;
-	char directorios[20][100];/*
-	if (amount_of_words > 1)
-	{
-		start = 1;
-		pos_dir = 0;
-		am_dir = 0;
-		for (iter = 1; iter < amount_of_words; iter++)
-		{
-			count = 0;
-			pos_dir = 0;
-	
-			if (buffer[index[iter]] == '-' && buffer[index[iter] + 1])
-			{
-				if (flag == 0)
-				{
-					flag = 1;
-					arguments[0] = '-';
-				}
-				count++;
-				while (buffer[index[iter] + count])
-				{
-					arguments[start] = buffer[index[iter] + count];
-					start++;
-					count++;
-				}
-				arguments[start] = '\0';
-			}
-			else
-			{
-				while (buffer[index[iter] + count])
-				{
-					directorios[am_dir][pos_dir] = buffer[index[iter] + count];
-					pos_dir++;
-					count++;
-				}
-				directorios[am_dir][pos_dir] = '\0';
-				am_dir++;
-			}				
-		}
-	}*/
 
 	char **argv;
 	argv = ar(buffer, index);
@@ -250,12 +210,6 @@ int find_and_run_command()
 		pos++;
 		free(pathname);							/*free in each while occurency, and if unkown command*/
 	}
-	/*
-	if (flag == 1)
-		pathfinder[pos][1] = arguments;
-	else
-		arguments[0] = '\0';
-	*/
 	if (!pathfinder[pos][0])
 	{
 		if(strcmp(buffer, str2))
@@ -268,20 +222,9 @@ int find_and_run_command()
 	}
 	else
 	{
-		/*int count_dirs;
-		if (amount_of_words > 1)
-			for (count_dirs = 0; count_dirs < amount_of_words; count_dirs++)
-			{*/
-				if (fork() == 0)
-					execve(pathname, argv, NULL);
-				wait(NULL);
-			/*}
-		else
-		{
-			if (fork() == 0)
-				execve(pathname, argv, NULL);
-			wait(NULL);
-		}*/
+		if (fork() == 0)
+			execve(pathname, argv, NULL);
+		wait(NULL);
 		free(pathname);							/*free in case command is found*/
 		free(buffer);
 		return (1);
