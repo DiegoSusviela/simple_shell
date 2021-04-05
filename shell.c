@@ -175,7 +175,7 @@ int find_and_run_command()
 	char arguments[100], *dirs;
 	int iter2 = 0, flag = 0;
 	int start, count, pos_dir, am_dir = 0;
-	char directorios[20][100];
+	char directorios[20][100];/*
 	if (amount_of_words > 1)
 	{
 		start = 1;
@@ -214,7 +214,7 @@ int find_and_run_command()
 				am_dir++;
 			}				
 		}
-	}
+	}*/
 
 	char **argv;
 	printf("aca llego1\n");
@@ -271,7 +271,6 @@ int find_and_run_command()
 		if (am_dir > 0)
 			for (count_dirs = 0; count_dirs < am_dir; count_dirs++)
 			{
-				pathfinder[pos][2] = directorios[count_dirs];
 				if (fork() == 0)
 					execve(pathname, argv, NULL);
 				wait(NULL);
@@ -279,7 +278,7 @@ int find_and_run_command()
 		else
 		{
 			if (fork() == 0)
-				execve(pathname, pathfinder[pos], NULL);
+				execve(pathname, argv, NULL);
 			wait(NULL);
 		}
 		free(pathname);							/*free in case command is found*/
