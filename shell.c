@@ -143,7 +143,6 @@ int find_and_run_command()
 				if (flag == 0)
 				{
 					flag = 1;
-					printf("flag changing\n");
 					arguments[0] = '-';
 				}
 				count++;
@@ -167,11 +166,8 @@ int find_and_run_command()
 				am_dir++;
 			}				
 		}
-		printf("%s\n", arguments);
-		printf("%i\n", am_dir);
 	}
 
-	printf("%s\n", arguments);
 	while(index[iter2])
 	{
 		index[iter2] = 0;
@@ -215,10 +211,7 @@ int find_and_run_command()
 	}
 	else
 	{
-		printf("flag value: %i\n", flag);
-		/*pathfinder[pos][2] = directorios;*/
 		int count_dirs;
-		printf("dir value: %i\n", am_dir);
 		if (am_dir > 0)
 			for (count_dirs = 0; count_dirs < am_dir; count_dirs++)
 			{
