@@ -83,7 +83,7 @@ int find_and_run_command()
 	char **word_container;
 	char *aux;
 
-	char *pathfinder[7][2] = {
+	char *pathfinder[7][3] = {
 		{"/usr/local/sbin/", NULL, NULL},
 		{"/usr/local/bin/", NULL, NULL},
 		{"/usr/sbin/", NULL, NULL},
