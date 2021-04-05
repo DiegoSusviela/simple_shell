@@ -75,7 +75,8 @@ char *find_path(char **env)
 
 int find_and_run_command()
 {
-	int pos = 0, i = 0, amount_of_words, j = 0, k, *index;
+	int pos = 0, i = 0, j = 0, k, *index;
+	size_t amount_of_words;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **word_container;
