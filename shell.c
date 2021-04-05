@@ -36,7 +36,7 @@ char **ar(char *buffer, int *index)
 		printf("NO mem\n");
 		return(0);
 	}
-	printf("%i", largo(index));
+	printf("%i\n", largo(index));
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
@@ -178,19 +178,18 @@ int find_and_run_command()
 		iter++;
 		amount_of_words++;
 	}
-	char arguments[100], *dirs;
-	int iter2 = 0, flag = 0;
-	int start, count, pos_dir, am_dir = 0;
 
+	int iter2 = 0;
 	char **argv;
+
 	argv = ar(buffer, index);
 
-
+/*
 	while(index[iter2])
 	{
 		index[iter2] = 0;
 		iter2++;
-	}
+	}*/
 	free(index);
 	while (pathfinder[pos][0])
 	{
