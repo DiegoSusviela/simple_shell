@@ -169,6 +169,11 @@ int find_and_run_command()
 		printf("%s\n", arguments);
 		printf("%i\n", am_dir);
 	}
+	else
+	{
+		arguments[0] = '\0';
+		directorios[0][0] = '\0'; 
+	}
 	while(index[iter2])
 	{
 		index[iter2] = 0;
