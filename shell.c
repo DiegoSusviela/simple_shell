@@ -137,6 +137,7 @@ int find_and_run_command()
 		for (iter = 1; iter < amount_of_words; iter++)
 		{
 			count = 0;
+			pos_dir = 0;
 			if (buffer[index[iter]] == '-' && flag == 0)
 			{
 				flag = 1;
