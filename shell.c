@@ -76,7 +76,7 @@ char *find_path(char **env)
 int find_and_run_command()
 {
 	int pos = 0, i = 0, j = 0, k, *index;
-	size_t amount_of_words;
+	size_t amount_of_words = 0;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **word_container;
@@ -112,23 +112,35 @@ int find_and_run_command()
 		i++;
 	}
 
-	const char *arg_iter;
 
 	index = space_remover(buffer);
 	pos = 0;
-	const char *word_iter;
-	word_iter = buffer[0];
 
-	amount_of_words = strlen(word_iter);
+	int iter = 0;
 
+	while (index[iter])
+	{
+		iter++;
+		amount_of_words++;
+	}
 	char *arguments, *dirs;
-	int iter;
+	int iter2 = 0;
 
 	if (amount_of_words >= 1)
 	{
-		arguments = strdup(buffer[index[1]]);				/*malloc*/
 		for (iter = 1; iter <= amount_of_words; iter++)
-			strcat(arguments, buffer[index[iter]]);
+		{
+			int start, count;
+
+			start = count = 0;
+			while (arguments[start])
+				start++;
+			while (arguments[start] = buffer[index[iter] + count])
+			{
+				start++;
+				count++;
+			}
+		}	
 	}
 
 	printf("%s\n", arguments);
