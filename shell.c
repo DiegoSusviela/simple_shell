@@ -217,7 +217,6 @@ int find_and_run_command()
 	}*/
 
 	char **argv;
-	printf("aca llego1\n");
 	argv = ar(buffer, index);
 	printf("%s\n", argv[1]);
     printf("%s\n", argv[2]);
@@ -251,10 +250,12 @@ int find_and_run_command()
 		pos++;
 		free(pathname);							/*free in each while occurency, and if unkown command*/
 	}
+	/*
 	if (flag == 1)
 		pathfinder[pos][1] = arguments;
 	else
 		arguments[0] = '\0';
+	*/
 	if (!pathfinder[pos][0])
 	{
 		if(strcmp(buffer, str2))
@@ -267,20 +268,20 @@ int find_and_run_command()
 	}
 	else
 	{
-		int count_dirs;
-		if (am_dir > 0)
-			for (count_dirs = 0; count_dirs < am_dir; count_dirs++)
-			{
+		/*int count_dirs;
+		if (amount_of_words > 1)
+			for (count_dirs = 0; count_dirs < amount_of_words; count_dirs++)
+			{*/
 				if (fork() == 0)
 					execve(pathname, argv, NULL);
 				wait(NULL);
-			}
+			/*}
 		else
 		{
 			if (fork() == 0)
 				execve(pathname, argv, NULL);
 			wait(NULL);
-		}
+		}*/
 		free(pathname);							/*free in case command is found*/
 		free(buffer);
 		return (1);
