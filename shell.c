@@ -135,7 +135,7 @@ int find_and_run_command()
 		for (iter = 1; iter <= amount_of_words; iter++)
 		{
 			count = 0;
-			printf("%i\n", index[1]);
+			printf("%i\n", index[iter]);
 			while (buffer[index[iter] + count])
 			{
 				arguments[start] = buffer[index[iter] + count];
@@ -147,8 +147,6 @@ int find_and_run_command()
 	}
 
 	printf("%s\n", arguments);
-	printf("%i\n", index[2]);
-	printf("%i\n", index[3]);
 	while (pathfinder[pos][0])
 	{
 		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
