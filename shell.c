@@ -36,12 +36,12 @@ char **ar(char *buffer, int *index)
 		printf("NO mem\n");
 		return(0);
 	}
-	printf("%i\n", largo(index));
+	/*printf("%i\n", largo(index));*/
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
 		argv[cont] = malloc(sizeof(char) * largo_palabra(aux));				/*we are not freeing this*/
-		printf("%i\n", largo_palabra(aux));
+		/*printf("%i\n", largo_palabra(aux));*/
 		iter = 0;
 		while (buffer[index[cont] + iter])
 		{
@@ -224,6 +224,12 @@ int find_and_run_command()
 	}
 	else
 	{
+		int toshi = 0;
+		while (argv[toshi])
+		{
+			printf("argvs %i %s\n", toshi, argv[toshi]);
+			toshi++;
+		}
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
