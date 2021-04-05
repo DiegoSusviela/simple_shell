@@ -124,7 +124,7 @@ int find_and_run_command()
 		iter++;
 		amount_of_words++;
 	}
-	char *arguments, *dirs;
+	char arguments[100], *dirs;
 	int iter2 = 0;
 	
 	if (amount_of_words >= 1)
