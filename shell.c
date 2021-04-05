@@ -28,7 +28,7 @@ char **ar(char *buffer, int *index)
 
 
 	argv = malloc(sizeof(char *) * largo(index));	
-
+	printf("%i\n", largo(index));
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
