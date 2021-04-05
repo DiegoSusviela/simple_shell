@@ -112,7 +112,7 @@ int find_and_run_command()
 		}
 		i++;
 	}
-	if (buffer[0] == '\n')
+	if (buffer[0] == '\0')
 	{
 		printf("\n");
 		return (1);
