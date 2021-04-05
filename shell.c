@@ -128,22 +128,26 @@ int find_and_run_command()
 	char arguments[100], *dirs;
 	int iter2 = 0;
 	int start, count;
+	arguments[0] = '-';
 	
 	if (amount_of_words > 1)
 	{
 
-		start = 0;
-		printf("%i\n", amount_of_words);
+		start = 1;
 		for (iter = 1; iter < amount_of_words; iter++)
 		{
 			count = 0;
-			while (buffer[index[iter] + count])
+			if (buffer[index[iter]] == '-' && buffer[index[iter] + 1] && buffer[index[iter] + 1] != ' ')
 			{
-				arguments[start] = buffer[index[iter] + count];
-				start++;
 				count++;
+				while (buffer[index[iter] + count])
+				{
+					arguments[start] = buffer[index[iter] + count];
+					start++;
+					count++;
+				}
+				arguments[start] = '\0';
 			}
-			arguments[start] = '\0';
 		}
 		printf("%s\n", arguments);
 	}
