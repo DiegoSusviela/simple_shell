@@ -65,9 +65,10 @@ void shell(void)
 	
 
 	scanf("%s", str);
-
+	char *PATH = _getenv("PATH");
+	rintf("path0[%s]\n", PATH);
 	char* path = realpath(str, NULL);
-	printf("path[%s]\n", path);
+	printf("path1[%s]\n", path);
 	/*readcount = getline(&buffer, &bufsize, stdin);
 	if (readcount == -1)
 	{
