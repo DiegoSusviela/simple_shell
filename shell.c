@@ -210,8 +210,6 @@ int find_and_run_command()
 	{
 		if (flag = 1)
 			pathfinder[pos][1] = arguments;
-		else
-			pathfinder[pos][1] = "/simple_shell";
 		/*pathfinder[pos][2] = directorios;*/
 		int count_dirs;
 		if (am_dir > 0)
