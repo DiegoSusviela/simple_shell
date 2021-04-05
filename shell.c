@@ -273,7 +273,7 @@ int find_and_run_command()
 			{
 				pathfinder[pos][2] = directorios[count_dirs];
 				if (fork() == 0)
-					execve(pathname, pathfinder[pos], NULL);
+					execve(pathname, argv, NULL);
 				wait(NULL);
 			}
 		else
