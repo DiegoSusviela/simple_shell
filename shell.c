@@ -116,9 +116,10 @@ int find_and_run_command()
 	index = space_remover(buffer);
 	pos = 0;
 
-	int iter = 0;
+	int iter = 1;
+	amount_of_words++;
 
-	while (index[iter] != NULL)
+	while (index[iter])
 	{
 		iter++;
 		amount_of_words++;
