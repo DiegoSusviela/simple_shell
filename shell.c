@@ -116,8 +116,9 @@ int find_and_run_command()
 
 	index = space_remover(buffer);
 	pos = 0;
+	const char *word_iter = buffer[0];
 
-	amount_of_words = strlen(buffer[0]);
+	amount_of_words = strlen(word_iter);
 
 	char *arguments, *dirs;
 	int iter;
