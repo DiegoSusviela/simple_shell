@@ -76,7 +76,7 @@ char *find_path(char **env)
 int find_and_run_command()
 {
 	int pos = 0, i = 0, j = 0, k, *index;
-	size_t amount_of_words = 0;
+	int amount_of_words = 0;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **word_container;
@@ -126,12 +126,14 @@ int find_and_run_command()
 	char *arguments, *dirs;
 	int iter2 = 0;
 	printf("llegue1\n");
+	printf("%i\n", amount_of_words);
 	if (amount_of_words >= 1)
 	{
+		printf("entre al if\n");
 		for (iter = 1; iter <= amount_of_words; iter++)
 		{
 			int start, count;
-				printf("llegue2\n");
+			printf("llegue2\n");
 			start = count = 0;
 			while (arguments[start])
 				start++;
