@@ -115,7 +115,7 @@ int find_and_run_command()
 
 	index = space_remover(buffer);
 	pos = 0;
-/*
+
 	int iter = 0;
 
 	while (index[iter])
@@ -125,13 +125,13 @@ int find_and_run_command()
 	}
 	char *arguments, *dirs;
 	int iter2 = 0;
-
+	printf("llegue1\n");
 	if (amount_of_words >= 1)
 	{
 		for (iter = 1; iter <= amount_of_words; iter++)
 		{
 			int start, count;
-
+				printf("llegue2\n");
 			start = count = 0;
 			while (arguments[start])
 				start++;
@@ -140,10 +140,11 @@ int find_and_run_command()
 				start++;
 				count++;
 			}
+				printf("llegue3\n");
 		}	
 	}
 
-	printf("%c\n", arguments[0]);*/
+	/*printf("%c\n", arguments[0]);*/
 	printf("%i\n", index[2]);
 	printf("%i\n", index[3]);
 	while (pathfinder[pos][0])
