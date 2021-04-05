@@ -171,8 +171,9 @@ int find_and_run_command()
 	}
 	else
 	{
+		am_dir = 1;
 		arguments[0] = '\0';
-		directorios[0][0] = '\0'; 
+		directorios[0][0] = '\0';
 	}
 	while(index[iter2])
 	{
