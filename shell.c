@@ -170,8 +170,7 @@ int find_and_run_command()
 		printf("%s\n", arguments);
 		printf("%i\n", am_dir);
 	}
-	else
-		arguments[0] = '\0';
+
 	printf("%s\n", arguments);
 	while(index[iter2])
 	{
@@ -200,6 +199,10 @@ int find_and_run_command()
 		pos++;
 		free(pathname);							/*free in each while occurency, and if unkown command*/
 	}
+	if (flag = 1)
+		pathfinder[pos][1] = arguments;
+	else
+		arguments[0] = '\0';
 	if (!pathfinder[pos][0])
 	{
 		if(strcmp(buffer, str2))
@@ -213,8 +216,6 @@ int find_and_run_command()
 	else
 	{
 		printf("%i\n", flag);
-		if (flag = 1)
-			pathfinder[pos][1] = arguments;
 		/*pathfinder[pos][2] = directorios;*/
 		int count_dirs;
 		printf("%i\n", am_dir);
