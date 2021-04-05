@@ -170,6 +170,8 @@ int find_and_run_command()
 		printf("%s\n", arguments);
 		printf("%i\n", am_dir);
 	}
+	else
+		arguments[0] = NULL;
 	printf("%s\n", arguments);
 	while(index[iter2])
 	{
@@ -213,8 +215,6 @@ int find_and_run_command()
 		printf("%i\n", flag);
 		if (flag = 1)
 			pathfinder[pos][1] = arguments;
-		else 
-			pathfinder[pos][1] = NULL;
 		/*pathfinder[pos][2] = directorios;*/
 		int count_dirs;
 		printf("%i\n", am_dir);
