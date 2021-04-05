@@ -132,7 +132,7 @@ int find_and_run_command()
 	{
 
 		start = 0;
-		for (iter = 1; iter <= amount_of_words; iter++)
+		for (iter = 1; iter < amount_of_words; iter++)
 		{
 			count = 0;
 			printf("%i\n", index[iter]);
