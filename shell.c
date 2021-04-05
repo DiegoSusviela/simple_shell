@@ -114,7 +114,6 @@ int find_and_run_command()
 	}
 	if (buffer[0] == '\0')
 	{
-		printf("\n");
 		return (1);
 	}
 
