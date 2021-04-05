@@ -214,8 +214,8 @@ int find_and_run_command()
 	}
 
 	char **argv;
+	printf("aca llego1\n");
 	argv = ar(buffer, index);
-
 	printf("%s\n", argv[1]);
     printf("%s\n", argv[2]);
 
