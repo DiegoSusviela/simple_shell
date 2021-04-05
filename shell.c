@@ -136,6 +136,7 @@ int find_and_run_command()
 			start = count = 0;
 			while (buffer[index[iter] + count])
 			{
+				printf("insidewhile0\n");
 				arguments[start] = buffer[index[iter] + count];
 				start++;
 				count++;
