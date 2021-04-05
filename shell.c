@@ -126,7 +126,7 @@ int find_and_run_command()
 	}
 	char arguments[100], *dirs;
 	int iter2 = 0, flag = 0;
-	int start, count, pos_dir, am_dir;
+	int start, count, pos_dir, am_dir = 0;
 	char directorios[20][100];
 
 	if (amount_of_words > 1)
@@ -168,12 +168,6 @@ int find_and_run_command()
 		}
 		printf("%s\n", arguments);
 		printf("%i\n", am_dir);
-	}
-	else
-	{
-		am_dir = 1;
-		arguments[0] = '\0';
-		directorios[0][0] = '\0';
 	}
 	while(index[iter2])
 	{
@@ -217,9 +211,16 @@ int find_and_run_command()
 		pathfinder[pos][1] = arguments;
 		/*pathfinder[pos][2] = directorios;*/
 		int count_dirs;
-		for (count_dirs = 0; count_dirs < am_dir; count_dirs++)
+		if (am_dir > 0)
+			for (count_dirs = 0; count_dirs < am_dir; count_dirs++)
+			{
+				pathfinder[pos][2] = directorios[count_dirs];
+				if (fork() == 0)
+					execve(pathname, pathfinder[pos], NULL);
+				wait(NULL);
+			}
+		else
 		{
-			pathfinder[pos][2] = directorios[count_dirs];
 			if (fork() == 0)
 				execve(pathname, pathfinder[pos], NULL);
 			wait(NULL);
