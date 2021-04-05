@@ -139,7 +139,7 @@ int find_and_run_command()
 			count = 0;
 			pos_dir = 0;
 	
-			if (buffer[index[iter]] == '-' && buffer[index[iter] + 1] && buffer[index[iter] + 1] != ' ')
+			if (buffer[index[iter]] == '-' && buffer[index[iter] + 1])
 			{
 				if (flag == 0)
 				{
