@@ -141,6 +141,7 @@ int find_and_run_command()
 				count++;
 				printf("insidewhile\n");
 			}
+			arguments[start] = '\0';
 			printf("llegue3\n");
 		}	
 	}
