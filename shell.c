@@ -135,6 +135,7 @@ int find_and_run_command()
 		for (iter = 1; iter <= amount_of_words; iter++)
 		{
 			count = 0;
+			printf("%i\n", index[1]);
 			while (buffer[index[iter] + count])
 			{
 				arguments[start] = buffer[index[iter] + count];
