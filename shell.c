@@ -128,7 +128,7 @@ int find_and_run_command()
 	int iter2 = 0, flag = 0;
 	int start, count, pos_dir, am_dir = 0;
 	char directorios[20][100];
-
+	flag = 0;
 	if (amount_of_words > 1)
 	{
 		start = 1;
