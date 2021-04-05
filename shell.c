@@ -120,7 +120,7 @@ int find_and_run_command()
 
 	if (amount_of_words >= 1)
 	{
-		arguments = strdup(index[1]);				/*malloc*/
+		arguments = strdup(*(index + 1));				/*malloc*/
 		for (iter = 1; iter <= amount_of_words; iter++)
 			strcat(arguments, index[iter]);
 	}
