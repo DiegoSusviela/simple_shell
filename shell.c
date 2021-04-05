@@ -127,11 +127,10 @@ int find_and_run_command()
 	char arguments[100], *dirs;
 	int iter2 = 0;
 	int start, count;
-	arguments[0] = '-';
-	
+		
 	if (amount_of_words > 1)
 	{
-
+		arguments[0] = '-';
 		start = 1;
 		for (iter = 1; iter < amount_of_words; iter++)
 		{
