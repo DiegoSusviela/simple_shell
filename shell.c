@@ -171,7 +171,7 @@ int find_and_run_command()
 		printf("%i\n", am_dir);
 	}
 	else
-		arguments[0] = NULL;
+		arguments[0] = '\0';
 	printf("%s\n", arguments);
 	while(index[iter2])
 	{
