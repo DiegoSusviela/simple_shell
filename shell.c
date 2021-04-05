@@ -76,7 +76,7 @@ char *find_path(char **env)
 
 int find_and_run_command()
 {
-	int pos = 0, i = 0, amount_of_words, j = 0, k;
+	int pos = 0, i = 0, amount_of_words, j = 0, k, *index;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **word_container;
@@ -111,26 +111,22 @@ int find_and_run_command()
 		}
 		i++;
 	}
-	int *index;
 
 	index = space_remover(buffer);
 	pos = 0;
-	/*word_container = malloc(sizeof(char*) * amount_of_words);*/
-	/*buffer = word_container[0];*/
-	/*
-	for(k = 0; k < amount_of_words; k++)
+	amount_of_words = strlen(index);
+
+	char *arguments, *dirs;
+	int iter;
+
+	if (amount_of_words >= 1)
 	{
-		word_container[k] = &buffer[j];
-		if (k < (amount_of_words - 1))
-		{
-			while(buffer[j])
-				j++;
-			while(!buffer[j])
-				j++;
-		}
+		arguments = strdup(index[1]);				/*malloc*/
+		for (iter = 1; iter <= amount_of_words; iter++)
+			strcat(arguments, index[iter]);
 	}
-	*/
-	printf("%i\n", index[1]);
+
+	printf("%s\n", arguments);
 	printf("%i\n", index[2]);
 	printf("%i\n", index[3]);
 	while (pathfinder[pos][0])
