@@ -126,24 +126,21 @@ int find_and_run_command()
 	}
 	char *arguments, *dirs;
 	int iter2 = 0;
-	printf("llegue1\n");
-	printf("%i\n", amount_of_words);
+	
 	if (amount_of_words >= 1)
 	{
-		printf("entre al if\n");
 		for (iter = 1; iter <= amount_of_words; iter++)
 		{
 			int start, count;
 			printf("llegue2\n");
 			start = count = 0;
-			while (arguments[start])
-				start++;
 			while (arguments[start] = buffer[index[iter] + count])
 			{
 				start++;
 				count++;
+				printf("insidewhile\n");
 			}
-				printf("llegue3\n");
+			printf("llegue3\n");
 		}	
 	}
 
