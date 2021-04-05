@@ -118,7 +118,7 @@ int find_and_run_command()
 
 	int iter = 1;
 	amount_of_words++;
-
+	printf("%i\n", amount_of_words);
 	while (index[iter])
 	{
 		iter++;
