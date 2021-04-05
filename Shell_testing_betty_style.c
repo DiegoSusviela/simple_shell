@@ -19,7 +19,7 @@ void type_prompt()
 		first_time = 0;
 	}
 }
-
+/*
 char *_getenv(const char *name)
 {
 	extern char **environ;
@@ -32,6 +32,26 @@ char *_getenv(const char *name)
 		else
 			i++;
 	return (NULL);
+}*/
+char *_getenv(const char *name)
+{
+    extern char ** environ;
+    int i, c;
+    size_t j;
+
+    for (i = 0; environ[i] != '\0'; i++)
+    {
+        for (j = 0; environ[i][j] != '='; j++)
+        {
+        }
+        c = strncmp(environ[i], name, j);
+            if ( c == 0)
+            {
+                strtok(environ[i], "=");
+                return(strtok(NULL, "="));
+            }
+    }
+    return (NULL);
 }
 
 void shell(void)
@@ -65,10 +85,10 @@ void shell(void)
 	
 
 	scanf("%s", str);
-	char *PATH = getenv("PATH");
+	char *PATH = _getenv("PATH");
 	printf("path0[%s]\n", PATH);
 	char* path = realpath(str, NULL);
-	printf("path1[%s]\n", path);
+
 	/*readcount = getline(&buffer, &bufsize, stdin);
 	if (readcount == -1)
 	{
