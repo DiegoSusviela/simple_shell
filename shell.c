@@ -126,13 +126,15 @@ int find_and_run_command()
 	}
 	char arguments[100], *dirs;
 	int iter2 = 0;
+	int start, count;
 	
 	if (amount_of_words >= 1)
 	{
+
+		start = 0;
 		for (iter = 1; iter <= amount_of_words; iter++)
 		{
-			int start, count;
-			start = count = 0;
+			count = 0;
 			while (buffer[index[iter] + count])
 			{
 				arguments[start] = buffer[index[iter] + count];
@@ -140,7 +142,7 @@ int find_and_run_command()
 				count++;
 			}
 			arguments[start] = '\0';
-		}	
+		}
 	}
 
 	printf("%s\n", arguments);
