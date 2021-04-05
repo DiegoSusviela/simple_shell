@@ -79,7 +79,7 @@ int find_and_run_command()
 	int pos = 0, i = 0, j = 0, k, *index;
 	int amount_of_words = 0;
 	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
+	char *pathname, *tmp, *buffer = NULL;
 	char **word_container;
 	char *aux;
 
@@ -184,7 +184,7 @@ int find_and_run_command()
 			return(0);
 		}
 		tmp = realloc(pathname, BUFFSIZE);
-		if (!tmp)							/*check if reallocation was posible*/
+		if (!tmp)								/*check if reallocation was posible*/
 		{
 			printf("NO mem\n");
 			return(0);
@@ -198,7 +198,7 @@ int find_and_run_command()
 	}
 	if (!pathfinder[pos][0])
 	{
-		if(strcmp(buffer, str2))
+		if(strcmp(buffer, 'exit'))
 		{
 			free(buffer);
 			return (0);
