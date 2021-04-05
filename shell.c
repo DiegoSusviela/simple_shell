@@ -117,18 +117,16 @@ int find_and_run_command()
 	index = space_remover(buffer);
 	pos = 0;
 
-	arg_iter = index;
-	amount_of_words = strlen(arg_iter);
+	amount_of_words = strlen(buffer[0]);
 
 	char *arguments, *dirs;
 	int iter;
 
 	if (amount_of_words >= 1)
 	{
-		arg_iter++;
-		arguments = strdup(arg_iter);				/*malloc*/
-		for (iter = 1; iter <= amount_of_words; iter++, arg_iter++)
-			strcat(arguments, arg_iter);
+		arguments = strdup(buffer[index[1]]);				/*malloc*/
+		for (iter = 1; iter <= amount_of_words; iter++)
+			strcat(arguments, buffer[index[iter]]);
 	}
 
 	printf("%s\n", arguments);
