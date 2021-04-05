@@ -143,7 +143,7 @@ int find_and_run_command()
 		}	
 	}
 
-	printf("%s\n", arguments);
+	printf("%c\n", arguments[0]);
 	printf("%i\n", index[2]);
 	printf("%i\n", index[3]);
 	while (pathfinder[pos][0])
