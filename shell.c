@@ -84,13 +84,13 @@ int find_and_run_command()
 	char *aux;
 
 	char *pathfinder[7][2] = {
-		{"/usr/local/sbin/", NULL},
-		{"/usr/local/bin/", NULL},
-		{"/usr/sbin/", NULL},
-		{"/usr/bin/", NULL},
-		{"/sbin/", NULL},
-		{"/bin/", NULL},
-		{NULL, NULL}
+		{"/usr/local/sbin/", NULL, NULL},
+		{"/usr/local/bin/", NULL, NULL},
+		{"/usr/sbin/", NULL, NULL},
+		{"/usr/bin/", NULL, NULL},
+		{"/sbin/", NULL, NULL},
+		{"/bin/", NULL, NULL},
+		{NULL, NULL, NULL}
 	};
 	ssize_t bufsize = 1024, readcount = 0;
 
@@ -119,7 +119,6 @@ int find_and_run_command()
 
 	int iter = 1;
 	amount_of_words++;
-	printf("%i\n", amount_of_words);
 	while (index[iter])
 	{
 		iter++;
@@ -148,6 +147,8 @@ int find_and_run_command()
 				}
 				arguments[start] = '\0';
 			}
+			else
+				printf("falta agregar los dirs\n");
 		}
 		printf("%s\n", arguments);
 	}
@@ -190,6 +191,7 @@ int find_and_run_command()
 	}
 	else
 	{
+		pathfinder[pos][1] = arguments;
 		if (fork() == 0)
 			execve(pathname, pathfinder[pos], NULL);
 		wait(NULL);
