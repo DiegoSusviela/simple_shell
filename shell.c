@@ -51,6 +51,7 @@ int *space_remover(char *to_remove)
 		count++;
 		pos_cont++;
 	}
+	index[pos_cont] = 0;
 	return (index);
 }
 
@@ -136,7 +137,6 @@ int find_and_run_command()
 		for (iter = 1; iter < amount_of_words; iter++)
 		{
 			count = 0;
-			printf("%i\n", index[iter]);
 			while (buffer[index[iter] + count])
 			{
 				arguments[start] = buffer[index[iter] + count];
