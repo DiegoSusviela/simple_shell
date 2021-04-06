@@ -210,6 +210,18 @@ void liberar_argv(char **argv)
 	argv = NULL;
 }
 
+void liberar_paths(list_t *list)
+{
+	list_t *aux = list->next;
+
+	if (list)
+	{
+		free(list->str);
+		free(list);
+		list = aux;
+		liberar_paths(list);
+	}
+}
 
 
 int find_and_run_command()
@@ -255,7 +267,11 @@ int find_and_run_command()
 	}
 	if (buffer[0] == '\0')
 		return (1);
-	create_paths();
+
+	list_t *paths;
+	paths = create_paths();
+	liberar_paths(paths);
+
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
