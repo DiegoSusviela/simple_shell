@@ -163,12 +163,14 @@ int find_and_run_command()
 		i++;
 	}
 	if (buffer[0] == '\0')
-	{
 		return (1);
-	}
-
-
 	index = space_remover(buffer);
+	if(!strcmp(buffer, str2))
+	{
+		free(buffer);
+		exit (99);
+	}
+	
 	pos = 0;
 
 	int iter = 1;
@@ -206,17 +208,7 @@ int find_and_run_command()
 		pos++;
 		free(pathname);							/*free in each while occurency, and if unkown command*/
 	}
-	if (!pathfinder[pos][0])
-	{
-		if(strcmp(buffer, str2))
-		{
-			free(buffer);
-			return (0);
-		}
-		free(buffer);
-		exit (99);
-	}
-	else
+	if (pathfinder[pos][0])
 	{
 		int toshi = 0;
 		printf("pathname is %s\n", pathname);
@@ -232,6 +224,8 @@ int find_and_run_command()
 		free(buffer);
 		return (1);
 	}
+	free(buffer);
+	return (0);
 }
 
 void start_shell(void)
