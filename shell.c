@@ -106,7 +106,7 @@ char *_getenv(const char *name)
 				path = malloc(sizeof(char) * cont);								/*safety net needed and later to free*/
 				while(environ[i][j])
 				{
-					path[pos] = environ[i][j]
+					path[pos] = environ[i][j];
 					pos++;
 					j++;
 				}				
