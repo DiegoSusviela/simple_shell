@@ -86,6 +86,7 @@ list_t *create_paths()
 		printf("NO mem\n");
 		return(NULL);
 	}
+	nodo->next = NULL;
 	head = nodo;
 	printf("%s\n", path);
 	while(path[index])
@@ -93,7 +94,6 @@ list_t *create_paths()
 		largo = 0;
 		while(path[index + largo] && path[index + largo] != ':')
 			largo++;
-		printf("%i\n", largo);
 		nodo->str = malloc(sizeof(char) * largo);
 		count = 0;
 		while(path[index] && path[index] != ':')
@@ -102,11 +102,21 @@ list_t *create_paths()
 			index++;
 			count++;
 		}
+		printf("%s\n", nodo->str);
 		if (path[index])
+		{
+			nodo->next = malloc(sizeof(list_t));							/*we are not freeing this*/
+			nodo = nodo->next;
+			if (!nodo)
+			{
+				printf("NO mem\n");
+				return(NULL);
+			}
 			index++;
+		}
+		nodo->next = NULL;
 	}
 	return (head);
-	printf("0 %s\n", path);
 }
 
 void start_new_promtp(void)
