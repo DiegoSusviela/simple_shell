@@ -57,7 +57,12 @@ void start_new_promtp(void)
 		first_time = 0;
 	}
 }
+ssize_t _getline(char **p_buffer, size_t *p_bufsize, stdin)
+{
+	int readcount = 0;
 
+	return (readline);
+}
 char *_getenv(const char *name)
 {
 	extern char ** environ;
@@ -78,6 +83,7 @@ char *_getenv(const char *name)
 	}
 	return (NULL);
 }
+
 
 int largo(int *index)
 {
@@ -284,7 +290,9 @@ int find_and_run_command(list_t *paths)
 	if(!strcmp(argv[0], str2))
 	{
 																			/*need to free paths*/
-		exit (99);
+		if(argv[1])
+			exit(argv[1]);
+		exit(0);
 	}
 	if(!strcmp(argv[0], str3))
 	{
