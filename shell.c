@@ -31,17 +31,15 @@ char **ar(char *buffer, int *index)
 
 
 	argv = malloc(sizeof(char *) * (largo(index) + 1));							/*we are not freeing this*/
-	if (!argv)								/*check if reallocation was posible*/
+	if (!argv)
 	{
 		printf("NO mem\n");
 		return(0);
 	}
-	/*printf("%i\n", largo(index));*/
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
-		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));				/*we are not freeing this*/
-		/*printf("%i\n", largo_palabra(aux));*/
+		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));				/*we are not freeing this, we need to add this safty net, but im lazy*/
 		iter = 0;
 		while (buffer[index[cont] + iter])
 		{
@@ -78,9 +76,6 @@ int validate_usr_in(char *usr_input)
 	return(1);
 }
 
-
-
-
 int *space_remover(char *to_remove)
 {
 	int pos_rem = 0, flag = 0, pos_cont = 0, count = 0;
@@ -88,6 +83,11 @@ int *space_remover(char *to_remove)
 	int *index;
 
 	index = malloc(sizeof(int) * BUFFSIZE);
+	if (!index)
+	{
+		printf("NO mem\n");
+		return(NULL);
+	}
 	while(to_remove[pos_rem])
 	{
 		index[pos_cont] = pos_rem;
@@ -154,8 +154,13 @@ int find_and_run_command()
 		NULL
 	};
 	ssize_t bufsize = 1024, readcount = 0;
-
-	readcount = getline(&buffer, &bufsize, stdin);
+	
+	readcount = getline(&buffer, &bufsize, stdin);							/*alloc para buffer    0*/
+	if (!buffer)
+	{
+		printf("NO mem\n");
+		return(0);
+	}
 	if (readcount == -1)
 	{
 		if (isatty(STDIN_FILENO) != 0)
@@ -175,51 +180,65 @@ int find_and_run_command()
 	}
 	if (buffer[0] == '\0')
 		return (1);
-	index = space_remover(buffer);
+	index = space_remover(buffer);											/*alloc index       1*/
+	if (!index)
+	{
+		printf("NO mem\n");
+		free(buffer);														/*libero buffer     0*/
+		return(0);
+	}
 	if(!strcmp(buffer, str2))
 	{
-		free(buffer);
+		free(buffer);														/*libero buffer     0*/
 		exit (99);
 	}
 
-	argv = ar(buffer, index);
-	free(index);
-	free(buffer);
+	argv = ar(buffer, index);												/*alloc argv 		2*/
+	if (!argv)
+	{
+		printf("NO mem\n");
+		free(index);														/*alloc index       1*/
+		free(buffer);														/*libero buffer     0*/
+		return(0);
+	}
+	free(index);															/*alloc index       1*/
+	free(buffer);															/*libero buffer     0*/
 
 	while (pathfinder[pos])
 	{
-		pathname = strdup(pathfinder[pos]);  /*Does a mnalloc 1 allocation each time it runs*/
-		if (!pathname)							/*check if allocation was posible*/
+		pathname = strdup(pathfinder[pos]);  								/*alloca pathname   3*/
+		if (!pathname)
 		{
 			printf("NO mem\n");
-			liberar_argv(argv);
+			liberar_argv(argv);												/*libero argv		2*/
 			return(0);
 		}
 		tmp = realloc(pathname, BUFFSIZE);
-		if (!tmp)								/*check if reallocation was posible*/
+		if (!tmp)
 		{
 			printf("NO mem\n");
-			liberar_argv(argv);
+			liberar_argv(argv);												/*libero argv		2*/
 			return(0);
 		}
+		free(pathname);														/*libero pathname	3*/
 		pathname = tmp;
-		strcat(pathname, argv[0]);				/*appends the second string to the first*/
+		strcat(pathname, argv[0]);											/*appends the second string to the first*/
 		if (!stat(pathname, &stats))
 			break;
 		pos++;
-		free(pathname);							/*free in each while occurency, and if unkown command*/
+		free(pathname);														/*libero pathname	3*/
 	}
 	if (pathfinder[pos])
 	{
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
-		free(pathname);							/*free in case command is found*/
-		liberar_argv(argv);
+		free(pathname);														/*libero pathname	3*/
+		liberar_argv(argv);													/*libero argv		2*/
 		return (1);
 	}
-	free(pathname);
-	liberar_argv(argv);
+	free(pathname);															/*libero pathname	3*/							
+	liberar_argv(argv);														/*libero argv		2*/
 	return (0);
 }
 
