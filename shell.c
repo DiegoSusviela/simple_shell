@@ -266,7 +266,7 @@ int find_and_run_command(list_t *paths)
 	if(!strcmp(buffer, str2))
 	{
 		free(buffer);														/*libero buffer     0*/
-		liberar_paths(paths);
+																			/*need to free paths*/
 		exit (99);
 	}
 
@@ -279,9 +279,9 @@ int find_and_run_command(list_t *paths)
 		return(0);
 	}
 
-	while (pathfinder[pos])
+	while (paths)
 	{
-		pathname = strdup(pathfinder[pos]);  								/*alloca pathname   3*/
+		pathname = strdup(paths->str);  								/*alloca pathname   3*/
 		if (!pathname)
 		{
 			printf("NO mem\n");
@@ -303,7 +303,7 @@ int find_and_run_command(list_t *paths)
 		pos++;
 		free(pathname);														/*libero pathname	3*/
 	}
-	if (pathfinder[pos])
+	if (paths)
 	{
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
