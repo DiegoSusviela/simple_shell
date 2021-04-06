@@ -90,7 +90,7 @@ list_t *create_paths()
 	printf("%s\n", path);
 	while(path[index])
 	{
-		largo = 0
+		largo = 0;
 		while(path[largo] && path[largo] != ':')
 			largo++;
 		printf("%i\n", largo);
