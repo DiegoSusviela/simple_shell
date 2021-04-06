@@ -143,6 +143,49 @@ void liberar_argv(char **argv)
 	argv = NULL;
 }
 
+char *_getenv(const char *name)
+{
+	extern char ** environ;
+	int i, c;
+	size_t j;
+
+	for (i = 0; environ[i] != '\0'; i++)
+	{
+		for (j = 0; environ[i][j] != '='; j++)
+		{
+		}
+		c = strncmp(environ[i], name, j);
+			if ( c == 0)
+			{
+				strtok(environ[i], "=");
+				return(strtok(NULL, "="));
+			}
+	}
+	return (NULL);
+}
+
+char *_getenv2(const char *name)
+{
+	extern char **environ;
+	int i = 0;
+	printf("%s\n", environ[i]);
+	printf("%s\n", name);
+	while(environ[i]) 
+		if (!strcmp(environ[i], name))
+			return (environ[i]);
+		else
+			i++;
+	return (NULL);
+}
+
+void tokenizer()
+{
+	char *PATH = _getenv("PATH");
+	char *PATH2 = _getenv2("PATH");
+
+	printf("0 %s\n", PATH);
+	printf("1 %s\n", PATH2);
+}
 int find_and_run_command()
 {
 	int pos = 0, i = 0, *index;
@@ -185,6 +228,7 @@ int find_and_run_command()
 	}
 	if (buffer[0] == '\0')
 		return (1);
+	tokenizer();
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
