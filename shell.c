@@ -1,5 +1,84 @@
 #include "header.h"
 
+void liberar_argv(char **argv)
+{
+	int word_count = 0, str_len = 0;
+
+	while(argv[word_count])
+	{
+		free(argv[word_count]);
+		argv[word_count] = NULL;
+		word_count++;
+	}
+	free(argv);
+	argv = NULL;
+}
+
+void liberar_paths(list_t *list)
+{
+	list_t *aux = list->next;
+
+	if (list)
+	{
+		free(list->str);
+		free(list);
+		liberar_paths(aux);
+	}
+}
+
+char *find_path(char **env)
+{
+	/*
+	char *path = "PATH=";
+	unsigned int i = 0, j;
+
+	while(env[i])
+	{
+		for (j = 0; j < 5; j++)
+			if (path[j] != env[i][j])
+				break;
+		if (j == 5)
+			break;
+		i++;
+	}
+	return (env[i]);
+	*/
+}
+
+void start_new_promtp(void)
+{
+	static int first_time = 1;
+	const char *CLEAR_SCREEN_ANSI;
+
+	if (first_time)
+	{
+		CLEAR_SCREEN_ANSI = " \e[1;1H\e[2J";
+		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
+		first_time = 0;
+	}
+}
+
+char *_getenv(const char *name)
+{
+	extern char ** environ;
+	int i, c;
+	size_t j;
+
+	for (i = 0; environ[i] != '\0'; i++)
+	{
+		for (j = 0; environ[i][j] != '='; j++)
+		{
+		}
+		c = strncmp(environ[i], name, j);
+			if ( c == 0)
+			{
+				strtok(environ[i], "=");
+				return(strtok(NULL, "="));
+			}
+	}
+	return (NULL);
+}
+
 int largo(int *index)
 {
 	int ret = 1, pos = 1;
@@ -52,31 +131,11 @@ char **ar(char *buffer, int *index)
 	return (argv);
 }
 
-char *_getenv(const char *name)
-{
-	extern char ** environ;
-	int i, c;
-	size_t j;
-
-	for (i = 0; environ[i] != '\0'; i++)
-	{
-		for (j = 0; environ[i][j] != '='; j++)
-		{
-		}
-		c = strncmp(environ[i], name, j);
-			if ( c == 0)
-			{
-				strtok(environ[i], "=");
-				return(strtok(NULL, "="));
-			}
-	}
-	return (NULL);
-}
-
 list_t *create_paths()
 {
 	char *path = _getenv("PATH");
 	int index = 0, count, largo;
+	char *str1;
 	list_t *nodo;
 	list_t *head;
 
@@ -94,14 +153,15 @@ list_t *create_paths()
 		largo = 0;
 		while(path[index + largo] && path[index + largo] != ':')
 			largo++;
-		nodo->str = malloc(sizeof(char) * largo);
+		str1 = malloc(sizeof(char) * largo);
 		count = 0;
 		while(path[index] && path[index] != ':')
 		{
-			nodo->str[count] = path[index];
+			str1[count] = path[index];
 			index++;
 			count++;
 		}
+		nodo->str = str1;
 		printf("%s\n", nodo->str);
 		if (path[index])
 		{
@@ -117,30 +177,6 @@ list_t *create_paths()
 		nodo->next = NULL;
 	}
 	return (head);
-}
-
-void start_new_promtp(void)
-{
-	static int first_time = 1;
-	const char *CLEAR_SCREEN_ANSI;
-
-	if (first_time)
-	{
-		CLEAR_SCREEN_ANSI = " \e[1;1H\e[2J";
-		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
-		first_time = 0;
-	}
-}
-
-int validate_usr_in(char *usr_input)
-{
-	int pos = 0;
-
-	while(usr_input[pos] && usr_input[pos] != ' ')
-		pos++;
-	if (usr_input[pos])
-		return (0);
-	return(1);
 }
 
 int *space_remover(char *to_remove)
@@ -176,53 +212,6 @@ int *space_remover(char *to_remove)
 	index[pos_cont] = 0;
 	return (index);
 }
-
-char *find_path(char **env)
-{
-	/*
-	char *path = "PATH=";
-	unsigned int i = 0, j;
-
-	while(env[i])
-	{
-		for (j = 0; j < 5; j++)
-			if (path[j] != env[i][j])
-				break;
-		if (j == 5)
-			break;
-		i++;
-	}
-	return (env[i]);
-	*/
-}
-
-void liberar_argv(char **argv)
-{
-	int word_count = 0, str_len = 0;
-
-	while(argv[word_count])
-	{
-		free(argv[word_count]);
-		argv[word_count] = NULL;
-		word_count++;
-	}
-	free(argv);
-	argv = NULL;
-}
-
-void liberar_paths(list_t *list)
-{
-	list_t *aux = list->next;
-
-	if (list)
-	{
-		free(list->str);
-		free(list);
-		list = aux;
-		liberar_paths(list);
-	}
-}
-
 
 int find_and_run_command()
 {
