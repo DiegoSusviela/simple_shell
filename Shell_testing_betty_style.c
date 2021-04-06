@@ -86,7 +86,7 @@ void shell(void)
 	
 
 	scanf("%s", str);
-	char *PATH = _getenv("PATH");
+	char *PATH = _getenv1("PATH");
 	printf("path0[%s]\n", PATH);
 	char* path = realpath(str, NULL);
 
