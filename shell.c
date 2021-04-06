@@ -278,10 +278,10 @@ int find_and_run_command(list_t *paths)
 		printf("NO mem\n");
 		return(0);
 	}
-
-	while (paths)
+	list_t *path_aux = paths;
+	while (path_aux)
 	{
-		pathname = strdup(paths->str);  								/*alloca pathname   3*/
+		pathname = strdup(path_aux->str);  								/*alloca pathname   3*/
 		if (!pathname)
 		{
 			printf("NO mem\n");
@@ -300,10 +300,10 @@ int find_and_run_command(list_t *paths)
 		strcat(pathname, argv[0]);											/*appends the second string to the first*/
 		if (!stat(pathname, &stats))
 			break;
-		pos++;
+		path_aux = path_aux->next;
 		free(pathname);														/*libero pathname	3*/
 	}
-	if (paths)
+	if (path_aux)
 	{
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
