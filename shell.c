@@ -52,17 +52,6 @@ char **ar(char *buffer, int *index)
 	return (argv);
 }
 
-int largo_path(char c)
-{
-	int ret = 0;
-	char *aux = &c;
-
-	while(*(aux + ret))
-		ret++;
-	printf("%i\n", ret);
-	return (ret);
-}
-
 char *_getenv(const char *name)
 {
 	extern char ** environ;
@@ -87,7 +76,7 @@ char *_getenv(const char *name)
 list_t *create_paths()
 {
 	char *path = _getenv("PATH");
-	int index = 0, len = 0, cont, count;
+	int index = 0, count, largo;
 	list_t *nodo;
 	list_t *head;
 
@@ -98,9 +87,14 @@ list_t *create_paths()
 		return(NULL);
 	}
 	head = nodo;
+	printf("%s\n", path);
 	while(path[index])
 	{
-		nodo->str = malloc(sizeof(char) * largo_path(path[index]));
+		largo = 0
+		while(path[largo] && path[largo] != ':')
+			largo++;
+		printf("%i\n", largo);
+		nodo->str = malloc(sizeof(char) * largo);
 		count = 0;
 		while(path[index] && path[index] != ':')
 		{
