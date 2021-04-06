@@ -177,7 +177,7 @@ list_t *create_paths()
 		}
 		nodo->next = NULL;
 	}
-
+	printf(head->str)
 	return (head);
 }
 
@@ -215,7 +215,7 @@ int *space_remover(char *to_remove)
 	return (index);
 }
 
-int find_and_run_command(struct list_t *paths)
+int find_and_run_command(list_t *paths)
 {
 	int pos = 0, i = 0, *index;
 	struct stat stats;
@@ -321,7 +321,7 @@ int find_and_run_command(struct list_t *paths)
 	return (0);
 }
 
-void start_shell(struct list_t *paths)
+void start_shell(list_t *paths)
 {
 	printf("$ ");
 	if (!find_and_run_command(paths))
