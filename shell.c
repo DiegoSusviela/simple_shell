@@ -256,13 +256,6 @@ int find_and_run_command(list_t *paths)
 	if (buffer[0] == '\0')
 		return (1);
 
-	/*liberar_paths(paths);*/
-	while(paths)
-	{
-		printf("%s\n", paths->str);
-		paths = paths->next;
-	}
-
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
@@ -273,6 +266,7 @@ int find_and_run_command(list_t *paths)
 	if(!strcmp(buffer, str2))
 	{
 		free(buffer);														/*libero buffer     0*/
+		liberar_paths(paths);
 		exit (99);
 	}
 
