@@ -124,15 +124,26 @@ char *find_path(char **env)
 	*/
 }
 
+void liberar_argv(char **argv)
+{
+	int word_count = 0, str_len = 0;
+
+	while(argv[word_count])
+	{
+		free(argv[word_count]);
+		argv[word_count] = NULL;
+		word_count++;
+	}
+	free(argv);
+	argv = NULL;
+}
+
 int find_and_run_command()
 {
-	int pos = 0, i = 0, j = 0, k, *index;
-	int amount_of_words = 0;
+	int pos = 0, i = 0, *index;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
-	char **word_container;
-	char *aux;
-
+	char **argv;
 	char *pathfinder[7][2] = {
 		{"/usr/local/sbin/", NULL},
 		{"/usr/local/bin/", NULL},
@@ -170,35 +181,26 @@ int find_and_run_command()
 		free(buffer);
 		exit (99);
 	}
-	
-	pos = 0;
-
-	int iter = 1;
-	amount_of_words++;
-	while (index[iter])
-	{
-		iter++;
-		amount_of_words++;
-	}
-
-	int iter2 = 0;
-	char **argv;
 
 	argv = ar(buffer, index);
-
 	free(index);
+
 	while (pathfinder[pos][0])
 	{
 		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
 		if (!pathname)							/*check if allocation was posible*/
 		{
 			printf("NO mem\n");
+			free(buffer);
+			liberar_argv(argv);
 			return(0);
 		}
 		tmp = realloc(pathname, BUFFSIZE);
 		if (!tmp)								/*check if reallocation was posible*/
 		{
 			printf("NO mem\n");
+			free(buffer);
+			liberar_argv(argv);
 			return(0);
 		}
 		pathname = tmp;
@@ -222,9 +224,11 @@ int find_and_run_command()
 		wait(NULL);
 		free(pathname);							/*free in case command is found*/
 		free(buffer);
+		liberar_argv(argv);
 		return (1);
 	}
 	free(buffer);
+	liberar_argv(argv);
 	return (0);
 }
 
