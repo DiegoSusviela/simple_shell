@@ -262,13 +262,7 @@ int find_and_run_command(list_t *paths)
 		free(buffer);														/*libero buffer     0*/
 		return(0);
 	}
-	if(!strcmp(buffer, str2))
-	{
-		free(buffer);														/*libero buffer     0*/
-																			/*need to free paths*/
-		exit (99);
-	}
-	if (buffer[0] == '\0' && !index[0])
+		if (buffer[0] == '\0' && !index[0])
 		return (1);
 	argv = ar(buffer, index);												/*alloc argv 		2*/
 	free(index);															/*libero index      1*/
@@ -277,6 +271,11 @@ int find_and_run_command(list_t *paths)
 	{
 		printf("NO mem\n");
 		return(0);
+	}
+	if(!strcmp(argv[0], str2))
+	{
+																			/*need to free paths*/
+		exit (99);
 	}
 	while (path_aux)
 	{
