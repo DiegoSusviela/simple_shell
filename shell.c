@@ -145,13 +145,13 @@ int find_and_run_command()
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **argv;
 	char *pathfinder[7] = {
-		{"/usr/local/sbin/"},
-		{"/usr/local/bin/"},
-		{"/usr/sbin/"},
-		{"/usr/bin/"},
-		{"/sbin/"},
-		{"/bin/"},
-		{NULL}
+		"/usr/local/sbin/", 
+		"/usr/local/bin/",
+		"/usr/sbin/",
+		"/usr/bin/",
+		"/sbin/",
+		"/bin/",
+		NULL
 	};
 	ssize_t bufsize = 1024, readcount = 0;
 
