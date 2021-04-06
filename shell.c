@@ -30,7 +30,7 @@ char **ar(char *buffer, int *index)
 	int cont = 0, iter;
 
 
-	argv = malloc(sizeof(char *) * largo(index));							/*we are not freeing this*/
+	argv = malloc(sizeof(char *) * (largo(index) + 1));							/*we are not freeing this*/
 	if (!argv)								/*check if reallocation was posible*/
 	{
 		printf("NO mem\n");
@@ -40,7 +40,7 @@ char **ar(char *buffer, int *index)
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
-		argv[cont] = malloc(sizeof(char) * largo_palabra(aux));				/*we are not freeing this*/
+		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));				/*we are not freeing this*/
 		/*printf("%i\n", largo_palabra(aux));*/
 		iter = 0;
 		while (buffer[index[cont] + iter])
@@ -50,6 +50,7 @@ char **ar(char *buffer, int *index)
 		}
 		argv[cont][iter] = buffer[index[cont] + iter];
 	}
+	argv[cont] = NULL;
 	return (argv);
 }
 
