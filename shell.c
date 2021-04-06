@@ -241,8 +241,6 @@ char *take_input()
 		}
 		i++;
 	}
-	if (buffer[0] == '\0')
-		return (1);
 	return (buffer);
 }
 
@@ -255,7 +253,8 @@ int find_and_run_command(list_t *paths)
 	list_t *path_aux = paths;
 	
 	buffer = take_input();
-
+	if (buffer[0] == '\0')
+		return (1);
 
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
