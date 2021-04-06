@@ -19,8 +19,8 @@ void type_prompt()
 		first_time = 0;
 	}
 }
-/*
-char *_getenv(const char *name)
+
+char *_getenv1(const char *name)
 {
 	extern char **environ;
 	int i = 0;
@@ -32,7 +32,8 @@ char *_getenv(const char *name)
 		else
 			i++;
 	return (NULL);
-}*/
+}
+
 char *_getenv(const char *name)
 {
     extern char ** environ;
@@ -85,7 +86,7 @@ void shell(void)
 	
 
 	scanf("%s", str);
-	char *PATH = _getenv("PATH");
+	char *PATH = _getenv1("PATH");
 	printf("path0[%s]\n", PATH);
 	char* path = realpath(str, NULL);
 
