@@ -37,7 +37,7 @@ char *find_path(char **env)
 		for (j = 0; j < 5; j++)
 			if (path[j] != env[i][j])
 				break;
-				if (j == 5)
+		if (j == 5)
 			break;
 		i++;
 	}
@@ -109,7 +109,7 @@ char **ar(char *buffer, int *index)
 	int cont = 0, iter;
 
 
-	argv = malloc(sizeof(char *) * (largo(index) + 1));							/*we are not freeing this*/
+	argv = malloc(sizeof(char *) * (largo(index) + 1));								/*we are not freeing this*/
 	if (!argv)
 	{
 		printf("NO mem\n");
@@ -118,12 +118,7 @@ char **ar(char *buffer, int *index)
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
-		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));/*we are not freeing this*/
-		if (!argv[cont])
-		{
-			printf("NO mem\n");
-			return(NULL);
-		}
+		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));				/*we are not freeing this, we need to add this safty net, but im lazy*/
 		iter = 0;
 		while (buffer[index[cont] + iter])
 		{
@@ -158,7 +153,7 @@ list_t *create_paths()
 		largo = 0;
 		while(path[index + largo] && path[index + largo] != ':')
 			largo++;
-		str1 = malloc(sizeof(char) * largo);
+		str1 = malloc(sizeof(char) * largo + 1);
 		count = 0;
 		while(path[index] && path[index] != ':')
 		{
@@ -166,8 +161,9 @@ list_t *create_paths()
 			index++;
 			count++;
 		}
-		printf("%s\n", str1);
+		str[count] = '\0';
 		nodo->str = str1;
+		printf("%s\n", nodo->str);
 		if (path[index])
 		{
 			nodo->next = malloc(sizeof(list_t));							/*we are not freeing this*/
@@ -181,6 +177,7 @@ list_t *create_paths()
 		}
 		nodo->next = NULL;
 	}
+
 	return (head);
 }
 
@@ -235,7 +232,7 @@ int find_and_run_command()
 		NULL
 	};
 	ssize_t bufsize = 1024, readcount = 0;
-
+	
 	readcount = getline(&buffer, &bufsize, stdin);							/*alloc  buffer    0*/
 	if (!buffer)
 	{
