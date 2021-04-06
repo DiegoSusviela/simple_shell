@@ -227,6 +227,7 @@ int find_and_run_command()
 		liberar_argv(argv);
 		return (1);
 	}
+	free(pathname);
 	free(buffer);
 	liberar_argv(argv);
 	return (0);
