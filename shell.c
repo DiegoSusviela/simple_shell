@@ -246,8 +246,6 @@ char *take_input()
 void print_env()
 {
 	int i;
-	extern **environ;
-
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		printf("\n%s", environ[i]);
