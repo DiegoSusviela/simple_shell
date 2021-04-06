@@ -234,7 +234,8 @@ char *take_input()
 	}
 	if (readcount == -1)
 	{
-		if (isatty(STDIN_FILENO) != 0)
+		free(buffer);
+		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "\n", 1);
 		exit(0);
 	}
@@ -340,7 +341,7 @@ int find_and_run_command(list_t *paths)
 
 void start_shell(list_t *paths)
 {
-	printf("$ ");
+	printf("8==D ");
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
 	start_shell(paths);
