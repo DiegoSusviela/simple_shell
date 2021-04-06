@@ -253,6 +253,8 @@ int find_and_run_command(list_t *paths)
 	list_t *path_aux = paths;
 	
 	buffer = take_input();
+	if (buffer[0] == '\0')
+		return (1);
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
@@ -266,7 +268,7 @@ int find_and_run_command(list_t *paths)
 																			/*need to free paths*/
 		exit (99);
 	}
-	if (buffer[0] == '\0')
+	if (buffer[0] == '\0' && index[0])
 		return (1);
 	argv = ar(buffer, index);												/*alloc argv 		2*/
 	free(index);															/*libero index      1*/
