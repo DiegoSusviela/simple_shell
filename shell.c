@@ -147,7 +147,6 @@ list_t *create_paths()
 	}
 	nodo->next = NULL;
 	head = nodo;
-	printf("%s\n", path);
 	while(path[index])
 	{
 		largo = 0;
@@ -163,7 +162,6 @@ list_t *create_paths()
 		}
 		str1[count] = '\0';
 		nodo->str = str1;
-		printf("%s\n", nodo->str);
 		if (path[index])
 		{
 			nodo->next = malloc(sizeof(list_t));							/*we are not freeing this*/
@@ -177,7 +175,6 @@ list_t *create_paths()
 		}
 		nodo->next = NULL;
 	}
-	printf("%s\n", head->next->str);
 	return (head);
 }
 
@@ -260,7 +257,11 @@ int find_and_run_command(list_t *paths)
 		return (1);
 
 	/*liberar_paths(paths);*/
-	printf("%s\n", paths->str);
+	while(paths)
+	{
+		printf("%s\n", paths->str);
+		paths = paths->next;
+	}
 
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
