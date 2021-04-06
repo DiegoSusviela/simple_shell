@@ -216,6 +216,7 @@ char *take_input()
 {
 	char *buffer = NULL;
 	ssize_t bufsize = 1024, readcount = 0;
+	int i = 0;
 
 	readcount = getline(&buffer, &bufsize, stdin);							/*alloc  buffer    0*/
 	if (!buffer)
@@ -247,7 +248,7 @@ char *take_input()
 
 int find_and_run_command(list_t *paths)
 {
-	int pos = 0, i = 0, *index;
+	int pos = 0, *index;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer;
 	char **argv;
