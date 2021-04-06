@@ -118,7 +118,12 @@ char **ar(char *buffer, int *index)
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
-		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));				/*we are not freeing this, we need to add this safty net, but im lazy*/
+		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));/*we are not freeing this*/
+		if (!argv[cont])
+		{
+			printf("NO mem\n");
+			return(NULL);
+		}
 		iter = 0;
 		while (buffer[index[cont] + iter])
 		{
