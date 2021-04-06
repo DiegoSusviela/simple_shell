@@ -59,11 +59,32 @@ int largo_path(char c)
 
 	while(*(aux + ret))
 		ret++;
-	printf("%i\n", ret)
+	printf("%i\n", ret);
 	return (ret);
 }
 
-list_t create_paths()
+char *_getenv(const char *name)
+{
+	extern char ** environ;
+	int i, c;
+	size_t j;
+
+	for (i = 0; environ[i] != '\0'; i++)
+	{
+		for (j = 0; environ[i][j] != '='; j++)
+		{
+		}
+		c = strncmp(environ[i], name, j);
+			if ( c == 0)
+			{
+				strtok(environ[i], "=");
+				return(strtok(NULL, "="));
+			}
+	}
+	return (NULL);
+}
+
+list_t *create_paths()
 {
 	char *path = _getenv("PATH");
 	int index = 0, len = 0, cont, count;
@@ -74,7 +95,7 @@ list_t create_paths()
 	if (!nodo)
 	{
 		printf("NO mem\n");
-		return(0);
+		return(NULL);
 	}
 	head = nodo;
 	while(path[index])
@@ -185,26 +206,6 @@ void liberar_argv(char **argv)
 	argv = NULL;
 }
 
-char *_getenv(const char *name)
-{
-	extern char ** environ;
-	int i, c;
-	size_t j;
-
-	for (i = 0; environ[i] != '\0'; i++)
-	{
-		for (j = 0; environ[i][j] != '='; j++)
-		{
-		}
-		c = strncmp(environ[i], name, j);
-			if ( c == 0)
-			{
-				strtok(environ[i], "=");
-				return(strtok(NULL, "="));
-			}
-	}
-	return (NULL);
-}
 
 
 int find_and_run_command()
