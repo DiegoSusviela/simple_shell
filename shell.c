@@ -177,7 +177,7 @@ list_t *create_paths()
 		}
 		nodo->next = NULL;
 	}
-	printf(head->str)
+	printf("%s\n"head->str);
 	return (head);
 }
 
@@ -326,7 +326,7 @@ void start_shell(list_t *paths)
 	printf("$ ");
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
-	start_shell();
+	start_shell(paths);
 }
 
 
