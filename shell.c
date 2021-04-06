@@ -204,7 +204,7 @@ int find_and_run_command()
 			return(0);
 		}
 		pathname = tmp;
-		strcat(pathname, buffer);				/*appends the second string to the first*/
+		strcat(pathname, argv[0]);				/*appends the second string to the first*/
 		if (!stat(pathname, &stats))
 			break;
 		pos++;
@@ -212,13 +212,6 @@ int find_and_run_command()
 	}
 	if (pathfinder[pos][0])
 	{
-		int toshi = 0;
-		printf("pathname is %s\n", pathname);
-		while (argv[toshi])
-		{
-			printf("argvs %i %s\n", toshi, argv[toshi]);
-			toshi++;
-		}
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
