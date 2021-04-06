@@ -243,12 +243,21 @@ char *take_input()
 	}
 	return (buffer);
 }
+void print_env()
+{
+	int i;
+	extern **environ;
 
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		printf("\n%s", environ[i]);
+	}
+}
 int find_and_run_command(list_t *paths)
 {
 	int pos = 0, *index;
 	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer;
+	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env";
 	char **argv;
 	list_t *path_aux = paths;
 	
@@ -276,6 +285,11 @@ int find_and_run_command(list_t *paths)
 	{
 																			/*need to free paths*/
 		exit (99);
+	}
+	if(!strcmp(argv[0], str3))
+	{
+		print_env();
+		return (1);
 	}
 	while (path_aux)
 	{
