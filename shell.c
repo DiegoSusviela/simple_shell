@@ -212,24 +212,11 @@ int *space_remover(char *to_remove)
 	return (index);
 }
 
-int find_and_run_command(list_t *paths)
+char *take_input()
 {
-	int pos = 0, i = 0, *index;
-	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
-	char **argv;
-	char **path_find;
-	char *pathfinder[7] = {
-		"/usr/local/sbin/", 
-		"/usr/local/bin/",
-		"/usr/sbin/",
-		"/usr/bin/",
-		"/sbin/",
-		"/bin/",
-		NULL
-	};
+	char *buffer = NULL;
 	ssize_t bufsize = 1024, readcount = 0;
-	
+
 	readcount = getline(&buffer, &bufsize, stdin);							/*alloc  buffer    0*/
 	if (!buffer)
 	{
@@ -255,6 +242,19 @@ int find_and_run_command(list_t *paths)
 	}
 	if (buffer[0] == '\0')
 		return (1);
+	return (buffer);
+}
+
+int find_and_run_command(list_t *paths)
+{
+	int pos = 0, i = 0, *index;
+	struct stat stats;
+	char *pathname, *tmp, str2[] = "exit", *buffer;
+	char **argv;
+	list_t *path_aux = paths;
+	
+	buffer = take_input();
+
 
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
@@ -278,7 +278,6 @@ int find_and_run_command(list_t *paths)
 		printf("NO mem\n");
 		return(0);
 	}
-	list_t *path_aux = paths;
 	while (path_aux)
 	{
 		pathname = strdup(path_aux->str);  								/*alloca pathname   3*/
