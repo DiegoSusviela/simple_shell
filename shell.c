@@ -65,12 +65,34 @@ ssize_t _getline(char **p_buffer, size_t *p_bufsize, stdin)
 	return (readline);
 }
 */
+
+/*
+char **copiar_path()
+{
+	extern char ** environ;
+	char **ret;
+	int i = 0, j = 0;
+
+	while(environ[i])
+	{
+		while(environ[i][j])
+		{
+			ret[i][j] = environ[i][j];
+			j++;
+		}
+		i++;
+	}
+}
+*/
+
 char *_getenv(const char *name)
 {
 	extern char ** environ;
-	int i, c;
+	int i, c, cont = 0, pos = 0;
 	size_t j;
+	char *path;
 
+	/*envi1 = copiar_env();*/
 	for (i = 0; environ[i] != '\0'; i++)
 	{
 		for (j = 0; environ[i][j] != '='; j++)
@@ -79,8 +101,16 @@ char *_getenv(const char *name)
 		c = strncmp(environ[i], name, j);
 			if ( c == 0)
 			{
-				strtok(environ[i], "=");
-				return(strtok(NULL, "="));
+				while(environ[i][j + cont])
+					cont++;
+				path = malloc(sizeof(char) * cont);								/*safety net needed and later to free*/
+				while(environ[i][j])
+				{
+					path[pos] = environ[i][j]
+					pos++;
+					j++;
+				}				
+				return(path);
 			}
 	}
 	return (NULL);
@@ -141,11 +171,9 @@ char **ar(char *buffer, int *index)
 
 list_t *create_paths()
 {
-	char *path = _getenv("PATH");
+	char *path = _getenv("PATH"), *str1;
 	int index = 0, count, largo;
-	char *str1;
-	list_t *nodo;
-	list_t *head;
+	list_t *nodo, *head;
 
 	nodo = malloc(sizeof(list_t));							/*we are not freeing this*/
 	if (!nodo)
@@ -165,8 +193,7 @@ list_t *create_paths()
 		while(path[index] && path[index] != ':')
 		{
 			str1[count] = path[index];
-			index++;
-			count++;
+			index++, count++;
 		}
 		str1[count] = '/';
 		nodo->str = str1;
@@ -188,9 +215,8 @@ list_t *create_paths()
 
 int *space_remover(char *to_remove)
 {
-	int pos_rem = 0, flag = 0, pos_cont = 0, count = 0;
+	int pos_rem = 0, flag = 0, pos_cont = 0, count = 0, *index;
 	char *words;
-	int *index;
 
 	index = malloc(sizeof(int) * BUFFSIZE);
 	if (!index)
@@ -252,6 +278,7 @@ char *take_input()
 	}
 	return (buffer);
 }
+
 void print_env()
 {
 	int i;
@@ -262,12 +289,12 @@ void print_env()
 		printf("%s\n", environ[i]);
 	}
 }
+
 int find_and_run_command(list_t *paths)
 {
 	int pos = 0, *index;
 	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env";
-	char **argv;
+	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", **argv;
 	list_t *path_aux = paths;
 	
 	buffer = take_input();
