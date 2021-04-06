@@ -177,7 +177,7 @@ list_t *create_paths()
 		}
 		nodo->next = NULL;
 	}
-	printf("%s\n"head->str);
+	printf("%s\n", head->str);
 	return (head);
 }
 
