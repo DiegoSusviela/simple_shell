@@ -194,15 +194,13 @@ int find_and_run_command()
 	}
 
 	argv = ar(buffer, index);												/*alloc argv 		2*/
+	free(index);															/*libero index      1*/
+	free(buffer);															/*libero buffer     0*/
 	if (!argv)
 	{
 		printf("NO mem\n");
-		free(index);														/*alloc index       1*/
-		free(buffer);														/*libero buffer     0*/
 		return(0);
 	}
-	free(index);															/*alloc index       1*/
-	free(buffer);															/*libero buffer     0*/
 
 	while (pathfinder[pos])
 	{
@@ -218,9 +216,9 @@ int find_and_run_command()
 		{
 			printf("NO mem\n");
 			liberar_argv(argv);												/*libero argv		2*/
+			free(pathname);														/*libero pathname	3*/
 			return(0);
 		}
-		free(pathname);														/*libero pathname	3*/
 		pathname = tmp;
 		strcat(pathname, argv[0]);											/*appends the second string to the first*/
 		if (!stat(pathname, &stats))
