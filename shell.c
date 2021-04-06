@@ -144,14 +144,14 @@ int find_and_run_command()
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **argv;
-	char *pathfinder[7][2] = {
-		{"/usr/local/sbin/", NULL},
-		{"/usr/local/bin/", NULL},
-		{"/usr/sbin/", NULL},
-		{"/usr/bin/", NULL},
-		{"/sbin/", NULL},
-		{"/bin/", NULL},
-		{NULL, NULL}
+	char *pathfinder[7] = {
+		{"/usr/local/sbin/"},
+		{"/usr/local/bin/"},
+		{"/usr/sbin/"},
+		{"/usr/bin/"},
+		{"/sbin/"},
+		{"/bin/"},
+		{NULL}
 	};
 	ssize_t bufsize = 1024, readcount = 0;
 
@@ -184,14 +184,14 @@ int find_and_run_command()
 
 	argv = ar(buffer, index);
 	free(index);
+	free(buffer);
 
-	while (pathfinder[pos][0])
+	while (pathfinder[pos])
 	{
-		pathname = strdup(pathfinder[pos][0]);  /*Does a mnalloc 1 allocation each time it runs*/
+		pathname = strdup(pathfinder[pos]);  /*Does a mnalloc 1 allocation each time it runs*/
 		if (!pathname)							/*check if allocation was posible*/
 		{
 			printf("NO mem\n");
-			free(buffer);
 			liberar_argv(argv);
 			return(0);
 		}
@@ -199,7 +199,6 @@ int find_and_run_command()
 		if (!tmp)								/*check if reallocation was posible*/
 		{
 			printf("NO mem\n");
-			free(buffer);
 			liberar_argv(argv);
 			return(0);
 		}
@@ -210,18 +209,16 @@ int find_and_run_command()
 		pos++;
 		free(pathname);							/*free in each while occurency, and if unkown command*/
 	}
-	if (pathfinder[pos][0])
+	if (pathfinder[pos])
 	{
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
 		free(pathname);							/*free in case command is found*/
-		free(buffer);
 		liberar_argv(argv);
 		return (1);
 	}
 	free(pathname);
-	free(buffer);
 	liberar_argv(argv);
 	return (0);
 }
