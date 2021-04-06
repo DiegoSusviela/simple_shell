@@ -155,7 +155,7 @@ int find_and_run_command()
 	};
 	ssize_t bufsize = 1024, readcount = 0;
 	
-	readcount = getline(&buffer, &bufsize, stdin);							/*alloc para buffer    0*/
+	readcount = getline(&buffer, &bufsize, stdin);							/*alloc  buffer    0*/
 	if (!buffer)
 	{
 		printf("NO mem\n");
@@ -216,7 +216,7 @@ int find_and_run_command()
 		{
 			printf("NO mem\n");
 			liberar_argv(argv);												/*libero argv		2*/
-			free(pathname);														/*libero pathname	3*/
+			free(pathname);													/*libero pathname	3*/
 			return(0);
 		}
 		pathname = tmp;
