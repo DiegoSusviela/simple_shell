@@ -48,6 +48,7 @@ char **ar(char *buffer, int *index)
 			argv[cont][iter] = buffer[index[cont] + iter];
 			iter++;
 		}
+		argv[cont][iter] = buffer[index[cont] + iter];
 	}
 	return (argv);
 }
@@ -86,8 +87,6 @@ int *space_remover(char *to_remove)
 	int *index;
 
 	index = malloc(sizeof(int) * BUFFSIZE);
-	/*word_container = malloc(sizeof(words) * amount_words(to_remove));*/
-	/*word_container = malloc(BUFFSIZE);*/
 	while(to_remove[pos_rem])
 	{
 		index[pos_cont] = pos_rem;
@@ -184,12 +183,6 @@ int find_and_run_command()
 
 	argv = ar(buffer, index);
 
-/*
-	while(index[iter2])
-	{
-		index[iter2] = 0;
-		iter2++;
-	}*/
 	free(index);
 	while (pathfinder[pos][0])
 	{
@@ -231,8 +224,6 @@ int find_and_run_command()
 			printf("argvs %i %s\n", toshi, argv[toshi]);
 			toshi++;
 		}
-		
-
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
