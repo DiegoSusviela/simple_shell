@@ -37,7 +37,7 @@ char *find_path(char **env)
 		for (j = 0; j < 5; j++)
 			if (path[j] != env[i][j])
 				break;
-		if (j == 5)
+				if (j == 5)
 			break;
 		i++;
 	}
@@ -166,8 +166,8 @@ list_t *create_paths()
 			index++;
 			count++;
 		}
+		printf("%s\n", str1);
 		nodo->str = str1;
-		printf("%s\n", nodo->str);
 		if (path[index])
 		{
 			nodo->next = malloc(sizeof(list_t));							/*we are not freeing this*/
@@ -235,7 +235,7 @@ int find_and_run_command()
 		NULL
 	};
 	ssize_t bufsize = 1024, readcount = 0;
-	
+
 	readcount = getline(&buffer, &bufsize, stdin);							/*alloc  buffer    0*/
 	if (!buffer)
 	{
