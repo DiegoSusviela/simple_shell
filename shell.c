@@ -237,7 +237,6 @@ int find_and_run_command()
 		liberar_argv(argv);													/*libero argv		2*/
 		return (1);
 	}
-	free(pathname);															/*libero pathname	3*/							
 	liberar_argv(argv);														/*libero argv		2*/
 	return (0);
 }
