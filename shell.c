@@ -250,7 +250,7 @@ void print_env()
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		printf("\n%s", environ[i]);
+		printf("%s\n", environ[i]);
 	}
 }
 int find_and_run_command(list_t *paths)
