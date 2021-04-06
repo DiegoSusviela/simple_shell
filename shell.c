@@ -215,7 +215,7 @@ int *space_remover(char *to_remove)
 	return (index);
 }
 
-int find_and_run_command()
+int find_and_run_command(list_t *paths)
 {
 	int pos = 0, i = 0, *index;
 	struct stat stats;
@@ -259,9 +259,8 @@ int find_and_run_command()
 	if (buffer[0] == '\0')
 		return (1);
 
-	list_t *paths;
-	paths = create_paths();
 	/*liberar_paths(paths);*/
+	printf("%s\n", paths->str);
 
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
@@ -322,10 +321,10 @@ int find_and_run_command()
 	return (0);
 }
 
-void start_shell(void)
+void start_shell(list_t *paths)
 {
 	printf("$ ");
-	if (!find_and_run_command())
+	if (!find_and_run_command(*paths))
 		printf("Unkown command, error 98\n");
 	start_shell();
 }
@@ -333,7 +332,10 @@ void start_shell(void)
 
 int main()
 {
+	list_t *paths;
+
+	paths = create_paths();
 	start_new_promtp();
-	start_shell();
+	start_shell(paths);
 	return (1);
 }
