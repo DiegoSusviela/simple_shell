@@ -258,11 +258,11 @@ int find_and_run_command()
 	}
 	if (buffer[0] == '\0')
 		return (1);
-	/*
+
 	list_t *paths;
 	paths = create_paths();
-	liberar_paths(paths);
-	*/
+	/*liberar_paths(paths);*/
+
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
