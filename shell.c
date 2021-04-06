@@ -91,7 +91,7 @@ list_t *create_paths()
 	while(path[index])
 	{
 		largo = 0;
-		while(path[largo] && path[largo] != ':')
+		while(path[index + largo] && path[index + largo] != ':')
 			largo++;
 		printf("%i\n", largo);
 		nodo->str = malloc(sizeof(char) * largo);
