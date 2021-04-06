@@ -52,6 +52,48 @@ char **ar(char *buffer, int *index)
 	return (argv);
 }
 
+int largo_path(char c)
+{
+	int ret = 0;
+	char *aux = &c;
+
+	while(*(aux + ret))
+		ret++;
+	printf("%i\n", ret)
+	return (ret);
+}
+
+list_t create_paths()
+{
+	char *path = _getenv("PATH");
+	int index = 0, len = 0, cont, count;
+	list_t *nodo;
+	list_t *head;
+
+	nodo = malloc(sizeof(list_t));							/*we are not freeing this*/
+	if (!nodo)
+	{
+		printf("NO mem\n");
+		return(0);
+	}
+	head = nodo;
+	while(path[index])
+	{
+		nodo->str = malloc(sizeof(char) * largo_path(path[index]));
+		count = 0;
+		while(path[index] && path[index] != ':')
+		{
+			nodo->str[count] = path[index];
+			index++;
+			count++;
+		}
+		if (path[index])
+			index++;
+	}
+	return (head);
+	printf("0 %s\n", path);
+}
+
 void start_new_promtp(void)
 {
 	static int first_time = 1;
@@ -164,34 +206,14 @@ char *_getenv(const char *name)
 	return (NULL);
 }
 
-char *_getenv2(const char *name)
-{
-	extern char **environ;
-	int i = 0;
-	printf("%s\n", environ[i]);
-	printf("%s\n", name);
-	while(environ[i]) 
-		if (!strcmp(environ[i], name))
-			return (environ[i]);
-		else
-			i++;
-	return (NULL);
-}
 
-void tokenizer()
-{
-	char *PATH = _getenv("PATH");
-	char *PATH2 = _getenv2("PATH");
-
-	printf("0 %s\n", PATH);
-	printf("1 %s\n", PATH2);
-}
 int find_and_run_command()
 {
 	int pos = 0, i = 0, *index;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer = NULL;
 	char **argv;
+	char **path_find;
 	char *pathfinder[7] = {
 		"/usr/local/sbin/", 
 		"/usr/local/bin/",
@@ -228,7 +250,7 @@ int find_and_run_command()
 	}
 	if (buffer[0] == '\0')
 		return (1);
-	tokenizer();
+	create_paths();
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
