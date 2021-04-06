@@ -161,7 +161,7 @@ list_t *create_paths()
 			index++;
 			count++;
 		}
-		str[count] = '\0';
+		str1[count] = '\0';
 		nodo->str = str1;
 		printf("%s\n", nodo->str);
 		if (path[index])
