@@ -88,6 +88,11 @@ int *space_remover(char *to_remove)
 		printf("NO mem\n");
 		return(NULL);
 	}
+	while (to_remove[pos_rem] == ' ')
+	{
+		to_remove[pos_rem] = '\0';
+		pos_rem++;
+	}
 	while(to_remove[pos_rem])
 	{
 		index[pos_cont] = pos_rem;

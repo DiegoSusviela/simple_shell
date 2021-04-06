@@ -19,6 +19,36 @@ int largo_palabra(char *aux)
 	}
 	return (ret);
 }
+
+
+char *_strcpy(char *dest, char *src)
+{
+	int index = 0;
+
+	while (src[index])
+	{
+		dest[index] = src[index];
+		index++;
+	}
+	dest[index] = '\0';
+
+	return (dest);
+}
+
+ void _puts(char *str)
+ {
+	 int index = 0;
+
+	 while (str[index])
+	 {
+		 _putchar(str[index]);
+		 index++;
+	 }
+	 _putchar('\n');
+ }
+
+
+
 /*
 	if (amount_of_words > 1)
 	{
