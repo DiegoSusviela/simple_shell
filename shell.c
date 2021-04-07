@@ -196,6 +196,7 @@ list_t *create_paths()
 			index++, count++;
 		}
 		str1[count] = '/';
+		str1[count + 1] = '\0';
 		nodo->str = str1;
 		if (path[index])
 		{
