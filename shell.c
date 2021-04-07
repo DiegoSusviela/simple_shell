@@ -27,7 +27,7 @@ void liberar_paths(list_t *head)
 
 	while (loc)
 	{
-		aux = siguiente(loc);
+		aux = loc->next;
 		liberar_nodo(loc);
 		loc = aux;
 	}
