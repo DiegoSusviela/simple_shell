@@ -374,9 +374,9 @@ int find_and_run_command(list_t *paths)
 
 void start_shell(list_t *paths)
 {
-	printf("(. Y .) ");
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
+	printf("(. Y .) ");
 	start_shell(paths);
 }
 
@@ -387,6 +387,7 @@ int main()
 
 	paths = create_paths();
 	start_new_promtp();
+	printf("(. Y .) ");
 	start_shell(paths);
 	return (1);
 }
