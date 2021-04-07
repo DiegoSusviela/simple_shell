@@ -379,6 +379,8 @@ int find_and_run_command(list_t *paths)
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
+		if (&pathname != &argv[0])
+			free(pathname);
 		liberar_argv(argv);													/*libero argv		2*/
 		return (1);
 	}
