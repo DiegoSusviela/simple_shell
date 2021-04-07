@@ -376,8 +376,6 @@ int find_and_run_command(list_t *paths)
 	}
 	if (path_aux)
 	{
-		if (&pathname != &argv[0])
-			free(pathname);
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
