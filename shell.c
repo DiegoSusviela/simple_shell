@@ -255,7 +255,7 @@ int *space_remover(char *to_remove)
 	return (index);
 }
 
-char *take_input(list_t *paths)
+char *take_input(list_t *paths, char** argv)
 {
 	char *buffer = NULL;
 	ssize_t bufsize = 1024, readcount = 0;
@@ -273,6 +273,7 @@ char *take_input(list_t *paths)
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "\n", 1);
 		liberar_paths(paths);
+		liberar_argv(argv);
 		exit(0);
 	}
 	if (buffer[readcount - 1] == '\n' || buffer[readcount - 1] == '\t')
@@ -307,7 +308,7 @@ int find_and_run_command(list_t *paths)
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", **argv;
 	list_t *path_aux = paths;
 	
-	buffer = take_input(paths);
+	buffer = take_input(paths, argv);
 	if (buffer[0] == '\0')
 		return (1);
 	index = space_remover(buffer);											/*alloc index       1*/
