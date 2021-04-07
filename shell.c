@@ -303,7 +303,7 @@ void print_env()
 
 int find_and_run_command(list_t *paths)
 {
-	int pos = 0, *index;
+	int pos = 0, *index, ato;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", **argv;
 	list_t *path_aux = paths;
@@ -333,8 +333,9 @@ int find_and_run_command(list_t *paths)
 		liberar_paths(paths);													/*need to free paths*/
 		if(argv[1])
 		{
+			ato = atoi(argv[1]);
 			liberar_argv(argv);
-			exit(atoi(argv[1]));
+			exit(ato);
 		}
 		liberar_argv(argv);
 		exit(0);
@@ -379,8 +380,8 @@ int find_and_run_command(list_t *paths)
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
-		/*if (&pathname != &argv[0])
-			free(pathname);*/
+		if (&pathname != &argv[0])
+			free(pathname);
 		liberar_argv(argv);													/*libero argv		2*/
 		return (1);
 	}
