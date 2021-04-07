@@ -335,7 +335,7 @@ int find_and_run_command(list_t *paths)
 	{
 		while (path_aux)
 		{
-			pathname = strdup(path_aux->str);  								/*alloca pathname   3*/
+			pathname = strdup(path_aux->str);  									/*alloca pathname   3*/
 			if (!pathname)
 			{
 				printf("NO mem\n");
