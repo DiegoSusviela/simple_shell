@@ -331,11 +331,16 @@ int find_and_run_command(list_t *paths)
 	{
 		liberar_paths(paths);													/*need to free paths*/
 		if(argv[1])
+		{
+			liberar_argv(argv);
 			exit(atoi(argv[1]));
+		}
+		liberar_argv(argv);
 		exit(0);
 	}
 	if(!strcmp(argv[0], str3))
 	{
+		liberar_argv(argv);
 		print_env();
 		return (1);
 	}
