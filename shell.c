@@ -108,7 +108,8 @@ char *_getenv(const char *name)
 				path[pos] = environ[i][j];
 				pos++;
 				j++;
-			}				
+			}
+			path[pos] = '\0';				
 			return(path);
 		}
 	}
