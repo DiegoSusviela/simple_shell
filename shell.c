@@ -366,7 +366,6 @@ int find_and_run_command(list_t *paths)
 				free(pathname);													/*libero pathname	3*/
 				return(0);
 			}
-			free(pathname);
 			pathname = tmp;
 			strcat(pathname, argv[0]);											/*appends the second string to the first*/
 			if (!stat(pathname, &stats))
@@ -377,6 +376,8 @@ int find_and_run_command(list_t *paths)
 	}
 	if (path_aux)
 	{
+		if (&pathname != &argv[0])
+			free(pathname);
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
