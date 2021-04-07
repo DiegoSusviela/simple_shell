@@ -140,7 +140,6 @@ int largo_palabra(char *aux)
 	return (ret);
 }
 
-
 char **ar(char *buffer, int *index)
 {
 	char **argv, *aux;
@@ -206,6 +205,7 @@ list_t *create_paths()
 				printf("NO mem\n");
 				return(NULL);
 			}
+			nodo->str = NULL;
 			index++;
 		}
 		nodo->next = NULL;
@@ -353,17 +353,17 @@ int find_and_run_command(list_t *paths)
 		path_aux = path_aux->next;
 		free(pathname);														/*libero pathname	3*/
 	}
-	if (path_aux)
-	{
+	/*if (path_aux)
+	{*/
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
 		free(pathname);														/*libero pathname	3*/
 		liberar_argv(argv);													/*libero argv		2*/
 		return (1);
-	}
+	/*}
 	liberar_argv(argv);														/*libero argv		2*/
-	return (0);
+	/*return (0);*/
 }
 
 void start_shell(list_t *paths)
