@@ -14,15 +14,22 @@ void liberar_argv(char **argv)
 	argv = NULL;
 }
 
-void liberar_paths(list_t *list)
+void liberar_nodo(list_t *a_liberar)
 {
-	list_t *aux = list->next;
+	free(a_liberar->str);
+	free(a_liberar);
+}
 
-	if (list)
+void liberar_paths(list_t *head)
+{
+	list_t *loc = head;
+	list_t *aux;
+
+	while (loc)
 	{
-		free(list->str);
-		free(list);
-		liberar_paths(aux);
+		aux = siguiente(loc);
+		liberar_nodo(loc);
+		loc = aux;
 	}
 }
 
@@ -248,7 +255,7 @@ int *space_remover(char *to_remove)
 	return (index);
 }
 
-char *take_input()
+char *take_input(list_t *paths)
 {
 	char *buffer = NULL;
 	ssize_t bufsize = 1024, readcount = 0;
@@ -265,6 +272,7 @@ char *take_input()
 		free(buffer);
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "\n", 1);
+		liberar_paths(paths);
 		exit(0);
 	}
 	if (buffer[readcount - 1] == '\n' || buffer[readcount - 1] == '\t')
@@ -299,7 +307,7 @@ int find_and_run_command(list_t *paths)
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", **argv;
 	list_t *path_aux = paths;
 	
-	buffer = take_input();
+	buffer = take_input(paths);
 	if (buffer[0] == '\0')
 		return (1);
 	index = space_remover(buffer);											/*alloc index       1*/
@@ -321,7 +329,7 @@ int find_and_run_command(list_t *paths)
 	}
 	if(!strcmp(argv[0], str2))
 	{
-																			/*need to free paths*/
+		liberar_paths(paths);													/*need to free paths*/
 		if(argv[1])
 			exit(atoi(argv[1]));
 		exit(0);
@@ -374,9 +382,9 @@ int find_and_run_command(list_t *paths)
 
 void start_shell(list_t *paths)
 {
+	printf("(. Y .) ");
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
-	printf("(. Y .) ");
 	start_shell(paths);
 }
 
@@ -387,7 +395,6 @@ int main()
 
 	paths = create_paths();
 	start_new_promtp();
-	printf("(. Y .) ");
 	start_shell(paths);
 	return (1);
 }
