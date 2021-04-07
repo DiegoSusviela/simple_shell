@@ -98,20 +98,19 @@ char *_getenv(const char *name)
 		for (j = 0; environ[i][j] != '='; j++)
 		{
 		}
-		c = strncmp(environ[i], name, j);
-			if ( c == 0)
+		if (!strncmp(environ[i], name, j))
+		{
+			while(environ[i][j + cont])
+				cont++;
+			path = malloc(sizeof(char) * cont);								/*safety net needed and later to free*/
+			while(environ[i][j])
 			{
-				while(environ[i][j + cont])
-					cont++;
-				path = malloc(sizeof(char) * cont);								/*safety net needed and later to free*/
-				while(environ[i][j])
-				{
-					path[pos] = environ[i][j];
-					pos++;
-					j++;
-				}				
-				return(path);
-			}
+				path[pos] = environ[i][j];
+				pos++;
+				j++;
+			}				
+			return(path);
+		}
 	}
 	return (NULL);
 }
@@ -210,6 +209,7 @@ list_t *create_paths()
 		}
 		nodo->next = NULL;
 	}
+	free(path);
 	return (head);
 }
 
