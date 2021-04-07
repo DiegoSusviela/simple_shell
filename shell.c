@@ -102,7 +102,7 @@ char *_getenv(const char *name)
 		{
 			while(environ[i][j + cont])
 				cont++;
-			path = malloc(sizeof(char) * cont);								/*safety net needed and later to free*/
+			path = malloc(sizeof(char) * (cont + 1));								/*safety net needed and later to free*/
 			while(environ[i][j])
 			{
 				path[pos] = environ[i][j];
@@ -187,7 +187,7 @@ list_t *create_paths()
 		largo = 0;
 		while(path[index + largo] && path[index + largo] != ':')
 			largo++;
-		str1 = malloc(sizeof(char) * largo + 1);
+		str1 = malloc(sizeof(char) * (largo + 2));
 		count = 0;
 		while(path[index] && path[index] != ':')
 		{
