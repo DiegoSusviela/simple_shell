@@ -329,42 +329,45 @@ int find_and_run_command(list_t *paths)
 		print_env();
 		return (1);
 	}
-	while (path_aux)
-	{
-		pathname = strdup(path_aux->str);  								/*alloca pathname   3*/
-		if (!pathname)
-		{
-			printf("NO mem\n");
-			liberar_argv(argv);												/*libero argv		2*/
-			return(0);
-		}
-		tmp = realloc(pathname, BUFFSIZE);
-		if (!tmp)
-		{
-			printf("NO mem\n");
-			liberar_argv(argv);												/*libero argv		2*/
-			free(pathname);													/*libero pathname	3*/
-			return(0);
-		}
-		pathname = tmp;
-		strcat(pathname, argv[0]);											/*appends the second string to the first*/
-		if (!stat(pathname, &stats))
-			break;
+	if (!stat(argv[0], &stats))
 		pathname = argv[0];
-		path_aux = path_aux->next;
-	}/*
+	else
+	{
+		while (path_aux)
+		{
+			pathname = strdup(path_aux->str);  								/*alloca pathname   3*/
+			if (!pathname)
+			{
+				printf("NO mem\n");
+				liberar_argv(argv);												/*libero argv		2*/
+				return(0);
+			}
+			tmp = realloc(pathname, BUFFSIZE);
+			if (!tmp)
+			{
+				printf("NO mem\n");
+				liberar_argv(argv);												/*libero argv		2*/
+				free(pathname);													/*libero pathname	3*/
+				return(0);
+			}
+			pathname = tmp;
+			strcat(pathname, argv[0]);											/*appends the second string to the first*/
+			if (!stat(pathname, &stats))
+				break;
+			path_aux = path_aux->next;
+		}
+	}
 	if (path_aux)
-	{*/
+	{
 		if (fork() == 0)
 			execve(pathname, argv, NULL);
 		wait(NULL);
-		if (path_aux)
-			free(pathname);														/*libero pathname	3*/
+		free(pathname);														/*libero pathname	3*/
 		liberar_argv(argv);													/*libero argv		2*/
-		return (1);/*
+		return (1);
 	}
-	liberar_argv(argv);												/*libero argv		2
-	return (0);*/
+	liberar_argv(argv);												/*libero argv		2*/
+	return (0);
 }
 
 void start_shell(list_t *paths)
