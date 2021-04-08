@@ -433,7 +433,10 @@ while (1)
 {
 	paths = create_paths();
 	if (!paths)
+	{
 		printf("No mem to start shell\n");
+		break;
+	}
 }
 	start_new_promtp();
 	start_shell(paths);
