@@ -429,10 +429,12 @@ void start_shell(list_t *paths)
 int main()
 {
 	list_t *paths;
-
+while (1)
+{
 	paths = create_paths();
 	if (!paths)
 		printf("No mem to start shell\n");
+}
 	start_new_promtp();
 	start_shell(paths);
 	return (1);
