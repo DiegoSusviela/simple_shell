@@ -264,8 +264,8 @@ list_t *create_paths()
 		if (path[index])
 		{
 			nodo->next = malloc(sizeof(list_t));
-			if (!safty_nets(nodo->next, "p", head))
-				return (0);
+			if (!nodo->next)
+				return (safty_nets(NULL, "p", head));
 			nodo = nodo->next;
 			if (!nodo)
 			{
