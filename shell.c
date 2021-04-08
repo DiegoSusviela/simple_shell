@@ -429,30 +429,9 @@ void start_shell(list_t *paths)
 int main()
 {
 	list_t *paths;
-
-
-
-	char *flood = malloc(10700000000);
-	if (!flood)
-	{
-		printf("cant play\n");
-		exit (0);
-	}
-	else 
-	while (1)
-	{
-		paths = create_paths();
-		if (!paths)
-		{
-			printf("No mem to start shell\n");
-			free(flood);
-			break;
-		}
-	}
-
-
-
-
+	paths = create_paths();
+	if (!paths)
+		printf("No mem to start shell\n");
 	start_new_promtp();
 	start_shell(paths);
 	return (1);
