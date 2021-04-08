@@ -77,7 +77,6 @@ static int safty_nets(char *checking, char *str5, ...)
 			}
 			pos++;
 		}
-		printf("NO MEMORY FOR ALLOC\n");
 		return (0);
 	}
 	return (1);	
@@ -355,7 +354,7 @@ int find_and_run_command(list_t *paths)
 	list_t *path_aux = paths;
 	
 	buffer = take_input(paths);
-	if (!safty_nets(buffer, "\0"))
+	if (!safty_nets(buffer, "x", buffer))
 		return (0);
 	if (buffer[0] == '\0')
 	{
@@ -365,7 +364,7 @@ int find_and_run_command(list_t *paths)
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
-		safty_nets(NULL, "x", buffer);
+		safty_nets(NULL, "xi", buffer, index);
 		return(0);
 	}
 	if (buffer[0] == '\0' && !index[0])
