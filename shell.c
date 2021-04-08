@@ -1,5 +1,53 @@
 #include "header.h"
 
+void liberar_buffer(char *buffer)
+{
+	free(buffer);
+}
+
+void liberar_index(int *index)
+{
+	free(index);
+}
+
+void liberar_pathname(char *pathname)
+{
+	free(pathname);
+}
+
+static int safty_nets(char *checking, ...)
+{
+	int pos = 0, pos1 = 0;
+	va_list list;
+	va_start(list, checking);
+	char *str = list;
+	data_t type[] = {
+			{"a", liberar_argv},
+			{"p", liberar_paths},
+			{"b", liberar_buffer},
+			{"i", liberar_index},
+			{"n", liberar_pathname},
+			{NULL, NULL},
+		};
+
+	if (!checking)
+	{
+		while (str[pos])
+		{
+			pos1 = 0;
+			while (type[pos1].type)
+			{
+				if (str[pos] == type[pos1].type)
+					type[pos1].func(list);
+				pos1++;
+			}
+			pos++;
+		}
+		return (0);
+	}
+	return (1);	
+}
+
 void liberar_argv(char **argv)
 {
 	int word_count = 0, str_len = 0;
@@ -110,6 +158,8 @@ char *_getenv(const char *name)
 			while(environ[i][j + cont])
 				cont++;
 			path = malloc(sizeof(char) * (cont + 1));								/*safety net needed and later to free*/
+			if (safty_nets(path))
+				return (NULL);
 			while(environ[i][j])
 			{
 				path[pos] = environ[i][j];
@@ -156,14 +206,20 @@ char **ar(char *buffer, int *index)
 
 	argv = malloc(sizeof(char *) * (largo(index) + 1));								/*we are not freeing this*/
 	if (!argv)
-	{
-		printf("NO mem\n");
-		return(0);
-	}
+		return(NULL);
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
 		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));				/*we are not freeing this, we need to add this safty net, but im lazy*/
+		if (!argv[cont])
+		{
+			while (cont >= 0)
+			{
+				free(argv[cont]);
+				cont--;
+			}
+			return (NULL);
+		}
 		iter = 0;
 		while (buffer[index[cont] + iter])
 		{
@@ -183,11 +239,8 @@ list_t *create_paths()
 	list_t *nodo, *head;
 
 	nodo = malloc(sizeof(list_t));							/*we are not freeing this*/
-	if (!nodo)
-	{
-		printf("NO mem\n");
+	if (!safty_nets(nodo, ""))
 		return(NULL);
-	}
 	nodo->next = NULL;
 	head = nodo;
 	while(path[index])
@@ -229,10 +282,7 @@ int *space_remover(char *to_remove)
 
 	index = malloc(sizeof(int) * BUFFSIZE);
 	if (!index)
-	{
-		printf("NO mem\n");
 		return(NULL);
-	}
 	while (to_remove[pos_rem] == ' ')
 	{
 		to_remove[pos_rem] = '\0';
@@ -263,10 +313,7 @@ char *take_input(list_t *paths)
 
 	readcount = getline(&buffer, &bufsize, stdin);							/*alloc  buffer    0*/
 	if (!buffer)
-	{
-		printf("NO mem\n");
-		return(0);
-	}
+		return (NULL);
 	if (readcount == -1)
 	{
 		free(buffer);
@@ -308,25 +355,25 @@ int find_and_run_command(list_t *paths)
 	list_t *path_aux = paths;
 	
 	buffer = take_input(paths);
+	if (!safty_nets(buffer, ""))
+		return (NULL);
 	if (buffer[0] == '\0')
 		return (1);
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
-		printf("NO mem\n");
-		free(buffer);														/*libero buffer     0*/
+		safty_nets(NULL, "b", buffer);
 		return(0);
 	}
-		if (buffer[0] == '\0' && !index[0])
+	if (buffer[0] == '\0' && !index[0])
 		return (1);
 	argv = ar(buffer, index);												/*alloc argv 		2*/
-	free(index);															/*libero index      1*/
-	free(buffer);															/*libero buffer     0*/
 	if (!argv)
 	{
-		printf("NO mem\n");
-		return(0);
+		safty_nets(NULL, "ib", index, buffer);
+		return (NULL);
 	}
+	safty_nets(NULL, "ib", index, buffer);										/*libero buffer     0*/
 	if(!strcmp(argv[0], str2))
 	{
 		liberar_paths(paths);													/*need to free paths*/
@@ -352,20 +399,11 @@ int find_and_run_command(list_t *paths)
 		while (path_aux)
 		{
 			pathname = strdup(path_aux->str);  									/*alloca pathname   3*/
-			if (!pathname)
-			{
-				printf("NO mem\n");
-				liberar_argv(argv);												/*libero argv		2*/
-				return(0);
-			}
+			if (!safty_nets(pathname, "a", argv))
+				return (NULL);
 			tmp = realloc(pathname, BUFFSIZE);
-			if (!tmp)
-			{
-				printf("NO mem\n");
-				liberar_argv(argv);												/*libero argv		2*/
-				free(pathname);													/*libero pathname	3*/
-				return(0);
-			}
+			if (!safty_nets(tmp, "ap", argv))
+				return (NULL);
 			pathname = tmp;
 			strcat(pathname, argv[0]);											/*appends the second string to the first*/
 			if (!stat(pathname, &stats))

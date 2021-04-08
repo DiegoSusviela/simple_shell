@@ -11,11 +11,23 @@
 #include <stdlib.h>
 #include <string.h> 
 #include <limits.h>
+#include <math.h>
+#include <stddef.h>
+#include <time.h>
+#include <stdarg.h>
 
 typedef struct list_s
 {
 	char *str;
 	struct list_s *next;
 } list_t;
+
+
+typedef struct datatype
+{
+	char *type;
+	int (*func)(va_list list);
+} data_t;
+
 
 #endif
