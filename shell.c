@@ -79,7 +79,7 @@ static int safty_nets(char *checking, char *str5, ...)
 		}
 		return (0);
 	}
-	return (1);	
+	return (1);
 }
 
 void start_new_promtp(void)
@@ -148,7 +148,7 @@ char *_getenv(const char *name)
 				pos++;
 				j++;
 			}
-			path[pos] = '\0';				
+			path[pos] = '\0';
 			return(path);
 		}
 	}
@@ -291,7 +291,8 @@ int *space_remover(char *to_remove)
 char *take_input(list_t *paths)
 {
 	char *buffer = NULL;
-	ssize_t bufsize = 1024, readcount = 0;
+	size_t bufsize = 1024;
+	ssize_t readcount = 0;
 	int i = 0;
 
 	readcount = getline(&buffer, &bufsize, stdin);
@@ -334,7 +335,7 @@ int find_and_run_command(list_t *paths)
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", **argv;
 	list_t *path_aux = paths;
-	
+
 	buffer = take_input(paths);
 	if (!safty_nets(buffer, "x", buffer))
 		return (0);
