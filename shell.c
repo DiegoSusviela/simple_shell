@@ -264,13 +264,11 @@ list_t *create_paths()
 		if (path[index])
 		{
 			nodo->next = malloc(sizeof(list_t));
-			if (!nodo->next)
-				return (safty_nets(NULL, "p", head));
 			nodo = nodo->next;
 			if (!nodo)
 			{
-				printf("NO mem\n");
-				return(NULL);
+				safty_nets(NULL, "p", head);
+				return (NULL);
 			}
 			index++;
 		}
