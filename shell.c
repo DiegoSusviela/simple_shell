@@ -1,8 +1,8 @@
 #include "header.h"
 
-void liberar_buffer(char *buffer)
+void liberar_buffer(va_list list)
 {
-	free(buffer);
+	free(list);
 }
 
 void liberar_index(int *index)
@@ -59,7 +59,7 @@ static int safty_nets(char *checking, char *str5, ...)
 			{'b', liberar_buffer},
 			{'i', liberar_index},
 			{'n', liberar_pathname},
-			{NULL, NULL},
+			{'\0', NULL},
 		};
 
 	if (!checking)
