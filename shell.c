@@ -158,7 +158,7 @@ char *_getenv(const char *name)
 		{
 			while(environ[i][j + cont])
 				cont++;
-			path = malloc(sizeof(char) * (cont + 1));								/*safety net needed and later to free*/
+			path = malloc(sizeof(char) * (cont + 1));
 			if (!path)
 				return (NULL);
 			while(environ[i][j])
@@ -205,13 +205,13 @@ char **ar(char *buffer, int *index)
 	int cont = 0, iter;
 
 
-	argv = malloc(sizeof(char *) * (largo(index) + 1));								/*we are not freeing this*/
+	argv = malloc(sizeof(char *) * (largo(index) + 1));
 	if (!argv)
 		return(NULL);
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
-		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));				/*we are not freeing this, we need to add this safty net, but im lazy*/
+		argv[cont] = malloc(sizeof(char) * (largo_palabra(aux) + 1));
 		if (!argv[cont])
 		{
 			while (cont >= 0)
@@ -239,7 +239,7 @@ list_t *create_paths()
 	int index = 0, count, largo;
 	list_t *nodo, *head;
 
-	nodo = malloc(sizeof(list_t));							/*we are not freeing this*/
+	nodo = malloc(sizeof(list_t));
 	if (!nodo)
 		return(NULL);
 	nodo->next = NULL;
@@ -250,6 +250,8 @@ list_t *create_paths()
 		while(path[index + largo] && path[index + largo] != ':')
 			largo++;
 		str1 = malloc(sizeof(char) * (largo + 2));
+		if (!safty_nets(str1, "p", head))
+			return (0);
 		count = 0;
 		while(path[index] && path[index] != ':')
 		{
@@ -261,7 +263,9 @@ list_t *create_paths()
 		nodo->str = str1;
 		if (path[index])
 		{
-			nodo->next = malloc(sizeof(list_t));							/*we are not freeing this*/
+			nodo->next = malloc(sizeof(list_t));
+			if (!safty_nets(nodo->next, "p", head))
+				return (0);
 			nodo = nodo->next;
 			if (!nodo)
 			{
@@ -312,7 +316,7 @@ char *take_input(list_t *paths)
 	ssize_t bufsize = 1024, readcount = 0;
 	int i = 0;
 
-	readcount = getline(&buffer, &bufsize, stdin);							/*alloc  buffer    0*/
+	readcount = getline(&buffer, &bufsize, stdin);
 	if (!buffer)
 		return (NULL);
 	if (readcount == -1)
@@ -357,28 +361,16 @@ int find_and_run_command(list_t *paths)
 	if (!safty_nets(buffer, "x", buffer))
 		return (0);
 	if (buffer[0] == '\0')
-	{
-		free(buffer);
-		return (1);
-	}
-	index = space_remover(buffer);											/*alloc index       1*/
+		return (!safty_nets(NULL, "x", buffer));
+	index = space_remover(buffer);
 	if (!index)
-	{
-		safty_nets(NULL, "xi", buffer, index);
-		return(0);
-	}
+		return (safty_nets(NULL, "xi", buffer, index));
 	if (buffer[0] == '\0' && !index[0])
-	{
-		safty_nets(NULL, "xi", buffer, index);
-		return (1);
-	}
-	argv = ar(buffer, index);												/*alloc argv 		2*/
+		return (!safty_nets(NULL, "xi", buffer, index));
+	argv = ar(buffer, index);
 	if (!argv)
-	{
-		safty_nets(NULL, "ix", index, buffer);
-		return (0);
-	}
-	safty_nets(NULL, "ix", index, buffer);										/*libero buffer     0*/
+		return (safty_nets(NULL, "ix", index, buffer));
+	safty_nets(NULL, "ix", index, buffer);
 	if(!strcmp(argv[0], str2))
 	{
 		safty_nets(NULL, "p", paths);
@@ -393,9 +385,8 @@ int find_and_run_command(list_t *paths)
 	}
 	if(!strcmp(argv[0], str3))
 	{
-		safty_nets(NULL, "a", argv);
 		print_env();
-		return (1);
+		return (!safty_nets(NULL, "a", argv));
 	}
 	if (!stat(argv[0], &stats))
 		pathname = strdup(argv[0]);
@@ -403,14 +394,14 @@ int find_and_run_command(list_t *paths)
 	{
 		while (path_aux)
 		{
-			pathname = strdup(path_aux->str);  									/*alloca pathname   3*/
+			pathname = strdup(path_aux->str);
 			if (!safty_nets(pathname, "a", argv))
 				return (0);
 			tmp = realloc(pathname, BUFFSIZE);
 			if (!safty_nets(tmp, "ax", argv, pathname))
 				return (0);
 			pathname = tmp;
-			strcat(pathname, argv[0]);											/*appends the second string to the first*/
+			strcat(pathname, argv[0]);
 			if (!stat(pathname, &stats))
 				break;
 			path_aux = path_aux->next;
@@ -423,11 +414,9 @@ int find_and_run_command(list_t *paths)
 			execve(pathname, argv, NULL);
 		wait(NULL);
 		free(pathname);
-		safty_nets(NULL, "a", argv);
-		return (1);
+		return (!safty_nets(NULL, "a", argv));
 	}
-	safty_nets(NULL, "a", argv);
-	return (0);
+	return (safty_nets(NULL, "a", argv));
 }
 
 void start_shell(list_t *paths)
@@ -444,6 +433,8 @@ int main()
 	list_t *paths;
 
 	paths = create_paths();
+	if (!paths)
+		printf("No mem to start shell\n");
 	start_new_promtp();
 	start_shell(paths);
 	return (1);
