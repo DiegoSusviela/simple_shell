@@ -15,39 +15,6 @@ void liberar_pathname(char *pathname)
 	free(pathname);
 }
 
-static int safty_nets(char *checking, ...)
-{
-	int pos = 0, pos1 = 0;
-	va_list list;
-	va_start(list, checking);
-	char *str = list;
-	data_t type[] = {
-			{"a", liberar_argv},
-			{"p", liberar_paths},
-			{"b", liberar_buffer},
-			{"i", liberar_index},
-			{"n", liberar_pathname},
-			{NULL, NULL},
-		};
-
-	if (!checking)
-	{
-		while (str[pos])
-		{
-			pos1 = 0;
-			while (type[pos1].type)
-			{
-				if (str[pos] == type[pos1].type)
-					type[pos1].func(list);
-				pos1++;
-			}
-			pos++;
-		}
-		return (0);
-	}
-	return (1);	
-}
-
 void liberar_argv(char **argv)
 {
 	int word_count = 0, str_len = 0;
@@ -79,6 +46,39 @@ void liberar_paths(list_t *head)
 		liberar_nodo(loc);
 		loc = aux;
 	}
+}
+
+static int safty_nets(char *checking, char *str, ...)
+{
+	int pos = 0, pos1 = 0;
+	va_list list;
+	va_start(list, checking);
+	str = list;
+	data_t type[] = {
+			{"a", liberar_argv},
+			{"p", liberar_paths},
+			{"b", liberar_buffer},
+			{"i", liberar_index},
+			{"n", liberar_pathname},
+			{NULL, NULL},
+		};
+
+	if (!checking)
+	{
+		while (str[pos])
+		{
+			pos1 = 0;
+			while (type[pos1].type)
+			{
+				if (str[pos] == type[pos1].type)
+					type[pos1].func(list);
+				pos1++;
+			}
+			pos++;
+		}
+		return (0);
+	}
+	return (1);	
 }
 
 char *find_path(char **env)
@@ -158,7 +158,7 @@ char *_getenv(const char *name)
 			while(environ[i][j + cont])
 				cont++;
 			path = malloc(sizeof(char) * (cont + 1));								/*safety net needed and later to free*/
-			if (safty_nets(path))
+			if (safty_nets(path, ""))
 				return (NULL);
 			while(environ[i][j])
 			{
