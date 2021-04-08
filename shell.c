@@ -48,12 +48,12 @@ void liberar_paths(list_t *head)
 	}
 }
 
-static int safty_nets(char *checking, char *str, ...)
+static int safty_nets(char *checking, char *str5, ...)
 {
 	int pos = 0, pos1 = 0;
 	va_list list;
 	va_start(list, checking);
-	str = list;
+	str5 = list;
 	data_t type[] = {
 			{"a", liberar_argv},
 			{"p", liberar_paths},
@@ -65,12 +65,12 @@ static int safty_nets(char *checking, char *str, ...)
 
 	if (!checking)
 	{
-		while (str[pos])
+		while (str5[pos])
 		{
 			pos1 = 0;
 			while (type[pos1].type)
 			{
-				if (str[pos] == type[pos1].type)
+				if (str5[pos] == type[pos1].type)
 					type[pos1].func(list);
 				pos1++;
 			}
@@ -239,7 +239,7 @@ list_t *create_paths()
 	list_t *nodo, *head;
 
 	nodo = malloc(sizeof(list_t));							/*we are not freeing this*/
-	if (!safty_nets(nodo, ""))
+	if (!nodo)
 		return(NULL);
 	nodo->next = NULL;
 	head = nodo;
