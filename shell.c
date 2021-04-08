@@ -432,7 +432,7 @@ int main()
 
 
 
-	char *flood = malloc(12500000000);
+	char *flood = malloc(12000000000);
 	if (!flood)
 	{
 		printf("cant play\n");
