@@ -89,7 +89,7 @@ void start_new_promtp(void)
 
 	if (first_time)
 	{
-		CLEAR_SCREEN_ANSI = " \e[1;1H\e[2J";
+		CLEAR_SCREEN_ANSI = " \033[1;1H\033[2J";
 		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 		first_time = 0;
 	}
