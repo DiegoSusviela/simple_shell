@@ -2,12 +2,14 @@
 
 void liberar_buffer(va_list list)
 {
-	free(list);
+	char *c = va_arg(list, char *);
+	free(c);
 }
 
-void liberar_index(int *index)
+void liberar_index(va_list list)
 {
-	free(index);
+	int *i = va_arg(list, int *);
+	free(i);
 }
 
 void liberar_pathname(char *pathname)
@@ -18,7 +20,7 @@ void liberar_pathname(char *pathname)
 void liberar_argv(va_list list)
 {
 	int word_count = 0, str_len = 0;
-	char **argv = list;
+	char **argv = va_arg(list, char **);
 
 	while(argv[word_count])
 	{
@@ -38,7 +40,7 @@ void liberar_nodo(list_t *a_liberar)
 
 void liberar_paths(va_list list)
 {
-	list_t *loc = list;
+	list_t *loc = va_arg(list, list_t *);
 	list_t *aux;
 
 	while (loc)
@@ -58,6 +60,7 @@ static int safty_nets(char *checking, char *str5, ...)
 			{'a', liberar_argv},
 			{'p', liberar_paths},
 			{'x', liberar_buffer},
+			{'i', liberar_index},
 			{'\0', NULL},
 		};
 
@@ -368,10 +371,10 @@ int find_and_run_command(list_t *paths)
 	argv = ar(buffer, index);												/*alloc argv 		2*/
 	if (!argv)
 	{
-		safty_nets(NULL, "xx", index, buffer);
+		safty_nets(NULL, "ix", index, buffer);
 		return (0);
 	}
-	safty_nets(NULL, "xx", index, buffer);										/*libero buffer     0*/
+	safty_nets(NULL, "ix", index, buffer);										/*libero buffer     0*/
 	if(!strcmp(argv[0], str2))
 	{
 		safty_nets(NULL, "p", paths);
