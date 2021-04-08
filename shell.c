@@ -356,7 +356,7 @@ int find_and_run_command(list_t *paths)
 	
 	buffer = take_input(paths);
 	if (!safty_nets(buffer, ""))
-		return (NULL);
+		return (0);
 	if (buffer[0] == '\0')
 		return (1);
 	index = space_remover(buffer);											/*alloc index       1*/
@@ -371,7 +371,7 @@ int find_and_run_command(list_t *paths)
 	if (!argv)
 	{
 		safty_nets(NULL, "ib", index, buffer);
-		return (NULL);
+		return (0);
 	}
 	safty_nets(NULL, "ib", index, buffer);										/*libero buffer     0*/
 	if(!strcmp(argv[0], str2))
@@ -400,10 +400,10 @@ int find_and_run_command(list_t *paths)
 		{
 			pathname = strdup(path_aux->str);  									/*alloca pathname   3*/
 			if (!safty_nets(pathname, "a", argv))
-				return (NULL);
+				return (0);
 			tmp = realloc(pathname, BUFFSIZE);
 			if (!safty_nets(tmp, "ap", argv))
-				return (NULL);
+				return (0);
 			pathname = tmp;
 			strcat(pathname, argv[0]);											/*appends the second string to the first*/
 			if (!stat(pathname, &stats))
