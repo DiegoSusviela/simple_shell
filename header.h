@@ -25,7 +25,7 @@ typedef struct list_s
 
 typedef struct datatype
 {
-	char *type;
+	char type;
 	int (*func)(va_list list);
 } data_t;
 
