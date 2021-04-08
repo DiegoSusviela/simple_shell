@@ -19,7 +19,7 @@ void liberar_pathname(char *pathname)
 
 void liberar_argv(va_list list)
 {
-	int word_count = 0, str_len = 0;
+	int word_count = 0;
 	char **argv = va_arg(list, char **);
 
 	while(argv[word_count])
@@ -55,7 +55,6 @@ static int safty_nets(char *checking, char *str5, ...)
 {
 	int pos = 0, pos1 = 0;
 	va_list list;
-	va_start(list, str5);
 	data_t type[] = {
 			{'a', liberar_argv},
 			{'p', liberar_paths},
@@ -64,6 +63,7 @@ static int safty_nets(char *checking, char *str5, ...)
 			{'\0', NULL},
 		};
 
+	va_start(list, str5);
 	if (!checking)
 	{
 		while (str5[pos])
@@ -80,25 +80,6 @@ static int safty_nets(char *checking, char *str5, ...)
 		return (0);
 	}
 	return (1);	
-}
-
-char *find_path(char **env)
-{
-	/*
-	char *path = "PATH=";
-	unsigned int i = 0, j;
-
-	while(env[i])
-	{
-		for (j = 0; j < 5; j++)
-			if (path[j] != env[i][j])
-				break;
-		if (j == 5)
-			break;
-		i++;
-	}
-	return (env[i]);
-	*/
 }
 
 void start_new_promtp(void)
@@ -144,7 +125,7 @@ char **copiar_path()
 char *_getenv(const char *name)
 {
 	extern char ** environ;
-	int i, c, cont = 0, pos = 0;
+	int i, cont = 0, pos = 0;
 	size_t j;
 	char *path;
 
@@ -280,8 +261,7 @@ list_t *create_paths()
 
 int *space_remover(char *to_remove)
 {
-	int pos_rem = 0, flag = 0, pos_cont = 0, count = 0, *index;
-	char *words;
+	int pos_rem = 0, pos_cont = 0, count = 0, *index;
 
 	index = malloc(sizeof(int) * BUFFSIZE);
 	if (!index)
@@ -350,7 +330,7 @@ void print_env()
 
 int find_and_run_command(list_t *paths)
 {
-	int pos = 0, *index, ato;
+	int *index, ato;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", **argv;
 	list_t *path_aux = paths;
