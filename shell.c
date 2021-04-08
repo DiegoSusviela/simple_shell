@@ -77,6 +77,7 @@ static int safty_nets(char *checking, char *str5, ...)
 			}
 			pos++;
 		}
+		printf("NO MEMORY FOR ALLOC\n");
 		return (0);
 	}
 	return (1);	
@@ -343,9 +344,7 @@ void print_env()
 	extern char **environ;
 
 	for (i = 0; environ[i] != NULL; i++)
-	{
 		printf("%s\n", environ[i]);
-	}
 }
 
 int find_and_run_command(list_t *paths)
@@ -359,7 +358,10 @@ int find_and_run_command(list_t *paths)
 	if (!safty_nets(buffer, "\0"))
 		return (0);
 	if (buffer[0] == '\0')
+	{
+		free(buffer);
 		return (1);
+	}
 	index = space_remover(buffer);											/*alloc index       1*/
 	if (!index)
 	{
