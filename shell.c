@@ -18,15 +18,16 @@ void liberar_pathname(char *pathname)
 void liberar_argv(va_list list)
 {
 	int word_count = 0, str_len = 0;
+	char **argv = list;
 
-	while(list[word_count])
+	while(argv[word_count])
 	{
-		free(list[word_count]);
-		list[word_count] = NULL;
+		free(argv[word_count]);
+		argv[word_count] = NULL;
 		word_count++;
 	}
-	free(list);
-	list = NULL;
+	free(argv);
+	argv = NULL;
 }
 
 void liberar_nodo(list_t *a_liberar)
@@ -35,9 +36,9 @@ void liberar_nodo(list_t *a_liberar)
 	free(a_liberar);
 }
 
-void liberar_paths(list_t *head)
+void liberar_paths(va_list list)
 {
-	list_t *loc = head;
+	list_t *loc = list;
 	list_t *aux;
 
 	while (loc)
