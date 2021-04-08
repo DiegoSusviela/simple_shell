@@ -368,7 +368,10 @@ int find_and_run_command(list_t *paths)
 		return(0);
 	}
 	if (buffer[0] == '\0' && !index[0])
+	{
+		safty_nets(NULL, "xi", buffer, index);
 		return (1);
+	}
 	argv = ar(buffer, index);												/*alloc argv 		2*/
 	if (!argv)
 	{
