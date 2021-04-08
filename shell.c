@@ -53,7 +53,7 @@ static int safty_nets(char *checking, char *str5, ...)
 	int pos = 0, pos1 = 0;
 	va_list list;
 	va_start(list, checking);
-	str5 = list;
+	str5 = va_arg(list, char *);
 	data_t type[] = {
 			{"a", liberar_argv},
 			{"p", liberar_paths},
