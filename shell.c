@@ -432,12 +432,13 @@ int main()
 
 
 
-	char *flood = malloc(107374182300);
+	char *flood = malloc(15737418230);
 	if (!flood)
 	{
 		printf("cant play\n");
 		exit;
 	}
+	else 
 	while (1)
 	{
 		paths = create_paths();
