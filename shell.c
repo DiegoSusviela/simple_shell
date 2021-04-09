@@ -395,6 +395,7 @@ int find_and_run_command(list_t *paths)
 		free(pathname);
 		return (!safty_nets(NULL, "a", argv));
 	}
+	perror(argv[0]);
 	return (safty_nets(NULL, "a", argv));
 }
 
