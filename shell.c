@@ -414,6 +414,7 @@ int main()
 	paths = create_paths();
 	if (!paths)
 		printf("No mem to start shell\n");
+	signal(SIGINT, SIG_IGN);
 	start_new_promtp();
 	start_shell(paths);
 	return (1);

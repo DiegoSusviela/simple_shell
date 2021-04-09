@@ -15,7 +15,8 @@
 #include <stddef.h>
 #include <time.h>
 #include <stdarg.h>
-#include <sys/wait.h>
+#include <signal.h>
+/*#include <sys/wait.h>*/
 
 typedef struct list_s
 {
