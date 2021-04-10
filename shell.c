@@ -501,7 +501,6 @@ void start_shell(list_t *paths)
 	start_shell(paths);
 }
 
-
 int main()
 {
 	list_t *paths;
