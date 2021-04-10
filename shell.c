@@ -333,7 +333,7 @@ int find_and_run_command(list_t *paths)
 {
 	int *index, ato;
 	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", **argv;
+	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", **argv;
 	list_t *path_aux = paths;
 
 	buffer = take_input(paths);
@@ -366,6 +366,11 @@ int find_and_run_command(list_t *paths)
 	{
 		print_env();
 		return (!safty_nets(NULL, "a", argv));
+	}
+	if(!strcmp(argv[0], str4))
+	{
+		chdir(argv[1]);
+		return (1);
 	}
 	if (!stat(argv[0], &stats))
 		pathname = strdup(argv[0]);
