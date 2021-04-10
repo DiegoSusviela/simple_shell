@@ -334,7 +334,7 @@ void print_env()
 void update_old_pwd()
 {
 	extern char ** environ;
-	int i;
+	int i, pos2 = 0;
 	size_t j;
 	char *name = "OLDPWD=";
 	char current_path[PATH_MAX];
@@ -367,7 +367,7 @@ void update_old_pwd()
 void update_pwd()
 {
 	extern char ** environ;
-	int i;
+	int i, pos2 = 0;
 	size_t j;
 	char *name = "PWD=";
 	char current_path[PATH_MAX];
