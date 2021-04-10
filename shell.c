@@ -331,12 +331,12 @@ void print_env()
 		printf("%s\n", environ[i]);
 }
 
-void update_vars(char *target, int flag)
+void update_old_pwd()
 {
 	extern char ** environ;
-	int i, cont = 0, pos = 0;
+	int i;
 	size_t j;
-	char *name = "PWD=", *name2 = "OLDPWD", *aux, *name3 = "OLD", *name4 = "PWD=/";
+	char *name = "OLDPWD";
 	char current_path[PATH_MAX];
 
 	getcwd(current_path, sizeof(current_path));
@@ -348,20 +348,30 @@ void update_vars(char *target, int flag)
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			aux = strdup(environ[i]);									/*missing safety net*/
-			environ[i] = current_path;								/*missing safety net, idk if i can edit read only*/
+			free(environ[i]);
+			environ[i] = current_path;
 		}
 	}
+}
+void update_pwd()
+{
+	extern char ** environ;
+	int i;
+	size_t j;
+	char *name = "PWD";
+	char current_path[PATH_MAX];
+
+	getcwd(current_path, sizeof(current_path));
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
 		for (j = 0; environ[i][j] != '='; j++)
 		{
 		}
-		if (!strncmp(environ[i], name2, j))
+		if (!strncmp(environ[i], name, j))
 		{
-			environ[i] = strdup(name3);									/*missing safty net*/
-			strcat(environ[i], aux);
+			free(environ[i]);
+			environ[i] = current_path;
 		}
 	}
 }
@@ -422,8 +432,9 @@ int find_and_run_command(list_t *paths)
 				target = strdup(argv[1]);
 				flag = 1;
 			}
+		update_old_pwd();
 		chdir(target);
-		update_vars(target, flag);		
+		update_pwd();
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
 
