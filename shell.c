@@ -371,8 +371,7 @@ int find_and_run_command(list_t *paths)
 	}
 	if(!strcmp(argv[0], str4))
 	{
-		home = _getenv("HOME");
-		home++;
+		home = _getenv("HOME=");
 		if (!argv[1])
 			chdir(home);
 		else
