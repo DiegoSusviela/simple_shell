@@ -337,7 +337,7 @@ int find_and_run_command(list_t *paths)
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", **argv;
 	list_t *path_aux = paths;
-	char *home;
+	char *target;
 
 	buffer = take_input(paths);
 	if (!safty_nets(buffer, "x", buffer))
@@ -373,12 +373,15 @@ int find_and_run_command(list_t *paths)
 	}
 	if(!strcmp(argv[0], str4))
 	{
-		home = _getenv("HOME=");
 		if (!argv[1])
-			chdir("$HOME");
+			target = _getenv("HOME=");
 		else
-			chdir(argv[1]);
-		return (!safty_nets(NULL, "ax", argv, home));
+			if (argv[1] == '-')
+				target = _getenv("OLDPWD=");
+			else
+				strncpy(target, argv[1]);
+		chdir(target);
+		return (!safty_nets(NULL, "ax", argv, target));
 	}
 
 	if (!stat(argv[0], &stats))
