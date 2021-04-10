@@ -376,10 +376,10 @@ int find_and_run_command(list_t *paths)
 		if (!argv[1])
 			target = _getenv("HOME=");
 		else
-			if (argv[1] == '-')
+			if (argv[1] == "-")
 				target = _getenv("OLDPWD=");
 			else
-				strncpy(target, argv[1]);
+				target = strdup(argv[1]);
 		chdir(target);
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
