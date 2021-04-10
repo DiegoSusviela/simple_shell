@@ -350,6 +350,7 @@ int find_and_run_command(list_t *paths)
 	if (!argv)
 		return (safty_nets(NULL, "ix", index, buffer));
 	safty_nets(NULL, "ix", index, buffer);
+
 	if(!strcmp(argv[0], str2))
 	{
 		safty_nets(NULL, "p", paths);
@@ -369,9 +370,13 @@ int find_and_run_command(list_t *paths)
 	}
 	if(!strcmp(argv[0], str4))
 	{
-		chdir(argv[1]);
-		return (1);
+		if (!argv[1])
+			chdir(_getenv("HOME"));
+		else
+			chdir(argv[1]);
+		return (!safty_nets(NULL, "a", argv));
 	}
+
 	if (!stat(argv[0], &stats))
 		pathname = strdup(argv[0]);
 	else
