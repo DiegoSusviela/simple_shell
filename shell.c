@@ -371,13 +371,10 @@ int find_and_run_command(list_t *paths)
 	}
 	if(!strcmp(argv[0], str4))
 	{
+		home = _getenv("HOME");
+		home++;
 		if (!argv[1])
-		{
-			home = _getenv("HOME");
-			home++;
-			printf("%s\n", home);
 			chdir(home);
-		}
 		else
 			chdir(argv[1]);
 		return (!safty_nets(NULL, "ax", argv, home));
