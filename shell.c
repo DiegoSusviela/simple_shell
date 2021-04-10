@@ -336,7 +336,7 @@ void update_old_pwd()
 	extern char ** environ;
 	int i;
 	size_t j;
-	char *name = "OLDPWD";
+	char *name = "OLDPWD=";
 	char current_path[PATH_MAX];
 
 	getcwd(current_path, sizeof(current_path));
@@ -348,8 +348,8 @@ void update_old_pwd()
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			free(environ[i]);
-			environ[i] = current_path;
+			environ[i] = strdup(name);
+			strcat(environ[i], current_path);
 		}
 	}
 }
@@ -358,7 +358,7 @@ void update_pwd()
 	extern char ** environ;
 	int i;
 	size_t j;
-	char *name = "PWD";
+	char *name = "PWD=";
 	char current_path[PATH_MAX];
 
 	getcwd(current_path, sizeof(current_path));
@@ -370,8 +370,8 @@ void update_pwd()
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			free(environ[i]);
-			environ[i] = current_path;
+			environ[i] = strdup(name);
+			strcat(environ[i], current_path);
 		}
 	}
 }
