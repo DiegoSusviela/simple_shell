@@ -222,6 +222,7 @@ list_t *create_paths()
 	int index = 0, count, largo;
 	list_t *nodo, *head;
 
+	printf("%s\n", path);
 	nodo = malloc(sizeof(list_t));
 	if (!nodo)
 		return(NULL);
@@ -374,7 +375,7 @@ int find_and_run_command(list_t *paths)
 	if(!strcmp(argv[0], str4))
 	{
 		if (!argv[1])
-			target = _getenv("HOME=");
+			target = _getenv("HOME");
 		else
 			if (!strcmp(argv[1], str5))
 				target = _getenv("OLDPWD");
