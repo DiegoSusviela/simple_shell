@@ -331,12 +331,12 @@ void print_env()
 		printf("%s\n", environ[i]);
 }
 
-void update_vars(char *target)
+void update_vars(char *target, int flag)
 {
 	extern char ** environ;
 	int i, cont = 0, pos = 0;
 	size_t j;
-	char *name = "PWD=/", *name2 = "OLDPWD", *aux, *name3 = "OLD";
+	char *name = "PWD=", *name2 = "OLDPWD", *aux, *name3 = "OLD", *name4 = "PWD=/";
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
@@ -346,7 +346,10 @@ void update_vars(char *target)
 		if (!strncmp(environ[i], name, j))
 		{
 			aux = strdup(environ[i]);									/*missing safety net*/
-			environ[i] = strdup(name);
+			if (flag)
+				environ[i] = strdup(name4);
+			else
+				environ[i] = strdup(name);
 			strcat(environ[i], strdup(target));							/*missing safety net, idk if i can edit read only*/
 		}
 	}
@@ -358,7 +361,6 @@ void update_vars(char *target)
 		}
 		if (!strncmp(environ[i], name2, j))
 		{
-			free(environ[i]);
 			environ[i] = strdup(name3);									/*missing safty net*/
 			strcat(environ[i], aux);
 		}
@@ -367,7 +369,7 @@ void update_vars(char *target)
 
 int find_and_run_command(list_t *paths)
 {
-	int *index, ato;
+	int *index, ato, flag;
 	struct stat stats;
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", str5[] = "-", **argv;
 	list_t *path_aux = paths;
@@ -407,6 +409,7 @@ int find_and_run_command(list_t *paths)
 	}
 	if(!strcmp(argv[0], str4))
 	{
+		flag = 0;
 		if (!argv[1])
 			target = _getenv("HOME");
 		else
@@ -416,8 +419,11 @@ int find_and_run_command(list_t *paths)
 				printf("%s\n", target);
 			}
 			else
+			{
 				target = strdup(argv[1]);
-		update_vars(target);
+				flag = 1;
+			}
+		update_vars(target, flag);
 		chdir(target);
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
