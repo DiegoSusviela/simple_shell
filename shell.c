@@ -336,7 +336,7 @@ void update_vars(char *target)
 	extern char ** environ;
 	int i, cont = 0, pos = 0;
 	size_t j;
-	char *name = "PWD=", *name2 = "OLDPWD", *aux;
+	char *name = "PWD=/", *name2 = "OLDPWD", *aux, *name3 = "OLD";
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
@@ -346,7 +346,8 @@ void update_vars(char *target)
 		if (!strncmp(environ[i], name, j))
 		{
 			aux = environ[i];
-			environ[i] = strcat(strdup(name), strdup(target));							/*missing safety net, idk if i can edit read only*/
+			environ[i] = strdup(name);
+			strcat(environ[i], strdup(target));							/*missing safety net, idk if i can edit read only*/
 		}
 	}
 
@@ -358,7 +359,8 @@ void update_vars(char *target)
 		if (!strncmp(environ[i], name2, j))
 		{
 			free(environ[i]);
-			environ[i] = aux;
+			environ[i] = name3;
+			strcat(environ[i], aux);
 		}
 	}
 }
@@ -415,7 +417,7 @@ int find_and_run_command(list_t *paths)
 			}
 			else
 				target = strdup(argv[1]);
-		/*update_vars(target);*/
+		update_vars(target);
 		chdir(target);
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
