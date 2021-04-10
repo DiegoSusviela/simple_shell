@@ -380,6 +380,7 @@ int find_and_run_command(list_t *paths)
 				target = _getenv("OLDPWD=");
 			else
 				target = strdup(argv[1]);
+		printf("%s\n", target);
 		chdir(target);
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
