@@ -348,7 +348,7 @@ void update_old_pwd()
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			environ[i] = strdup(name);
+			environ[i] = name;
 			strcat(environ[i], current_path);
 		}
 	}
@@ -370,7 +370,7 @@ void update_pwd()
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			environ[i] = strdup(name);
+			environ[i] = name;
 			strcat(environ[i], current_path);
 		}
 	}
