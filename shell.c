@@ -345,7 +345,7 @@ void update_vars(char *target)
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			aux = environ[i];
+			aux = strdup(environ[i]);									/*missing safety net*/
 			environ[i] = strdup(name);
 			strcat(environ[i], strdup(target));							/*missing safety net, idk if i can edit read only*/
 		}
@@ -359,7 +359,7 @@ void update_vars(char *target)
 		if (!strncmp(environ[i], name2, j))
 		{
 			free(environ[i]);
-			environ[i] = name3;
+			environ[i] = strdup(name3);									/*missing safty net*/
 			strcat(environ[i], aux);
 		}
 	}
