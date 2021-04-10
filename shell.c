@@ -415,7 +415,7 @@ int find_and_run_command(list_t *paths)
 			}
 			else
 				target = strdup(argv[1]);
-		update_vars(target);
+		/*update_vars(target);*/
 		chdir(target);
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
