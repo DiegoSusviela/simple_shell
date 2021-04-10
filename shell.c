@@ -1,5 +1,7 @@
 #include "header.h"
 
+char *previous_path;
+
 void liberar_buffer(va_list list)
 {
 	char *c = va_arg(list, char *);
@@ -373,7 +375,7 @@ int find_and_run_command(list_t *paths)
 	{
 		home = _getenv("HOME=");
 		if (!argv[1])
-			chdir(home);
+			chdir("$HOME");
 		else
 			chdir(argv[1]);
 		return (!safty_nets(NULL, "ax", argv, home));
