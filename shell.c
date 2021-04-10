@@ -377,7 +377,7 @@ int find_and_run_command(list_t *paths)
 			target = _getenv("HOME=");
 		else
 			if (!strcmp(argv[1], str5))
-				target = _getenv("OLDPWD=");
+				target = _getenv("OLDPWD");
 			else
 				target = strdup(argv[1]);
 		printf("%s\n", target);
