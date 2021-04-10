@@ -336,7 +336,7 @@ void update_vars(char *target)
 	extern char ** environ;
 	int i, cont = 0, pos = 0;
 	size_t j;
-	char char *name = "PWD=", char *name2 = "OLDPWD", char *aux;
+	char *name = "PWD=", *name2 = "OLDPWD", *aux;
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
@@ -348,6 +348,7 @@ void update_vars(char *target)
 			aux = environ[i];
 			environ[i] = strcat(strdup(name), strdup(target));							/*missing safety net, idk if i can edit read only*/
 		}
+	}
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
