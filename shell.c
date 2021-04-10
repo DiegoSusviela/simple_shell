@@ -348,8 +348,19 @@ void update_old_pwd()
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			environ[i] = name;
-			strcat(environ[i], current_path);
+			j = 0;
+			while (name[pos2])
+			{
+				environ[i][j] = name[pos2];
+				pos2++, j++;
+			}
+			pos2 = 0;
+			while (current_path[pos2])
+			{
+				environ[i][j] = current_path[pos2];
+				j++, pos2++;
+			}
+			environ[i][j] = '\0';
 		}
 	}
 }
@@ -370,8 +381,19 @@ void update_pwd()
 		}
 		if (!strncmp(environ[i], name, j))
 		{
-			environ[i] = name;
-			strcat(environ[i], current_path);
+			j = 0;
+			while (name[pos2])
+			{
+				environ[i][j] = name[pos2];
+				pos2++, j++;
+			}
+			pos2 = 0;
+			while (current_path[pos2])
+			{
+				environ[i][j] = current_path[pos2];
+				j++, pos2++;
+			}
+			environ[i][j] = '\0';
 		}
 	}
 }
