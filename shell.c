@@ -335,7 +335,7 @@ int find_and_run_command(list_t *paths)
 {
 	int *index, ato;
 	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", **argv;
+	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", str5[] = "-", **argv;
 	list_t *path_aux = paths;
 	char *target;
 
@@ -376,7 +376,7 @@ int find_and_run_command(list_t *paths)
 		if (!argv[1])
 			target = _getenv("HOME=");
 		else
-			if (argv[1] == "-")
+			if (!strcmp(argv[1], str5))
 				target = _getenv("OLDPWD=");
 			else
 				target = strdup(argv[1]);
