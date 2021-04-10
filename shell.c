@@ -337,6 +337,9 @@ void update_vars(char *target, int flag)
 	int i, cont = 0, pos = 0;
 	size_t j;
 	char *name = "PWD=", *name2 = "OLDPWD", *aux, *name3 = "OLD", *name4 = "PWD=/";
+	char current_path[PATH_MAX];
+
+	getcwd(current_path, sizeof(current_path));
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
@@ -346,11 +349,7 @@ void update_vars(char *target, int flag)
 		if (!strncmp(environ[i], name, j))
 		{
 			aux = strdup(environ[i]);									/*missing safety net*/
-			if (flag)
-				environ[i] = strdup(name4);
-			else
-				environ[i] = strdup(name);
-			strcat(environ[i], strdup(target));							/*missing safety net, idk if i can edit read only*/
+			environ[i] = current_path;								/*missing safety net, idk if i can edit read only*/
 		}
 	}
 
@@ -423,8 +422,8 @@ int find_and_run_command(list_t *paths)
 				target = strdup(argv[1]);
 				flag = 1;
 			}
-		update_vars(target, flag);
 		chdir(target);
+		update_vars(target, flag);		
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
 
