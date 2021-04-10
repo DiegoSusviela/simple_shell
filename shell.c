@@ -139,6 +139,7 @@ char *_getenv(const char *name)
 		}
 		if (!strncmp(environ[i], name, j))
 		{
+			j++;
 			while(environ[i][j + cont])
 				cont++;
 			path = malloc(sizeof(char) * (cont + 1));
@@ -222,7 +223,6 @@ list_t *create_paths()
 	int index = 0, count, largo;
 	list_t *nodo, *head;
 
-	printf("%s\n", path);
 	nodo = malloc(sizeof(list_t));
 	if (!nodo)
 		return(NULL);
