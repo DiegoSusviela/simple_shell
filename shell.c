@@ -131,7 +131,6 @@ char *_getenv(const char *name)
 	size_t j;
 	char *path;
 
-	/*envi1 = copiar_env();*/
 	for (i = 0; environ[i] != '\0'; i++)
 	{
 		for (j = 0; environ[i][j] != '='; j++)
@@ -332,6 +331,37 @@ void print_env()
 		printf("%s\n", environ[i]);
 }
 
+void update_vars(char *target)
+{
+	extern char ** environ;
+	int i, cont = 0, pos = 0;
+	size_t j;
+	char char *name = "PWD=", char *name2 = "OLDPWD", char *aux;
+
+	for (i = 0; environ[i] != '\0'; i++)
+	{
+		for (j = 0; environ[i][j] != '='; j++)
+		{
+		}
+		if (!strncmp(environ[i], name, j))
+		{
+			aux = environ[i];
+			environ[i] = strcat(strdup(name), strdup(target));							/*missing safety net, idk if i can edit read only*/
+		}
+
+	for (i = 0; environ[i] != '\0'; i++)
+	{
+		for (j = 0; environ[i][j] != '='; j++)
+		{
+		}
+		if (!strncmp(environ[i], name2, j))
+		{
+			free(environ[i]);
+			environ[i] = aux;
+		}
+	}
+}
+
 int find_and_run_command(list_t *paths)
 {
 	int *index, ato;
@@ -384,6 +414,7 @@ int find_and_run_command(list_t *paths)
 			}
 			else
 				target = strdup(argv[1]);
+		update_vars(target);
 		chdir(target);
 		return (!safty_nets(NULL, "ax", argv, target));
 	}
