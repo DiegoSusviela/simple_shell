@@ -311,8 +311,6 @@ int *space_remover(char *to_remove)
 }
 ssize_t _read(char *buffer)
 {
-	buffer = malloc(sizeof(char) * BUFFSIZE);
-
 	return (read(0 , buffer, BUFFSIZE));
 }
 
@@ -323,7 +321,7 @@ char *take_input(list_t *paths)
 	ssize_t readcount = 0;
 	int i = 0;
 
-	char *aux;
+	char *aux = malloc(sizeof(char) * BUFFSIZE);;
 
 	_read(aux);
 	printf("%s\n", aux);
