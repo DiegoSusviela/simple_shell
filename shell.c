@@ -526,7 +526,7 @@ int find_and_run_command(list_t *paths)
 void start_shell(list_t *paths)
 {
 	if (isatty(STDIN_FILENO))
-		printf("(. Y .) ");
+		write(1, "(. Y .) ", 8);
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
 	start_shell(paths);
