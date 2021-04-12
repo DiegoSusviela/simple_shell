@@ -528,6 +528,8 @@ void start_shell(list_t *paths)
 		printf("(. Y .) ");
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
+	else
+		continue;
 	start_shell(paths);
 }
 
