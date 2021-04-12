@@ -316,17 +316,18 @@ ssize_t _read(char *buffer)
 
 char *take_input(list_t *paths)
 {
-	char *buffer = NULL;
+	char *buffer = malloc(sizeof(char) * BUFFSIZE);
 	size_t bufsize = 1024;
 	ssize_t readcount = 0;
 	int i = 0;
 
-	char *aux = malloc(sizeof(char) * BUFFSIZE);;
+	/*char *aux = malloc(sizeof(char) * BUFFSIZE);;
 
 	_read(aux);
 	printf("%s\n", aux);
-
-	readcount = getline(&buffer, &bufsize, stdin);
+	*/
+	/*readcount = getline(&buffer, &bufsize, stdin);*/
+	readcount = _read(buffer)
 	if (!buffer)
 		return (NULL);
 	if (readcount == -1)
