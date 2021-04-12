@@ -328,7 +328,7 @@ char *take_input(list_t *paths)
 	printf("%s\n", aux);
 	*/
 	/*readcount = getline(&buffer, &bufsize, stdin);*/
-	readcount = read(isatty(STDIN_FILENO) , buffer, BUFFSIZE);
+	readcount = read(isatty(STDIN_FILENO), buffer, BUFFSIZE);
 	if (!buffer)
 		return (NULL);
 	if (readcount == -1)
