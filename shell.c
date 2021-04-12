@@ -312,7 +312,7 @@ char *take_input(list_t *paths)
 		buffer[readcount - 1] = '\0';
 	while (buffer[i])
 	{
-		if (buffer[i] == '#' && buffer[i - 1] == ' ')
+		if ((buffer[i] == '#' && buffer[i - 1] == ' ') || buffer[0] == '#')
 		{
 			buffer[i] = '\0';
 			break;
@@ -406,7 +406,7 @@ int find_and_run_command(list_t *paths)
 	list_t *path_aux = paths;
 	char *target;
 
-	buffer = take_input(paths);
+	buffer = 	(paths);
 	if (!safty_nets(buffer, "x", buffer))
 		return (0);
 	if (buffer[0] == '\0')
