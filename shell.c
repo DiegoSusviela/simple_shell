@@ -156,7 +156,7 @@ char *_getenv(const char *name)
 		for (j = 0; environ[i][j] != '='; j++)
 		{
 		}
-		if (!strncmp(environ[i], name, j))
+		if (!_strncmp(environ[i], name, j))
 		{
 			j++;
 			while(environ[i][j + cont])
