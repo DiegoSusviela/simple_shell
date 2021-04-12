@@ -317,7 +317,7 @@ ssize_t _read(char *buffer)
 
 char *take_input(list_t *paths)
 {
-	char *buffer = malloc(sizeof(char) * BUFFSIZE);
+	char *buffer = malloc(sizeof(char) * BUFFSIZE + 1);
 	size_t bufsize = 1024;
 	ssize_t readcount = 0;
 	int i = 0;
