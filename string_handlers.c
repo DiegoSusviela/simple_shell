@@ -79,23 +79,21 @@ int _strcmp(char *s1, char *s2)
 
 int _strncmp(const char *str1, const char *str2, int n)
 {
-	while (*str1 == *str2)
+	int val = 0;
+
+	if (*str1 + n > *str2 + n)
 	{
-		if (*str1 == '\0')
-		{
-			return (0);
-		}
-		*str1++;
-		*str2++;
+		val = 1;
 	}
-	if (*str1 > *str2)
+	else if (*str1 + n < *str2 + n)
 	{
-		return (1);
+		val = -1;
 	}
 	else
 	{
-		return (0);
+		val = 0;
 	}
+	return (val);
 }
 
 /**
