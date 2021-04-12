@@ -406,7 +406,7 @@ int find_and_run_command(list_t *paths)
 	list_t *path_aux = paths;
 	char *target;
 
-	buffer = 	(paths);
+	buffer = take_input(paths);
 	if (!safty_nets(buffer, "x", buffer))
 		return (0);
 	if (buffer[0] == '\0')
