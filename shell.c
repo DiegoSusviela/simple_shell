@@ -536,7 +536,7 @@ int main()
 {
 	list_t *paths;
 	paths = create_paths();
-	global_aliases = start_alias();
+	/*global_aliases = start_alias();*/
 	if (!paths)
 		printf("No mem to start shell\n");
 	signal(SIGINT, SIG_IGN);
