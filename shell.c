@@ -327,7 +327,7 @@ char *take_input(list_t *paths)
 	printf("%s\n", aux);
 	*/
 	/*readcount = getline(&buffer, &bufsize, stdin);*/
-	readcount = _read(buffer)
+	readcount = _read(buffer);
 	if (!buffer)
 		return (NULL);
 	if (readcount == -1)
