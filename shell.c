@@ -377,7 +377,7 @@ void update_old_pwd()
 		for (j = 0; environ[i][j] != '='; j++)
 		{
 		}
-		if (!strncmp(environ[i], name, j))
+		if (!_strncmp(environ[i], name, j))
 		{
 			j = 0;
 			while (name[pos2])
@@ -410,7 +410,7 @@ void update_pwd()
 		for (j = 0; environ[i][j] != '='; j++)
 		{
 		}
-		if (!strncmp(environ[i], name, j))
+		if (!_strncmp(environ[i], name, j))
 		{
 			j = 0;
 			while (name[pos2])
@@ -452,19 +452,19 @@ int find_and_run_command(list_t *paths)
 		return (safty_nets(NULL, "ix", index, buffer));
 	safty_nets(NULL, "ix", index, buffer);
 
-	if(!strcmp(argv[0], str2))
+	if(!_strcmp(argv[0], str2))
 	{
 		safty_nets(NULL, "p", paths);
 		if(argv[1])
 		{
-			ato = atoi(argv[1]);
+			ato = _atoi(argv[1]);
 			safty_nets(NULL, "a", argv);
 			exit(ato);
 		}
 		safty_nets(NULL, "a", argv);
 		exit(0);
 	}
-	if(!strcmp(argv[0], str3))
+	if(!_strcmp(argv[0], str3))
 	{
 		print_env();
 		return (!safty_nets(NULL, "a", argv));
@@ -475,14 +475,14 @@ int find_and_run_command(list_t *paths)
 		if (!argv[1])
 			target = _getenv("HOME");
 		else
-			if (!strcmp(argv[1], str5))
+			if (!_strcmp(argv[1], str5))
 			{
 				target = _getenv("OLDPWD");
 				printf("%s\n", target);
 			}
 			else
 			{
-				target = strdup(argv[1]);
+				target = _strdup(argv[1]);
 				flag = 1;
 			}
 		update_old_pwd();
@@ -492,19 +492,19 @@ int find_and_run_command(list_t *paths)
 	}
 
 	if (!stat(argv[0], &stats))
-		pathname = strdup(argv[0]);
+		pathname = _strdup(argv[0]);
 	else
 	{
 		while (path_aux)
 		{
-			pathname = strdup(path_aux->str);
+			pathname = _strdup(path_aux->str);
 			if (!safty_nets(pathname, "a", argv))
 				return (0);
 			tmp = realloc(pathname, BUFFSIZE);
 			if (!safty_nets(tmp, "ax", argv, pathname))
 				return (0);
 			pathname = tmp;
-			strcat(pathname, argv[0]);
+			_strcat(pathname, argv[0]);
 			if (!stat(pathname, &stats))
 				break;
 			path_aux = path_aux->next;
