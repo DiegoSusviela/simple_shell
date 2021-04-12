@@ -529,7 +529,7 @@ void start_shell(list_t *paths)
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
 	else
-		continue;
+		printf("");
 	start_shell(paths);
 }
 
