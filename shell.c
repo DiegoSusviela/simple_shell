@@ -55,7 +55,7 @@ void liberar_paths(va_list list)
 		loc = aux;
 	}
 }
-
+/*
 char **start_alias()
 {
 	int i = 0;
@@ -72,7 +72,7 @@ char **start_alias()
 
 	return (hardcode);
 }
-
+*/
 static int safty_nets(char *checking, char *str5, ...)
 {
 	int pos = 0, pos1 = 0;
