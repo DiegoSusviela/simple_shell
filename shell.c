@@ -469,7 +469,7 @@ int find_and_run_command(list_t *paths)
 		print_env();
 		return (!safty_nets(NULL, "a", argv));
 	}
-	if(!strcmp(argv[0], str4))
+	if(!_strcmp(argv[0], str4))
 	{
 		flag = 0;
 		if (!argv[1])
