@@ -312,7 +312,7 @@ char *take_input(list_t *paths)
 		buffer[readcount - 1] = '\0';
 	while (buffer[i])
 	{
-		if ((buffer[i] == '#' && buffer[i - 1] == ' ') || buffer[0] == '#')
+		if (buffer[0] == '#' || (buffer[i] == '#' && buffer[i - 1] == ' '))
 		{
 			buffer[i] = '\0';
 			break;
