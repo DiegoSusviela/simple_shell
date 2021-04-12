@@ -1,5 +1,8 @@
 #include "header.h"
 
+
+char **global_aliases = NULL;
+
 char *previous_path;
 
 void liberar_buffer(va_list list)
@@ -51,6 +54,23 @@ void liberar_paths(va_list list)
 		liberar_nodo(loc);
 		loc = aux;
 	}
+}
+
+char **start_alias()
+{
+	int i = 0;
+	char **hardcode = malloc(9 * sizeof(char *));
+
+	hardcode[0] = strcpy("egrep='egrep --color=auto'");
+	hardcode[1] = strcpy("fgrep='fgrep --color=auto'");
+	hardcode[2] = strcpy("grep='grep --color=auto'");
+	hardcode[3] = strcpy("l='ls -CF'");
+	hardcode[4] = strcpy("la='ls -A'");
+	hardcode[5] = strcpy("ll='ls -alF'");
+	hardcode[6] = strcpy("ls='ls --color=auto'");
+	hardcode[7] = NULL;
+
+	return (hardcode);
 }
 
 static int safty_nets(char *checking, char *str5, ...)
@@ -289,6 +309,12 @@ int *space_remover(char *to_remove)
 	index[pos_cont] = 0;
 	return (index);
 }
+ssize_t _read(char *buffer)
+{
+	buffer = malloc(sizeof(char) * BUFFSIZE);
+
+	return (read(0 , buffer, BUFFSIZE));
+}
 
 char *take_input(list_t *paths)
 {
@@ -296,6 +322,11 @@ char *take_input(list_t *paths)
 	size_t bufsize = 1024;
 	ssize_t readcount = 0;
 	int i = 0;
+
+	char *aux;
+
+	_read(aux);
+	printf("%s\n", aux);
 
 	readcount = getline(&buffer, &bufsize, stdin);
 	if (!buffer)
@@ -505,6 +536,7 @@ int main()
 {
 	list_t *paths;
 	paths = create_paths();
+	global_aliases = start_alias();
 	if (!paths)
 		printf("No mem to start shell\n");
 	signal(SIGINT, SIG_IGN);
