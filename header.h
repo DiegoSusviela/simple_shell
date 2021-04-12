@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <string.h> 
+#include <string.h>
 #include <limits.h>
 #include <math.h>
 #include <stddef.h>
@@ -31,5 +31,9 @@ typedef struct datatype
 	void (*func)(va_list list);
 } data_t;
 
-
+char *_strcat(char *dest, char *src);
+char *_strdup(char *str);
+int _strcmp(char *s1, char *s2);
+int _strncmp(const char *str1, const char *str2, int n);
+int _atoi(char *s);
 #endif
