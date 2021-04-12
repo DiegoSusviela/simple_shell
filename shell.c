@@ -309,10 +309,11 @@ int *space_remover(char *to_remove)
 	index[pos_cont] = 0;
 	return (index);
 }
+/*
 ssize_t _read(char *buffer)
 {
-	return (read(0 , buffer, BUFFSIZE));
-}
+	return ();
+}*/
 
 char *take_input(list_t *paths)
 {
@@ -327,7 +328,7 @@ char *take_input(list_t *paths)
 	printf("%s\n", aux);
 	*/
 	/*readcount = getline(&buffer, &bufsize, stdin);*/
-	readcount = _read(buffer);
+	readcount = read(isatty(STDIN_FILENO) , buffer, BUFFSIZE);
 	if (!buffer)
 		return (NULL);
 	if (readcount == -1)
@@ -528,8 +529,6 @@ void start_shell(list_t *paths)
 		printf("(. Y .) ");
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
-	else
-		printf(" ");
 	start_shell(paths);
 }
 
