@@ -8,6 +8,19 @@ char **global_aliases = NULL;
 
 char *previous_path;
 
+void liberar_arg_aux(char ***arg_aux)
+{
+	int pos = 0;
+
+	while (arg_aux[pos])
+	{
+		safty_nets(NULL, "a", arg_aux[pos]);
+		arg_aux[pos] = NULL;
+		pos++;
+	}
+	free(arg_aux);
+	arg_aux = NULL;
+}
 
 void liberar_buffer(va_list list)
 {
@@ -622,6 +635,7 @@ int find_and_run_command()
 	{
 		if (!check_builtins(arg_aux[pos1]))
 			check_paths(arg_aux[pos1]);
+		liberar_arg_aux(arg_aux);
 		pos1++;
 		printf("se rompe aca 2\n");
 		fflush(NULL);
