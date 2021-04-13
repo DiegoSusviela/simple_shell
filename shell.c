@@ -638,7 +638,8 @@ int find_and_run_command()
 		printf("se rompe aca 2\n");
 		fflush(NULL);
 	}
-	liberar_arg_aux(arg_aux);
+	/*liberar_arg_aux(arg_aux);*/
+	free(arg_aux);
 	return (1);
 }
 
