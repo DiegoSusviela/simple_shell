@@ -480,7 +480,7 @@ void cd(char **argv)
 	!safty_nets(NULL, "ax", argv, target);
 }
 
-void check_builtins(char **argv)
+int check_builtins(char **argv)
 {
 	int i = 0;
 
@@ -500,8 +500,11 @@ void check_builtins(char **argv)
 			break;
 	}
 	if (!built[i].f)
+	{
 		built[i].f(argv);
-	return (built[i].f);
+		return (1);
+	}
+	return (0);
 }
 
 int check_paths(char **argv)
@@ -568,7 +571,7 @@ char ***separator(char **argv)
 	return (arg_aux);
 }
 
-void find_and_run_command()
+int find_and_run_command()
 {
 	int *index, ato, flag, pos1 = 0;
 	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", str5[] = "-", **argv;
@@ -600,6 +603,7 @@ void find_and_run_command()
 			check_paths(arg_aux[pos1]);
 		pos1++;
 	}
+	return (1);
 }
 
 void start_shell()
