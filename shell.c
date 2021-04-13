@@ -543,7 +543,7 @@ char ***separator(char **argv)
 {
 	int pos = 0, len = 0, pos1 = 0, pos2 = 0;
 	char str1[] = ";";
-	if (!_strcmp(argv[0][0], ';'))
+	if (!_strcmp(argv[0], str1))
 		return (NULL);
 
 	char ***arg_aux = malloc(sizeof(char ***) * len + 1);
