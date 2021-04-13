@@ -437,6 +437,8 @@ void update_pwd()
 
 void salir(char **argv)
 {
+	int ato;
+
 	safty_nets(NULL, "p", paths);
 	if(argv[1])
 	{
@@ -485,7 +487,7 @@ void check_builtins(char **argv)
 	builtins_t built[] = {
 		{"exit", salir},
 		{"env", env},
-		{"cd", cd}
+		{"cd", cd},
 		/*{"setenv", setenv},
 		{"unsetenv", unsetenv},*/
 		{NULL, NULL}
@@ -494,7 +496,7 @@ void check_builtins(char **argv)
 
 	while(built[i].f)
 	{
-		if (!_strcmp(argv, built[i].name))
+		if (!_strcmp(argv[0], built[i].command))
 			break;
 	}
 	if (!built[i].f)
