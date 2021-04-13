@@ -634,11 +634,11 @@ int find_and_run_command()
 	{
 		if (!check_builtins(arg_aux[pos1]))
 			check_paths(arg_aux[pos1]);
-		liberar_arg_aux(arg_aux);
 		pos1++;
 		printf("se rompe aca 2\n");
 		fflush(NULL);
 	}
+	liberar_arg_aux(arg_aux);
 	return (1);
 }
 
