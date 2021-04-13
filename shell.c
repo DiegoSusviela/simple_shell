@@ -561,6 +561,7 @@ char ***separator(char **argv)
 		return (NULL);
 
 	char ***arg_aux = malloc(sizeof(char ***) * 150);
+	char **sub_argv = NULL;
 
 	pos = 0;
 	while (argv[pos])
