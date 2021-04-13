@@ -492,7 +492,7 @@ void cd(char **argv)
 	!safty_nets(NULL, "ax", argv, target);
 }
 
-int check_builtins(char **argv)
+int check_builtins(char **argv, int flag, char ***arg_aux)
 {
 	int i = 0;
 
@@ -514,6 +514,8 @@ int check_builtins(char **argv)
 	}
 	if (built[i].f)
 	{
+		if (flag)
+			free(arg_aux);
 		built[i].f(argv);
 		return (1);
 	}
@@ -629,11 +631,14 @@ int find_and_run_command()
 		}
 		test++;
 	}
-
+	char str1[] = "exit";
+	int flag3 = 0;
 	fflush(NULL);
 	while (arg_aux[pos1])
 	{
-		if (!check_builtins(arg_aux[pos1]))
+		if (!strcmp(arg_aux[pos1][0], str1))
+			flag3 = 1;
+		if (!check_builtins(arg_aux[pos1], flag3, arg_aux))
 			check_paths(arg_aux[pos1]);
 		pos1++;
 		printf("se rompe aca 2\n");
