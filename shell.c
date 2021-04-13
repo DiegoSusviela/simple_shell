@@ -107,10 +107,8 @@ static int safty_nets(char *checking, char *str5, ...)
 	return (1);
 }
 
-void liberar_arg_aux(char ***arg_aux)
+void liberar_arg_aux(char ***arg_aux, int pos)
 {
-	int pos = 0;
-
 	while (arg_aux[pos])
 	{
 		safty_nets(NULL, "a", arg_aux[pos]);
@@ -524,7 +522,7 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 				iter++;
 			}
 			argv[iter] = NULL;
-			liberar_arg_aux(arg_aux);
+			liberar_arg_aux(arg_aux, pos1);
 		}
 		built[i].f(argv);
 		return (1);
