@@ -604,6 +604,7 @@ int find_and_run_command()
 	int test = 0, i = 0;
 	while (arg_aux[test])
 	{
+		i = 0;
 		while (arg_aux[test][i])
 		{
 			printf("%s\n", arg_aux[test][i]);
