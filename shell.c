@@ -492,9 +492,10 @@ void cd(char **argv)
 	!safty_nets(NULL, "ax", argv, target);
 }
 
-int check_builtins(char **argv, int flag, char ***arg_aux)
+int check_builtins(int pos1, int flag, char ***arg_aux)
 {
-	int i = 0;
+	int i = 0, iter = 0;
+	char **argv;
 
 	builtins_t built[] = {
 		{"exit", salir},
@@ -508,14 +509,23 @@ int check_builtins(char **argv, int flag, char ***arg_aux)
 
 	while(built[i].f)
 	{
-		if (!_strcmp(argv[0], built[i].command))
+		if (!_strcmp(arg_aux[pos1][0], built[i].command))
 			break;
 		i++;
 	}
 	if (built[i].f)
 	{
 		if (flag)
-			free(arg_aux);
+		{
+			argv = malloc(sizeof(char**) * BUFFSIZE);
+			while (arg_aux[pos1][iter])
+			{
+				argv[iter] = arg_aux[pos1][iter];
+				iter++;
+			}
+			argv[iter] = arg_aux[pos1][iter];
+			liberar_arg_aux(arg_aux);
+		}
 		built[i].f(argv);
 		return (1);
 	}
@@ -638,7 +648,7 @@ int find_and_run_command()
 	{
 		if (!strcmp(arg_aux[pos1][0], str1))
 			flag3 = 1;
-		if (!check_builtins(arg_aux[pos1], flag3, arg_aux))
+		if (!check_builtins(pos1, flag3, arg_aux))
 			check_paths(arg_aux[pos1]);
 		pos1++;
 		printf("se rompe aca 2\n");
