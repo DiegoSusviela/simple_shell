@@ -542,7 +542,7 @@ int check_paths(char **argv)
 
 char ***separator(char **argv)
 {
-	int pos = 0, len = 0, pos1 = 0, pos2 = 0;
+	int pos = 0, len = 0, pos1 = 1, pos2 = 0;
 	char str1[] = ";";
 	if (!_strcmp(argv[0], str1))
 		return (NULL);
@@ -567,10 +567,10 @@ char ***separator(char **argv)
 			pos1++;
 			pos2 = 0;
 		}
-		arg_aux[pos1 - 1] = sub_argv;
 		pos++;
 		printf("se rompe aca 1\n");
 	}
+	arg_aux[pos1 - 1] = sub_argv;
 	arg_aux[pos1] = NULL;
 	return (arg_aux);
 }
@@ -600,6 +600,18 @@ int find_and_run_command()
 	arg_aux = separator(argv);							/*separator not done*/
 	if (!arg_aux)
 		printf("syntax error\n");
+	
+	int test = 0, i = 0;
+	while (arg_aux[test])
+	{
+		while (arg_aux[test][i])
+		{
+			printf("%s\n", arg_aux[test][i]);
+			i++;
+		}
+		test++;
+	}
+
 	fflush(NULL);
 	while (arg_aux[pos1])
 	{
