@@ -331,7 +331,7 @@ char *take_input(list_t *paths)
 	*/
 	/*readcount = getline(&buffer, &bufsize, stdin);*/
 	readcount = read(isatty(STDIN_FILENO), buffer, BUFFSIZE);
-	printf("%i\n", readcount);
+	printf("%zd\n", readcount);
 	fflush(NULL);
 	if (!buffer)
 		return (NULL);
