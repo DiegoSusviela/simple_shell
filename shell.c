@@ -8,20 +8,6 @@ char **global_aliases = NULL;
 
 char *previous_path;
 
-void liberar_arg_aux(char ***arg_aux)
-{
-	int pos = 0;
-
-	while (arg_aux[pos])
-	{
-		safty_nets(NULL, "a", arg_aux[pos]);
-		arg_aux[pos] = NULL;
-		pos++;
-	}
-	free(arg_aux);
-	arg_aux = NULL;
-}
-
 void liberar_buffer(va_list list)
 {
 	char *c = va_arg(list, char *);
@@ -121,6 +107,19 @@ static int safty_nets(char *checking, char *str5, ...)
 	return (1);
 }
 
+void liberar_arg_aux(char ***arg_aux)
+{
+	int pos = 0;
+
+	while (arg_aux[pos])
+	{
+		safty_nets(NULL, "a", arg_aux[pos]);
+		arg_aux[pos] = NULL;
+		pos++;
+	}
+	free(arg_aux);
+	arg_aux = NULL;
+}
 void start_new_promtp(void)
 {
 	static int first_time = 1;
