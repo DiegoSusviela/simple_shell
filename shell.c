@@ -500,7 +500,7 @@ int check_builtins(char **argv)
 		if (!_strcmp(argv[0], built[i].command))
 			break;
 	}
-	if (!built[i].f)
+	if (built[i].f)
 	{
 		built[i].f(argv);
 		return (1);
