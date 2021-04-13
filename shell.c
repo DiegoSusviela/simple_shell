@@ -543,7 +543,7 @@ char ***separator(char **argv)
 {
 	int pos = 0, len = 0, pos1 = 0, pos2 = 0;
 	char str1[] = ";";
-	if (!_strcmp(argv[0], str1))
+	if (!_strcmp(argv[0][0], ';'))
 		return (NULL);
 
 	char ***arg_aux = malloc(sizeof(char ***) * len + 1);
@@ -565,6 +565,7 @@ char ***separator(char **argv)
 				sub_argv = malloc(sizeof(char **) * 250);
 			pos1++;
 		}
+		arg_aux[pos1 - 1] = sub_argv;
 		pos++;
 		printf("se rompe aca 1\n");
 	}
