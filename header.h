@@ -24,6 +24,11 @@ typedef struct list_s
 	struct list_s *next;
 } list_t;
 
+typedef struct builtins
+{
+	char *command;
+	void (*f)(char **);
+} builtins_t;
 
 typedef struct datatype
 {
@@ -36,4 +41,6 @@ char *_strdup(char *str);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *str1, const char *str2, int n);
 int _atoi(char *s);
+
+void salir(char **argv);
 #endif

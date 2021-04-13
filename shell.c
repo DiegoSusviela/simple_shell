@@ -2,10 +2,12 @@
 #include "string_handlers.c"
 #include "_strlen.c"
 
+list_t *paths;
 
 char **global_aliases = NULL;
 
 char *previous_path;
+
 
 void liberar_buffer(va_list list)
 {
@@ -317,7 +319,7 @@ ssize_t _read(char *buffer)
 	return ();
 }*/
 
-char *take_input(list_t *paths)
+char *take_input()
 {
 	char *buffer = malloc(sizeof(char) * BUFFSIZE + 1);
 	size_t bufsize = 1024;
@@ -331,8 +333,8 @@ char *take_input(list_t *paths)
 	*/
 	/*readcount = getline(&buffer, &bufsize, stdin);*/
 	readcount = read(isatty(STDIN_FILENO), buffer, BUFFSIZE);
-	printf("%zd\n", readcount);
-	fflush(NULL);
+	/*printf("%zd\n", readcount);
+	fflush(NULL);*/
 	if (!buffer)
 		return (NULL);
 	if (readcount <= 0)
@@ -433,13 +435,148 @@ void update_pwd()
 	}
 }
 
-int find_and_run_command(list_t *paths)
+void salir(char **argv)
 {
-	int *index, ato, flag;
-	struct stat stats;
-	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", str5[] = "-", **argv;
+	int ato;
+
+	safty_nets(NULL, "p", paths);
+	if(argv[1])
+	{
+		ato = _atoi(argv[1]);
+		safty_nets(NULL, "a", argv);
+		exit(ato);
+	}
+	safty_nets(NULL, "a", argv);
+	exit(0);
+}
+
+void env(char **argv)
+{
+	print_env();
+	safty_nets(NULL, "a", argv);
+}
+
+void cd(char **argv)
+{
+	char *target, str5[] = "-";
+	int flag = 0;
+
+	if (!argv[1])
+		target = _getenv("HOME");
+	else
+		if (!_strcmp(argv[1], str5))
+		{
+			target = _getenv("OLDPWD");
+			printf("%s\n", target);
+		}
+		else
+		{
+			target = _strdup(argv[1]);
+			flag = 1;
+		}
+	update_old_pwd();
+	chdir(target);
+	update_pwd();
+	!safty_nets(NULL, "ax", argv, target);
+}
+
+int check_builtins(char **argv)
+{
+	int i = 0;
+
+	builtins_t built[] = {
+		{"exit", salir},
+		{"env", env},
+		{"cd", cd},
+		/*{"setenv", setenv},
+		{"unsetenv", unsetenv},*/
+		{NULL, NULL}
+	};
+	printf("se rompe aca 3 %s\n", argv[0]);
+
+	while(built[i].f)
+	{
+		if (!_strcmp(argv[0], built[i].command))
+			break;
+	}
+	if (!built[i].f)
+	{
+		built[i].f(argv);
+		return (1);
+	}
+	return (0);
+}
+
+int check_paths(char **argv)
+{
 	list_t *path_aux = paths;
-	char *target;
+	struct stat stats;
+	char *pathname, *tmp;
+
+	while (path_aux)
+	{
+		pathname = _strdup(path_aux->str);
+		if (!safty_nets(pathname, "a", argv))
+			return (0);
+		tmp = realloc(pathname, BUFFSIZE);
+		if (!safty_nets(tmp, "ax", argv, pathname))
+			return (0);
+		pathname = tmp;
+		_strcat(pathname, argv[0]);
+		if (!stat(pathname, &stats))
+			break;
+		path_aux = path_aux->next;
+		free(pathname);
+	}
+	if (!path_aux)
+		pathname =	_strdup(argv[0]);
+	
+	if (fork() == 0)
+		if (execve(pathname, argv, NULL) == -1)
+			perror(argv[0]);
+	wait(NULL);
+	free(pathname);
+	return (!safty_nets(NULL, "a", argv));
+}
+
+char ***separator(char **argv)
+{
+	int pos = 0, len = 0, pos1 = 0, pos2 = 0;
+	char str1[] = ";";
+	if (!_strcmp(argv[0][0], ';'))
+		return (NULL);
+
+	char ***arg_aux = malloc(sizeof(char ***) * len + 1);
+	char **sub_argv = malloc(sizeof(char **) * 250);
+
+	pos = 0;
+	while (argv[pos])
+	{
+		if (_strcmp(argv[pos], str1))
+		{
+			sub_argv[pos2] = _strdup(argv[pos]);
+			pos2++;
+		}
+		else
+		{
+			sub_argv[pos2] = NULL;
+			arg_aux[pos1] = sub_argv;
+			if (argv[pos + 1])
+				sub_argv = malloc(sizeof(char **) * 250);
+			pos1++;
+		}
+		arg_aux[pos1 - 1] = sub_argv;
+		pos++;
+		printf("se rompe aca 1\n");
+	}
+	arg_aux[pos1] = NULL;
+	return (arg_aux);
+}
+
+int find_and_run_command()
+{
+	int *index, ato, flag, pos1 = 0;
+	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", str5[] = "-", **argv;
 
 	buffer = take_input(paths);
 	if (!safty_nets(buffer, "x", buffer))
@@ -456,90 +593,33 @@ int find_and_run_command(list_t *paths)
 		return (safty_nets(NULL, "ix", index, buffer));
 	safty_nets(NULL, "ix", index, buffer);
 
-	if(!_strcmp(argv[0], str2))
-	{
-		safty_nets(NULL, "p", paths);
-		if(argv[1])
-		{
-			ato = _atoi(argv[1]);
-			safty_nets(NULL, "a", argv);
-			exit(ato);
-		}
-		safty_nets(NULL, "a", argv);
-		exit(0);
-	}
-	if(!_strcmp(argv[0], str3))
-	{
-		print_env();
-		return (!safty_nets(NULL, "a", argv));
-	}
-	if(!_strcmp(argv[0], str4))
-	{
-		flag = 0;
-		if (!argv[1])
-			target = _getenv("HOME");
-		else
-			if (!_strcmp(argv[1], str5))
-			{
-				target = _getenv("OLDPWD");
-				printf("%s\n", target);
-			}
-			else
-			{
-				target = _strdup(argv[1]);
-				flag = 1;
-			}
-		update_old_pwd();
-		chdir(target);
-		update_pwd();
-		return (!safty_nets(NULL, "ax", argv, target));
-	}
+	char ***arg_aux;
 
-	if (!stat(argv[0], &stats))
-		pathname = _strdup(argv[0]);
-	else
+	arg_aux = separator(argv);							/*separator not done*/
+	if (!arg_aux)
+		printf("syntax error\n");
+	fflush(NULL);
+	while (arg_aux[pos1])
 	{
-		while (path_aux)
-		{
-			pathname = _strdup(path_aux->str);
-			if (!safty_nets(pathname, "a", argv))
-				return (0);
-			tmp = realloc(pathname, BUFFSIZE);
-			if (!safty_nets(tmp, "ax", argv, pathname))
-				return (0);
-			pathname = tmp;
-			_strcat(pathname, argv[0]);
-			if (!stat(pathname, &stats))
-				break;
-			path_aux = path_aux->next;
-			free(pathname);
-		}
+		if (!check_builtins(arg_aux[pos1]))
+			check_paths(arg_aux[pos1]);
+		pos1++;
+		printf("se rompe aca 2\n");
 	}
-	if (path_aux)
-	{
-		if (fork() == 0)
-			execve(pathname, argv, NULL);
-		wait(NULL);
-		free(pathname);
-		return (!safty_nets(NULL, "a", argv));
-	}
-	perror(argv[0]);
-	return (safty_nets(NULL, "a", argv));
+	return (1);
 }
 
-void start_shell(list_t *paths)
+void start_shell()
 {
 	if (isatty(STDIN_FILENO))
 		write(1, "(. Y .) ", 8);
 	fflush(NULL);
-	if (!find_and_run_command(paths))
-		printf("Unkown command, error 98\n");
+	find_and_run_command(paths);
 	start_shell(paths);
 }
 
 int main()
 {
-	list_t *paths;
 	paths = create_paths();
 	/*global_aliases = start_alias();*/
 	if (!paths)
