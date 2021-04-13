@@ -520,10 +520,10 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 			argv = malloc(sizeof(char**) * BUFFSIZE);
 			while (arg_aux[pos1][iter])
 			{
-				argv[iter] = arg_aux[pos1][iter];
+				argv[iter] = _strdup(arg_aux[pos1][iter]);
 				iter++;
 			}
-			argv[iter] = arg_aux[pos1][iter];
+			argv[iter] = NULL;
 			liberar_arg_aux(arg_aux);
 		}
 		built[i].f(argv);
