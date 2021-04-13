@@ -1,4 +1,5 @@
 #include "header.h"
+
 /**
  * _strcat - concatenates two strings
  * @dest: destination parameter

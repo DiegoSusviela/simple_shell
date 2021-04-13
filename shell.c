@@ -1,6 +1,4 @@
 #include "header.h"
-#include "string_handlers.c"
-#include "_strlen.c"
 
 list_t *paths;
 
@@ -129,33 +127,6 @@ void start_new_promtp(void)
 		first_time = 0;
 	}
 }
-/*
-ssize_t _getline(char **p_buffer, size_t *p_bufsize, stdin)
-{
-	int readcount = 0;
-
-	return (readline);
-}
-*/
-
-/*
-char **copiar_path()
-{
-	extern char ** environ;
-	char **ret;
-	int i = 0, j = 0;
-
-	while(environ[i])
-	{
-		while(environ[i][j])
-		{
-			ret[i][j] = environ[i][j];
-			j++;
-		}
-		i++;
-	}
-}
-*/
 
 char *_getenv(const char *name)
 {
@@ -331,19 +302,11 @@ ssize_t _read(char *buffer)
 char *take_input()
 {
 	char *buffer = malloc(sizeof(char) * BUFFSIZE + 1);
-	size_t bufsize = 1024;
 	ssize_t readcount = 0;
 	int i = 0;
 
-	/*char *aux = malloc(sizeof(char) * BUFFSIZE);;
-
-	_read(aux);
-	printf("%s\n", aux);
-	*/
-	/*readcount = getline(&buffer, &bufsize, stdin);*/
 	readcount = read(isatty(STDIN_FILENO), buffer, BUFFSIZE);
-	/*printf("%zd\n", readcount);
-	fflush(NULL);*/
+
 	if (!buffer)
 		return (NULL);
 	if (readcount <= 0)
