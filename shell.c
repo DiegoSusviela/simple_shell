@@ -115,9 +115,9 @@ void liberar_arg_aux(char ***arg_aux, int pos)
 		arg_aux[pos] = NULL;
 		pos++;
 	}
-	free(arg_aux);
 	arg_aux = NULL;
 }
+
 void start_new_promtp(void)
 {
 	static int first_time = 1;
@@ -523,6 +523,7 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 			}
 			argv[iter] = NULL;
 			liberar_arg_aux(arg_aux, pos1);
+			free(arg_aux);
 		}
 		built[i].f(argv);
 		return (1);
@@ -649,8 +650,6 @@ int find_and_run_command()
 		if (!check_builtins(pos1, flag3, arg_aux))
 			check_paths(arg_aux[pos1]);
 		pos1++;
-		printf("se rompe aca 2\n");
-		fflush(NULL);
 	}
 	/*liberar_arg_aux(arg_aux);*/
 	free(arg_aux);
