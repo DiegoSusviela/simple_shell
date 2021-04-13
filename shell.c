@@ -335,7 +335,7 @@ char *take_input(list_t *paths)
 	fflush(NULL);
 	if (!buffer)
 		return (NULL);
-	if (readcount == -1)
+	if (readcount < 0)
 	{
 		free(buffer);
 		if (isatty(STDIN_FILENO))
