@@ -493,6 +493,7 @@ int check_builtins(char **argv)
 		{NULL, NULL}
 	};
 	printf("se rompe aca 3 %s\n", argv[0]);
+	fflush(NULL);
 
 	while(built[i].f)
 	{
