@@ -585,6 +585,7 @@ char ***separator(char **argv)
 	sub_argv[pos2] = NULL;
 	arg_aux[pos1] = sub_argv;
 	arg_aux[pos1 + 1] = NULL;
+	safty_nets(NULL, "a", argv)
 	return (arg_aux);
 }
 
