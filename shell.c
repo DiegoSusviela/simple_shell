@@ -537,7 +537,6 @@ int check_paths(char **argv)
 	list_t *path_aux = paths;
 	struct stat stats;
 	char *pathname, *tmp;
-	printf("entro a los paths\n");
 
 	while (path_aux)
 	{
@@ -630,7 +629,7 @@ int find_and_run_command()
 	fflush(NULL);
 	
 	int test = 0, i = 0;
-	while (arg_aux[test])
+/*	while (arg_aux[test])
 	{
 		i = 0;
 		while (arg_aux[test][i])
@@ -641,6 +640,7 @@ int find_and_run_command()
 		}
 		test++;
 	}
+*/
 	char str1[] = "exit";
 	int flag3 = 0;
 	fflush(NULL);
