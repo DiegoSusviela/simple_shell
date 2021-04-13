@@ -513,6 +513,7 @@ int check_paths(char **argv)
 	list_t *path_aux = paths;
 	struct stat stats;
 	char *pathname, *tmp;
+	printf("entro a los paths\n");
 
 	while (path_aux)
 	{
@@ -601,6 +602,8 @@ int find_and_run_command()
 	arg_aux = separator(argv);							/*separator not done*/
 	if (!arg_aux)
 		printf("syntax error\n");
+
+	fflush(NULL);
 	
 	int test = 0, i = 0;
 	while (arg_aux[test])
@@ -609,6 +612,7 @@ int find_and_run_command()
 		while (arg_aux[test][i])
 		{
 			printf("%s\n", arg_aux[test][i]);
+			fflush(NULL);
 			i++;
 		}
 		test++;
@@ -621,6 +625,7 @@ int find_and_run_command()
 			check_paths(arg_aux[pos1]);
 		pos1++;
 		printf("se rompe aca 2\n");
+		fflush(NULL);
 	}
 	return (1);
 }
