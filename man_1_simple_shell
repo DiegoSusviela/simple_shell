@@ -1,52 +1,81 @@
 .\"Man page for Diego and Toshi Simple Shell.
-.TH man 3 "06 April 2021" "1.0" "simple_shell man page"
+.TH man 1 "12 April 2021" "1.0" "Simple_shell man page"
 .SH NAME
-.B simple_shell - Command interpreter (Shell) made in C language
+.B simple_shell \- Command interpreter (Shell) made in C language
 .SH SYNOPSIS
-.B #include "header.h"
-.PP [commmand][options]
+.PP
+.B #include """header.h"""
+.PP
+[\fBcommand\fR]
+[\fParguments\fR]
+.PP
 .SH COMPILATION
-.B Compile using gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+.PP
+Compile using
+\fB\gcc -Wall -Werror -Wextra -pedantic *.c -o hsh\fR
 .SH DESCRIPTION
-Our personal shell works a lot like the basic "sh" shell, the program reads lines from a file or the keyboard, interprets them, and passes them
-to the operating system to carry out. It can handle commands and parameters for various commands in linux. This program can be run on top of another shell (by entering
-the program "./hsh") where a new prompt is displayed and you can interact with it, exiting with the "exit" command or Ctrl+D ("EOF").
-It can also be used as non interactive program, passing the command and parameters piped to the shell program.
+Our personal shell works a lot like the basic "sh" shell, the program reads lines from a file or the keyboard, interprets them, and passes them to the operating system to carry out. It can handle commands and parameters for various commands in linux. This program can be run on top of another shell (by entering the program "./hsh") where a new prompt is displayed and you can interact with it, exiting with the "exit" command or Ctrl+D ("EOF"). It can also be used as non interactive program, passing the command and parameters piped to the shell program.
+.PP
 For example:
-NON INTERACTIVE
+.PP
+.B NON INTERACTIVE
+.PP
+.nf
+.RS
 $ echo "/bin/ls" | ./simple_shell
 simple_shell main.c shell.c test_ls_2
-INTERACTIVE
+$
+.RE
+.fi
+.PP
+.B INTERACTIVE
+.PP
+.nf
+.RS
 $ ./hsh
 ourshell$ /bin/ls
 hsh main.c shell.c test_ls_2
 ourshell$
 ourshell$ exit
 $
+.RE
+.fi
 .PP
 .SH PATH SEARCH
+.PP
 When locating a command, the shell first looks to see if it has a shell function by that name. Then it looks for a builtin command by that name.
 The shell searches each entry in PATH for the command. The value of the PATH variable should be a series of entries separated by colons)":".
-Each entry consists of a directory name(for example "/usr/local/bin"). The current directory may be indicated implicitly by an empty directory name,
-or explicitly by a single period.
+Each entry consists of a directory name(for example "/usr/local/bin"). The current directory may be indicated implicitly by an empty directory name, or explicitly by a single period.
 .PP
 .SH FEATURES
+.TP
 --handles command line with arguments: for example "ls -la" (lists all files and directories in the current directory with long format and with hidden files.
+.TP
 --handles comments (#).
+.TP
 --we implemented our own getline to read the inputs and our own strtok to tokenize it.
+.TP
 --you can enter each argument consecutive or separated by spaces, for example "ls -l -a" = "ls -la".
-.PP
+.TP
 .SH BUILINTS
-.B cd [PATH] - Changes the current directory of the process. If no argument is given to cd the command it is interpreted like cd $HOME.
-.B exit [STATUS]- implements the exit built-in that exits the shell and causes normal process termintation. Can handle status for exit.
-.B env - implements the env built-in that prints the current environment.
-.B Handling Ctrl+C: We handle the signal so when the user inputs ^C it does not quit.
-.B Handling Ctrl+D: The simple shell will be terminated.
+.TP
+\fBcd\fR [\fPPATH\fR] - Changes the current directory of the process. If no argument is given to cd the command it is interpreted like cd $HOME.
+.TP
+\fBexit\fR [\fPSTATUS\fR]- implements the exit built-in that exits the shell and causes normal process termintation. Can handle status for exit.
+.TP
+\fBenv\fR - implements the env built-in that prints the current environment.
+.TP
+Handling \fBCtrl+C\fR: We handle the signal so when the user inputs ^C it does not quit.
+.PP
+Handling \fBCtrl+D\fR: The simple shell will be terminated.
+.PP
 .SH RETURN VALUE
 On success the return value is always 1, on error we handle the error according to the errno of the shell.
 .PP
 .SH SEE ALSO
+.PP
 For more information on how our shell works you can visit our README file on the git repository
+.PP
 https://github.com/DiegoSusviela/simple_shell/blob/main/README.md
 .SH BUGS
 No known bugs. If you find some, please contact the authors
