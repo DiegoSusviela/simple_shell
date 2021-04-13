@@ -115,7 +115,6 @@ void liberar_arg_aux(char ***arg_aux, int pos)
 		arg_aux[pos] = NULL;
 		pos++;
 	}
-	arg_aux = NULL;
 }
 
 void start_new_promtp(void)
@@ -525,6 +524,8 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 			liberar_arg_aux(arg_aux, pos1);
 			free(arg_aux);
 		}
+		else
+			argv = arg_aux[pos1];
 		built[i].f(argv);
 		return (1);
 	}
