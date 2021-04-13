@@ -492,7 +492,7 @@ int check_builtins(char **argv)
 		{"unsetenv", unsetenv},*/
 		{NULL, NULL}
 	};
-
+	printf("se rompe aca 3 %s\n", argv[0]);
 
 	while(built[i].f)
 	{
