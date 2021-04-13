@@ -566,6 +566,7 @@ char ***separator(char **argv)
 			pos1++;
 		}
 		pos++;
+		printf("se rompe aca 1\n");
 	}
 	arg_aux[pos1] = NULL;
 	return (arg_aux);
@@ -602,6 +603,7 @@ int find_and_run_command()
 		if (!check_builtins(arg_aux[pos1]))
 			check_paths(arg_aux[pos1]);
 		pos1++;
+		printf("se rompe aca 2\n");
 	}
 	return (1);
 }
