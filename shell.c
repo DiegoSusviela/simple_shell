@@ -570,6 +570,7 @@ char ***separator(char **argv)
 		pos++;
 		printf("se rompe aca 1\n");
 	}
+	sub_argv[pos2] = NULL;
 	arg_aux[pos1 - 1] = sub_argv;
 	arg_aux[pos1] = NULL;
 	return (arg_aux);
