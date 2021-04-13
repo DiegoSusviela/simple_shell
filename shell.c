@@ -492,7 +492,6 @@ int check_builtins(char **argv)
 		{"unsetenv", unsetenv},*/
 		{NULL, NULL}
 	};
-	printf("se rompe aca 3 %s\n", argv[0]);
 	fflush(NULL);
 
 	while(built[i].f)
@@ -549,7 +548,7 @@ char ***separator(char **argv)
 	if (!_strcmp(argv[0], str1))
 		return (NULL);
 
-	char ***arg_aux = malloc(sizeof(char ***) * len + 1);
+	char ***arg_aux = malloc(sizeof(char ***) * 150);
 	char **sub_argv = malloc(sizeof(char **) * 250);
 
 	pos = 0;
@@ -570,7 +569,6 @@ char ***separator(char **argv)
 			pos2 = 0;
 		}
 		pos++;
-		printf("se rompe aca 1\n");
 	}
 	sub_argv[pos2] = NULL;
 	arg_aux[pos1 - 1] = sub_argv;
