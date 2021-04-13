@@ -331,6 +331,8 @@ char *take_input(list_t *paths)
 	*/
 	/*readcount = getline(&buffer, &bufsize, stdin);*/
 	readcount = read(isatty(STDIN_FILENO), buffer, BUFFSIZE);
+	printf("%i\n", readcount);
+	fflush(NULL);
 	if (!buffer)
 		return (NULL);
 	if (readcount == -1)
@@ -529,6 +531,7 @@ void start_shell(list_t *paths)
 {
 	if (isatty(STDIN_FILENO))
 		write(1, "(. Y .) ", 8);
+	fflush(NULL);
 	if (!find_and_run_command(paths))
 		printf("Unkown command, error 98\n");
 	start_shell(paths);
