@@ -499,6 +499,7 @@ int check_builtins(char **argv)
 	{
 		if (!_strcmp(argv[0], built[i].command))
 			break;
+		i++;
 	}
 	if (built[i].f)
 	{
