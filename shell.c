@@ -8,7 +8,6 @@ char **global_aliases = NULL;
 
 char *previous_path;
 
-
 void liberar_buffer(va_list list)
 {
 	char *c = va_arg(list, char *);
@@ -106,6 +105,16 @@ static int safty_nets(char *checking, char *str5, ...)
 		return (0);
 	}
 	return (1);
+}
+
+void liberar_arg_aux(char ***arg_aux, int pos)
+{
+	while (arg_aux[pos])
+	{
+		safty_nets(NULL, "a", arg_aux[pos]);
+		arg_aux[pos] = NULL;
+		pos++;
+	}
 }
 
 void start_new_promtp(void)
@@ -480,9 +489,10 @@ void cd(char **argv)
 	!safty_nets(NULL, "ax", argv, target);
 }
 
-int check_builtins(char **argv)
+int check_builtins(int pos1, int flag, char ***arg_aux)
 {
-	int i = 0;
+	int i = 0, iter = 0;
+	char **argv;
 
 	builtins_t built[] = {
 		{"exit", salir},
@@ -492,15 +502,30 @@ int check_builtins(char **argv)
 		{"unsetenv", unsetenv},*/
 		{NULL, NULL}
 	};
-	printf("se rompe aca 3 %s\n", argv[0]);
+	fflush(NULL);
 
 	while(built[i].f)
 	{
-		if (!_strcmp(argv[0], built[i].command))
+		if (!_strcmp(arg_aux[pos1][0], built[i].command))
 			break;
+		i++;
 	}
-	if (!built[i].f)
+	if (built[i].f)
 	{
+		if (flag)
+		{
+			argv = malloc(sizeof(char**) * BUFFSIZE);
+			while (arg_aux[pos1][iter])
+			{
+				argv[iter] = _strdup(arg_aux[pos1][iter]);
+				iter++;
+			}
+			argv[iter] = NULL;
+			liberar_arg_aux(arg_aux, pos1);
+			free(arg_aux);
+		}
+		else
+			argv = arg_aux[pos1];
 		built[i].f(argv);
 		return (1);
 	}
@@ -512,6 +537,7 @@ int check_paths(char **argv)
 	list_t *path_aux = paths;
 	struct stat stats;
 	char *pathname, *tmp;
+	printf("entro a los paths\n");
 
 	while (path_aux)
 	{
@@ -543,10 +569,10 @@ char ***separator(char **argv)
 {
 	int pos = 0, len = 0, pos1 = 0, pos2 = 0;
 	char str1[] = ";";
-	if (!_strcmp(argv[0][0], ';'))
+	if (!_strcmp(argv[0], str1))
 		return (NULL);
 
-	char ***arg_aux = malloc(sizeof(char ***) * len + 1);
+	char ***arg_aux = malloc(sizeof(char ***) * 150);
 	char **sub_argv = malloc(sizeof(char **) * 250);
 
 	pos = 0;
@@ -564,12 +590,14 @@ char ***separator(char **argv)
 			if (argv[pos + 1])
 				sub_argv = malloc(sizeof(char **) * 250);
 			pos1++;
+			pos2 = 0;
 		}
-		arg_aux[pos1 - 1] = sub_argv;
 		pos++;
-		printf("se rompe aca 1\n");
 	}
-	arg_aux[pos1] = NULL;
+	sub_argv[pos2] = NULL;
+	arg_aux[pos1] = sub_argv;
+	arg_aux[pos1 + 1] = NULL;
+	safty_nets(NULL, "a", argv);
 	return (arg_aux);
 }
 
@@ -598,14 +626,34 @@ int find_and_run_command()
 	arg_aux = separator(argv);							/*separator not done*/
 	if (!arg_aux)
 		printf("syntax error\n");
+
+	fflush(NULL);
+	
+	int test = 0, i = 0;
+	while (arg_aux[test])
+	{
+		i = 0;
+		while (arg_aux[test][i])
+		{
+			printf("%s\n", arg_aux[test][i]);
+			fflush(NULL);
+			i++;
+		}
+		test++;
+	}
+	char str1[] = "exit";
+	int flag3 = 0;
 	fflush(NULL);
 	while (arg_aux[pos1])
 	{
-		if (!check_builtins(arg_aux[pos1]))
+		if (!strcmp(arg_aux[pos1][0], str1))
+			flag3 = 1;
+		if (!check_builtins(pos1, flag3, arg_aux))
 			check_paths(arg_aux[pos1]);
 		pos1++;
-		printf("se rompe aca 2\n");
 	}
+	/*liberar_arg_aux(arg_aux);*/
+	free(arg_aux);
 	return (1);
 }
 
