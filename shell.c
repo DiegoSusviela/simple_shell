@@ -1,4 +1,6 @@
 #include "header.h"
+#include "string_handlers.c"
+#include "_strlen.c"
 
 
 char **global_aliases = NULL;
