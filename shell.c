@@ -431,7 +431,7 @@ void env(char **argv)
 void cd(char **argv)
 {
 	char *target, str5[] = "-";
-	int flag = 0;
+	/*int flag = 0;*/
 
 	if (!argv[1])
 		target = _getenv("HOME");
@@ -442,14 +442,14 @@ void cd(char **argv)
 			printf("%s\n", target);
 		}
 		else
-		{
+		/*{*/
 			target = _strdup(argv[1]);
-			flag = 1;
-		}
+			/*flag = 1;
+		}*/
 	update_old_pwd();
 	chdir(target);
 	update_pwd();
-	!safty_nets(NULL, "ax", argv, target);
+	safty_nets(NULL, "ax", argv, target);
 }
 
 int check_builtins(int pos1, int flag, char ***arg_aux)
@@ -529,13 +529,16 @@ int check_paths(char **argv)
 
 char ***separator(char **argv)
 {
-	int pos = 0, len = 0, pos1 = 0, pos2 = 0;
+	int pos = 0, pos1 = 0, pos2 = 0;
 	char str1[] = ";";
 	if (!_strcmp(argv[0], str1))
 		return (NULL);
 
-	char ***arg_aux = malloc(sizeof(char ***) * 150);
-	char **sub_argv = malloc(sizeof(char **) * 250);
+	char ***arg_aux;
+	char **sub_argv;
+
+	arg_aux = malloc(sizeof(char ***) * 150);
+	sub_argv = malloc(sizeof(char **) * 250);
 
 	pos = 0;
 	while (argv[pos])
@@ -565,8 +568,8 @@ char ***separator(char **argv)
 
 int find_and_run_command()
 {
-	int *index, ato, flag, pos1 = 0;
-	char *pathname, *tmp, str2[] = "exit", *buffer, str3[] = "env", str4[] = "cd", str5[] = "-", **argv;
+	int *index, pos1 = 0;
+	char **argv, ***arg_aux;
 
 	buffer = take_input(paths);
 	if (!safty_nets(buffer, "x", buffer))
@@ -583,15 +586,12 @@ int find_and_run_command()
 		return (safty_nets(NULL, "ix", index, buffer));
 	safty_nets(NULL, "ix", index, buffer);
 
-	char ***arg_aux;
-
-	arg_aux = separator(argv);							/*separator not done*/
+	arg_aux = separator(argv);
 	if (!arg_aux)
 		printf("syntax error\n");
 
 	fflush(NULL);
 	
-	int test = 0, i = 0;
 /*	while (arg_aux[test])
 	{
 		i = 0;

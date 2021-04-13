@@ -41,6 +41,7 @@ char *_strdup(char *str);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *str1, const char *str2, int n);
 int _atoi(char *s);
+int _strlen(char *s);
 
 void salir(char **argv);
 #endif
