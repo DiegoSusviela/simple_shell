@@ -87,7 +87,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		return (NULL);
 	if (new_size > old_size)
 		max_size = old_size;
-	for (contador = 0; contador < max_size; contador++)
+	for (contador = 0; contador < (max_size - 1); contador++)
 		dest[contador] = old_ptr[contador];
 	free(ptr);
 	return (dest);
