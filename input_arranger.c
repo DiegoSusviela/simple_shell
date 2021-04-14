@@ -93,7 +93,6 @@ char ***separator(char **argv)
 	char ***arg_aux;
 	char **sub_argv;
 
-	printf("outside %s\n", str2);
 	if (!_strcmp(argv[0], str1))
 		return (NULL);
 
@@ -107,11 +106,9 @@ char ***separator(char **argv)
 		{
 			sub_argv[pos2] = _strdup(argv[pos]);
 			pos2++;
-			printf("enmtro al if\n");
 		}
 		else
 		{
-			printf("inside else %s\n", str2);
 			sub_argv[pos2] = NULL;
 			arg_aux[pos1] = sub_argv;
 			if (argv[pos + 1])
