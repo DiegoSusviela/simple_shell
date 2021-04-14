@@ -106,11 +106,11 @@ void cd(char **argv)
 	char *target, str5[] = "-";
 
 	if (!argv[1])
-		target = _strdup(_getenv("HOME"));
+		target = _getenv("HOME");
 	else
 		if (!_strcmp(argv[1], str5))
 		{
-			target = _strdup(_getenv("OLDPWD"));
+			target = _getenv("OLDPWD");
 			_puts(target);
 		}
 		else
