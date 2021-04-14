@@ -93,7 +93,7 @@ char ***separator(char **argv)
 	char ***arg_aux;
 	char **sub_argv;
 
-	printf("%s\n", str2);
+	printf("outside %s\n", str2);
 	if (!_strcmp(argv[0], str1))
 		return (NULL);
 
@@ -110,7 +110,7 @@ char ***separator(char **argv)
 		}
 		else
 		{
-			printf("%s\n", str2);
+			printf("inside else %s\n", str2);
 			sub_argv[pos2] = NULL;
 			arg_aux[pos1] = sub_argv;
 			if (argv[pos + 1])
