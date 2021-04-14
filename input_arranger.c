@@ -107,6 +107,7 @@ char ***separator(char **argv)
 		{
 			sub_argv[pos2] = _strdup(argv[pos]);
 			pos2++;
+			printf("enmtro al if\n");
 		}
 		else
 		{
