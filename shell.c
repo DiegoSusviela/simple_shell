@@ -82,8 +82,7 @@ void start_shell(void)
 		start_new_prompt();
 		write(1, "(. Y .) ", 8);
 	}
-	if (!find_and_run_command())
-
+	find_and_run_command();
 	start_shell();
 }
 
