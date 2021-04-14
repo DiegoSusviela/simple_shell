@@ -17,6 +17,7 @@
 #include <stdarg.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 typedef struct list_s
 {
