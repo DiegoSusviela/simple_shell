@@ -66,17 +66,13 @@ int check_paths(char **argv)
 {
 	list_t *path_aux = paths;
 	struct stat stats;
-	char *pathname, *tmp;
+	char *pathname;
 
 	while (path_aux)
 	{
 		pathname = _strdup(path_aux->str);
 		if (!safty_nets(pathname, "a", argv))
 			return (0);
-		/*tmp = _realloc(pathname, sizeof(pathname), BUFFSIZE);
-		if (!safty_nets(tmp, "ax", argv, pathname))
-			return (0);
-		pathname = tmp;*/
 		_strcat(pathname, argv[0]);
 		if (!stat(pathname, &stats))
 			break;
