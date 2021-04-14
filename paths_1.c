@@ -2,6 +2,13 @@
 
 extern list_t *paths;
 
+/**
+ * create_paths - Function that creates the paths
+ *
+ * Return: a pointer to the head of the linked list
+ *
+ */
+
 list_t *create_paths()
 {
 	char *path = _getenv("PATH"), *str1;
@@ -10,19 +17,19 @@ list_t *create_paths()
 
 	nodo = malloc(sizeof(list_t));
 	if (!nodo)
-		return(NULL);
+		return (NULL);
 	nodo->next = NULL;
 	head = nodo;
-	while(path[index])
+	while (path[index])
 	{
 		largo = 0;
-		while(path[index + largo] && path[index + largo] != ':')
+		while (path[index + largo] && path[index + largo] != ':')
 			largo++;
 		str1 = malloc(sizeof(char) * (largo + 2));
 		if (!safty_nets(str1, "p", head))
 			return (0);
 		count = 0;
-		while(path[index] && path[index] != ':')
+		while (path[index] && path[index] != ':')
 		{
 			str1[count] = path[index];
 			index++, count++;
@@ -40,12 +47,19 @@ list_t *create_paths()
 				return (NULL);
 			}
 			index++;
-		}
-		nodo->next = NULL;
+		} nodo->next = NULL;
 	}
 	free(path);
 	return (head);
 }
+
+/**
+ * check_paths - Function that checks all the paths
+ * @argv: argument variable
+ *
+ * Return: Something
+ *
+ */
 
 int check_paths(char **argv)
 {
