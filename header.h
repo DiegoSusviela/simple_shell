@@ -48,7 +48,7 @@ int _strlen(char *s);
 /*Free*/
 void liberar_pathname(char *pathname);
 void liberar_arg_aux(char ***arg_aux, int pos);
-static int safty_nets(char *checking, char *str5, ...);
+int safty_nets(char *checking, char *str5, ...);
 void liberar_paths(va_list list);
 void liberar_nodo(list_t *a_liberar);
 void liberar_argv(va_list list);

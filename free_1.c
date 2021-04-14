@@ -2,7 +2,7 @@
 
 extern list_t *paths;
 
-static int safty_nets(char *checking, char *str5, ...)
+int safty_nets(char *checking, char *str5, ...)
 {
 	int pos = 0, pos1 = 0;
 	va_list list;
