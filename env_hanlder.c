@@ -42,7 +42,7 @@ void print_env()
 	extern char **environ;
 
 	for (i = 0; environ[i] != NULL; i++)
-		printf("%s\n", environ[i]);
+		_puts(environ[i]);
 }
 
 void update_old_pwd()

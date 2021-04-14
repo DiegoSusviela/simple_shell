@@ -67,6 +67,7 @@ list_t *create_paths();
 
 /*Aux*/
 int largo(int *index);
+void _puts(char *str);
 
 /*Input*/
 char *take_input();

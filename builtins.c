@@ -16,7 +16,6 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 		{"unsetenv", unsetenv},*/
 		{NULL, NULL}
 	};
-	fflush(NULL);
 
 	while(built[i].f)
 	{
@@ -77,7 +76,7 @@ void cd(char **argv)
 		if (!_strcmp(argv[1], str5))
 		{
 			target = _getenv("OLDPWD");
-			printf("%s\n", target);
+			_puts(target);
 		}
 		else
 			target = _strdup(argv[1]);
