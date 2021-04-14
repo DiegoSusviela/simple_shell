@@ -2,7 +2,7 @@
 #include "header.h"
 
 extern list_t *paths;
-extern char **environ;
+
 
 /**
  * _getenv - Entry point
@@ -17,6 +17,7 @@ char *_getenv(const char *name)
 	int i, cont = 0, pos = 0;
 	size_t j;
 	char *path;
+	extern char **environ;
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
@@ -54,6 +55,7 @@ char *_getenv(const char *name)
 void print_env(void)
 {
 	int i;
+	extern char **environ;
 
 	for (i = 0; environ[i] != NULL; i++)
 		_puts(environ[i]);
@@ -72,6 +74,7 @@ void update_old_pwd(void)
 	size_t j;
 	char *name = "OLDPWD=";
 	char current_path[PATH_MAX];
+	extern char **environ;
 
 	getcwd(current_path, sizeof(current_path));
 
@@ -112,6 +115,7 @@ void update_pwd(void)
 	size_t j;
 	char *name = "PWD=";
 	char current_path[PATH_MAX];
+	extern char **environ;
 
 	getcwd(current_path, sizeof(current_path));
 
