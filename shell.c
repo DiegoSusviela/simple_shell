@@ -100,5 +100,5 @@ int main(void)
 	}
 	signal(SIGINT, SIG_IGN);
 	start_shell();
-	return (1);
+	return (0);
 }

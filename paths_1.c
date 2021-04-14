@@ -73,7 +73,7 @@ int check_paths(char **argv)
 		pathname = _strdup(path_aux->str);
 		if (!safty_nets(pathname, "a", argv))
 			return (0);
-		tmp = realloc(pathname, BUFFSIZE);
+		tmp = _realloc(pathname, BUFFSIZE);
 		if (!safty_nets(tmp, "ax", argv, pathname))
 			return (0);
 		pathname = tmp;
