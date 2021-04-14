@@ -102,7 +102,7 @@ char ***separator(char **argv)
 	pos = 0;
 	while (argv[pos])
 	{
-		if (_strcmp(argv[pos], str1) || argv[pos][0] == '\n'))
+		if (_strcmp(argv[pos], str1) || argv[pos][0] == '\n')
 		{
 			sub_argv[pos2] = _strdup(argv[pos]);
 			pos2++;
