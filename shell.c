@@ -530,12 +530,12 @@ int check_paths(char **argv)
 char ***separator(char **argv)
 {
 	int pos = 0, pos1 = 0, pos2 = 0;
-	char str1[] = ";";
-	if (!_strcmp(argv[0], str1))
-		return (NULL);
-
+	char str1[] = ";";	
 	char ***arg_aux;
 	char **sub_argv;
+
+	if (!_strcmp(argv[0], str1))
+		return (NULL);
 
 	arg_aux = malloc(sizeof(char ***) * 150);
 	sub_argv = malloc(sizeof(char **) * 250);
@@ -568,8 +568,8 @@ char ***separator(char **argv)
 
 int find_and_run_command()
 {
-	int *index, pos1 = 0;
-	char **argv, ***arg_aux;
+	int *index, pos1 = 0, flag3 = 0;
+	char **argv, ***arg_aux, *buffer, str1[] = "exit";
 
 	buffer = take_input(paths);
 	if (!safty_nets(buffer, "x", buffer))
@@ -604,8 +604,6 @@ int find_and_run_command()
 		test++;
 	}
 */
-	char str1[] = "exit";
-	int flag3 = 0;
 	fflush(NULL);
 	while (arg_aux[pos1])
 	{
