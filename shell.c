@@ -558,18 +558,16 @@ int find_and_run_command()
 
 	arg_aux = separator(argv);
 	if (!arg_aux)
-		write(1, "syntax error", 12);
-
-	fflush(NULL);
-
-	while (arg_aux[pos1])
-	{
-		if (!strcmp(arg_aux[pos1][0], str1))
-			flag3 = 1;
-		if (!check_builtins(pos1, flag3, arg_aux))
-			check_paths(arg_aux[pos1]);
-		pos1++;
-	}
+		write(1, "syntax error\n", 13);
+	else
+		while (arg_aux[pos1])
+		{
+			if (!strcmp(arg_aux[pos1][0], str1))
+				flag3 = 1;
+			if (!check_builtins(pos1, flag3, arg_aux))
+				check_paths(arg_aux[pos1]);
+			pos1++;
+		}
 	free(arg_aux);
 	return (1);
 }
