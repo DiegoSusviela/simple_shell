@@ -575,7 +575,10 @@ int find_and_run_command()
 void start_shell()
 {
 	if (isatty(STDIN_FILENO))
+	{
+		start_new_promtp();
 		write(1, "(. Y .) ", 8);
+	}
 	fflush(NULL);
 	find_and_run_command(paths);
 	start_shell(paths);
@@ -587,7 +590,6 @@ int main()
 	if (!paths)
 		write(1, "No mem to start shell", 21);
 	signal(SIGINT, SIG_IGN);
-	start_new_promtp();
 	start_shell(paths);
 	return (1);
 }
