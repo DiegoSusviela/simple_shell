@@ -21,8 +21,10 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 		{"exit", salir},
 		{"env", env},
 		{"cd", cd},
-		/*{"setenv", setenv},
-		{"unsetenv", unsetenv},*/
+		/**
+		*{"setenv", setenv},
+		*{"unsetenv", unsetenv},
+		*/
 		{NULL, NULL}
 	};
 

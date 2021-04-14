@@ -2,10 +2,18 @@
 #include "header.h"
 
 extern list_t *paths;
+extern char **environ;
+
+/**
+ * _getenv - Entry point
+ * @name: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
 
 char *_getenv(const char *name)
 {
-	extern char ** environ;
 	int i, cont = 0, pos = 0;
 	size_t j;
 	char *path;
@@ -18,36 +26,48 @@ char *_getenv(const char *name)
 		if (!_strncmp(environ[i], name, j))
 		{
 			j++;
-			while(environ[i][j + cont])
+			while (environ[i][j + cont])
 				cont++;
 			path = malloc(sizeof(char) * (cont + 1));
 			if (!path)
 				return (NULL);
-			while(environ[i][j])
+			while (environ[i][j])
 			{
 				path[pos] = environ[i][j];
 				pos++;
 				j++;
 			}
 			path[pos] = '\0';
-			return(path);
+			return (path);
 		}
 	}
 	return (NULL);
 }
 
-void print_env()
+/**
+ * print_env - Entry point
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
+void print_env(void)
 {
 	int i;
-	extern char **environ;
 
 	for (i = 0; environ[i] != NULL; i++)
 		_puts(environ[i]);
 }
 
-void update_old_pwd()
+/**
+ * update_old_pwd - Entry point
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
+void update_old_pwd(void)
 {
-	extern char ** environ;
 	int i, pos2 = 0;
 	size_t j;
 	char *name = "OLDPWD=";
@@ -78,9 +98,16 @@ void update_old_pwd()
 		}
 	}
 }
-void update_pwd()
+
+/**
+ * update_pwd - Entry point
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
+void update_pwd(void)
 {
-	extern char ** environ;
 	int i, pos2 = 0;
 	size_t j;
 	char *name = "PWD=";
