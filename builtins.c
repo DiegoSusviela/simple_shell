@@ -2,6 +2,15 @@
 
 extern list_t *paths;
 
+/**
+ * check_builtins - Entry point
+ * @pos1: wopa
+ * @flag: wopa
+ * @arg_aux: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
 
 int check_builtins(int pos1, int flag, char ***arg_aux)
 {
@@ -17,7 +26,7 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 		{NULL, NULL}
 	};
 
-	while(built[i].f)
+	while (built[i].f)
 	{
 		if (!_strcmp(arg_aux[pos1][0], built[i].command))
 			break;
@@ -27,7 +36,7 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 	{
 		if (flag)
 		{
-			argv = malloc(sizeof(char**) * BUFFSIZE);
+			argv = malloc(sizeof(char **) * BUFFSIZE);
 			while (arg_aux[pos1][iter])
 			{
 				argv[iter] = _strdup(arg_aux[pos1][iter]);
@@ -45,12 +54,20 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 	return (0);
 }
 
+/**
+ * salir - Entry point
+ * @pos1: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
 void salir(char **argv)
 {
 	int ato;
 
 	safty_nets(NULL, "p", paths);
-	if(argv[1])
+	if (argv[1])
 	{
 		ato = _atoi(argv[1]);
 		safty_nets(NULL, "a", argv);
@@ -60,11 +77,27 @@ void salir(char **argv)
 	exit(0);
 }
 
+/**
+ * env - Entry point
+ * @argv: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
 void env(char **argv)
 {
 	print_env();
 	safty_nets(NULL, "a", argv);
 }
+
+/**
+ * cd - Entry point
+ * @argv: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
 
 void cd(char **argv)
 {
