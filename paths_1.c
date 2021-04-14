@@ -47,7 +47,8 @@ list_t *create_paths()
 				return (NULL);
 			}
 			index++;
-		} nodo->next = NULL;
+		}
+		nodo->next = NULL;
 	}
 	free(path);
 	return (head);
