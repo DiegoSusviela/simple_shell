@@ -51,7 +51,7 @@ int find_and_run_command(void)
 
 	arg_aux = separator(argv);
 	if (!arg_aux)
-		write(1, "syntax error\n", 13);
+		_puts("syntax error");
 	else
 		while (arg_aux[pos1])
 		{
@@ -79,7 +79,6 @@ void start_shell(void)
 		start_new_prompt();
 		write(1, "(. Y .) ", 8);
 	}
-	fflush(NULL);
 	find_and_run_command();
 	start_shell();
 }

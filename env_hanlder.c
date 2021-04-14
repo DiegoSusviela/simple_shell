@@ -76,7 +76,7 @@ void update_old_pwd(void)
 	char current_path[PATH_MAX];
 	extern char **environ;
 
-	getcwd(current_path, sizeof(current_path));
+	getcwd(current_path, sizeof(current_path + 1));
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
@@ -117,7 +117,7 @@ void update_pwd(void)
 	char current_path[PATH_MAX];
 	extern char **environ;
 
-	getcwd(current_path, sizeof(current_path));
+	getcwd(current_path, sizeof(current_path + 1));
 
 	for (i = 0; environ[i] != '\0'; i++)
 	{
