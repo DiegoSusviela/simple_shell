@@ -89,7 +89,7 @@ int *space_remover(char *to_remove)
 char ***separator(char **argv)
 {
 	int pos = 0, pos1 = 0, pos2 = 0;
-	char str1[] = ";", str2[] = "\n";
+	char str1[] = ";";
 	char ***arg_aux;
 	char **sub_argv;
 
@@ -102,7 +102,7 @@ char ***separator(char **argv)
 	pos = 0;
 	while (argv[pos])
 	{
-		if (_strcmp(argv[pos], str1) || _strcmp(argv[pos], str2))
+		if (_strcmp(argv[pos], str1) || argv[pos][0] == '\n'))
 		{
 			sub_argv[pos2] = _strdup(argv[pos]);
 			pos2++;
