@@ -70,8 +70,8 @@ int _strcmp(char *s1, char *s2)
 
 /**
  * _strncmp - compares two strings with one delimiter
- * @s1: destination parameter
- * @s2: source parameter
+ * @str1: destination parameter
+ * @str2: source parameter
  * @n: delimiter
  *
  * Return: a pointer to the resulting string dest
