@@ -115,7 +115,10 @@ void cd(char **argv)
 		}
 		else
 			target = _strdup(argv[1]);
-	/*printf("%s\n", target);*/
+
+	_puts(target);
+	fflush(NULL);
+
 	update_old_pwd();
 	chdir(target);
 	update_pwd();
