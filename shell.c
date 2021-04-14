@@ -2,6 +2,13 @@
 
 list_t *paths;
 
+/**
+ * start_new_prompt - Entry point
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
 void start_new_prompt(void)
 {
 	static int first_time = 1;
@@ -15,7 +22,14 @@ void start_new_prompt(void)
 	}
 }
 
-int find_and_run_command()
+/**
+ * find_and_run_command - Entry point
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
+int find_and_run_command(void)
 {
 	int *index, pos1 = 0, flag3 = 0;
 	char **argv, ***arg_aux, *buffer, str1[] = "exit";
@@ -51,7 +65,14 @@ int find_and_run_command()
 	return (1);
 }
 
-void start_shell()
+/**
+ * start_shell - Entry point
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
+void start_shell(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
@@ -63,7 +84,14 @@ void start_shell()
 	start_shell(paths);
 }
 
-int main()
+/**
+ * main - Entry point
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
+int main(void)
 {
 	paths = create_paths();
 	if (!paths)
