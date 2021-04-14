@@ -558,7 +558,7 @@ int find_and_run_command()
 
 	arg_aux = separator(argv);
 	if (!arg_aux)
-		write(1, "syntax error\n", 13);
+		write(1, "syntax error", 12);
 
 	fflush(NULL);
 
