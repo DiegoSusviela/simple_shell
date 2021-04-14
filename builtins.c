@@ -58,7 +58,7 @@ int check_builtins(int pos1, int flag, char ***arg_aux)
 
 /**
  * salir - Entry point
- * @pos1: wopa
+ * @argv: wopa
  *
  * Description: Show a message blablabla
  * Return: Always 0 (Success)

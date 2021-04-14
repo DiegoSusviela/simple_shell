@@ -2,7 +2,15 @@
 
 extern list_t *paths;
 
-char *take_input()
+/**
+ * take_input - Entry point
+ * @name: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
+char *take_input(void)
 {
 	char *buffer = malloc(sizeof(char) * BUFFSIZE + 1);
 	ssize_t readcount = 0;
@@ -34,19 +42,27 @@ char *take_input()
 	return (buffer);
 }
 
+/**
+ * space_remover - Entry point
+ * @to_remove: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
 int *space_remover(char *to_remove)
 {
 	int pos_rem = 0, pos_cont = 0, count = 0, *index;
 
 	index = malloc(sizeof(int) * BUFFSIZE);
 	if (!index)
-		return(NULL);
+		return (NULL);
 	while (to_remove[pos_rem] == ' ')
 	{
 		to_remove[pos_rem] = '\0';
 		pos_rem++;
 	}
-	while(to_remove[pos_rem])
+	while (to_remove[pos_rem])
 	{
 		index[pos_cont] = pos_rem;
 		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
@@ -62,6 +78,14 @@ int *space_remover(char *to_remove)
 	index[pos_cont] = 0;
 	return (index);
 }
+
+/**
+ * separator - Entry point
+ * @argv: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
 
 char ***separator(char **argv)
 {
@@ -102,15 +126,23 @@ char ***separator(char **argv)
 	return (arg_aux);
 }
 
+/**
+ * ar - Entry point
+ * @buffer: wopa
+ * @index: ea
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
+
 char **ar(char *buffer, int *index)
 {
 	char **argv, *aux;
 	int cont = 0, iter;
 
-
 	argv = malloc(sizeof(char *) * (largo(index) + 1));
 	if (!argv)
-		return(NULL);
+		return (NULL);
 	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
