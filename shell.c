@@ -2,10 +2,6 @@
 
 list_t *paths;
 
-char **global_aliases = NULL;
-
-char *previous_path;
-
 void liberar_buffer(va_list list)
 {
 	char *c = va_arg(list, char *);
@@ -56,24 +52,7 @@ void liberar_paths(va_list list)
 		loc = aux;
 	}
 }
-/*
-char **start_alias()
-{
-	int i = 0;
-	char **hardcode = malloc(9 * sizeof(char *));
 
-	hardcode[0] = strcpy("egrep='egrep --color=auto'");
-	hardcode[1] = strcpy("fgrep='fgrep --color=auto'");
-	hardcode[2] = strcpy("grep='grep --color=auto'");
-	hardcode[3] = strcpy("l='ls -CF'");
-	hardcode[4] = strcpy("la='ls -A'");
-	hardcode[5] = strcpy("ll='ls -alF'");
-	hardcode[6] = strcpy("ls='ls --color=auto'");
-	hardcode[7] = NULL;
-
-	return (hardcode);
-}
-*/
 static int safty_nets(char *checking, char *str5, ...)
 {
 	int pos = 0, pos1 = 0;
@@ -293,11 +272,6 @@ int *space_remover(char *to_remove)
 	index[pos_cont] = 0;
 	return (index);
 }
-/*
-ssize_t _read(char *buffer)
-{
-	return ();
-}*/
 
 char *take_input()
 {
@@ -431,7 +405,6 @@ void env(char **argv)
 void cd(char **argv)
 {
 	char *target, str5[] = "-";
-	/*int flag = 0;*/
 
 	if (!argv[1])
 		target = _getenv("HOME");
@@ -442,10 +415,7 @@ void cd(char **argv)
 			printf("%s\n", target);
 		}
 		else
-		/*{*/
 			target = _strdup(argv[1]);
-			/*flag = 1;
-		}*/
 	update_old_pwd();
 	chdir(target);
 	update_pwd();
@@ -588,23 +558,10 @@ int find_and_run_command()
 
 	arg_aux = separator(argv);
 	if (!arg_aux)
-		printf("syntax error\n");
+		write(1, "syntax error\n", 13);
 
 	fflush(NULL);
-	
-/*	while (arg_aux[test])
-	{
-		i = 0;
-		while (arg_aux[test][i])
-		{
-			printf("%s\n", arg_aux[test][i]);
-			fflush(NULL);
-			i++;
-		}
-		test++;
-	}
-*/
-	fflush(NULL);
+
 	while (arg_aux[pos1])
 	{
 		if (!strcmp(arg_aux[pos1][0], str1))
@@ -613,7 +570,6 @@ int find_and_run_command()
 			check_paths(arg_aux[pos1]);
 		pos1++;
 	}
-	/*liberar_arg_aux(arg_aux);*/
 	free(arg_aux);
 	return (1);
 }
@@ -630,9 +586,8 @@ void start_shell()
 int main()
 {
 	paths = create_paths();
-	/*global_aliases = start_alias();*/
 	if (!paths)
-		printf("No mem to start shell\n");
+		write(1, "No mem to start shell", 21);
 	signal(SIGINT, SIG_IGN);
 	start_new_promtp();
 	start_shell(paths);
