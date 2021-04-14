@@ -80,8 +80,8 @@ void start_shell(void)
 		write(1, "(. Y .) ", 8);
 	}
 	fflush(NULL);
-	find_and_run_command(paths);
-	start_shell(paths);
+	find_and_run_command();
+	start_shell();
 }
 
 /**
@@ -100,6 +100,6 @@ int main(void)
 		exit(EXIT_FAILURE);
 	}
 	signal(SIGINT, SIG_IGN);
-	start_shell(paths);
+	start_shell();
 	return (1);
 }
