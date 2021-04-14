@@ -94,7 +94,7 @@ void liberar_arg_aux(char ***arg_aux, int pos)
 	}
 }
 
-void start_new_promtp(void)
+void start_new_prompt(void)
 {
 	static int first_time = 1;
 	const char *CLEAR_SCREEN_ANSI;
@@ -488,7 +488,7 @@ int check_paths(char **argv)
 	}
 	if (!path_aux)
 		pathname =	_strdup(argv[0]);
-	
+
 	if (fork() == 0)
 		if (execve(pathname, argv, NULL) == -1)
 			perror(argv[0]);
@@ -500,7 +500,7 @@ int check_paths(char **argv)
 char ***separator(char **argv)
 {
 	int pos = 0, pos1 = 0, pos2 = 0;
-	char str1[] = ";";	
+	char str1[] = ";";
 	char ***arg_aux;
 	char **sub_argv;
 
@@ -576,7 +576,7 @@ void start_shell()
 {
 	if (isatty(STDIN_FILENO))
 	{
-		start_new_promtp();
+		start_new_prompt();
 		write(1, "(. Y .) ", 8);
 	}
 	fflush(NULL);
@@ -588,7 +588,10 @@ int main()
 {
 	paths = create_paths();
 	if (!paths)
-		write(1, "No mem to start shell", 21);
+	{
+		perror("No mem to start shell");
+		exit(EXIT_FAILURE);
+	}
 	signal(SIGINT, SIG_IGN);
 	start_shell(paths);
 	return (1);
