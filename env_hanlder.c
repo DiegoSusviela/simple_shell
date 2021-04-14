@@ -58,7 +58,10 @@ void print_env(void)
 	extern char **environ;
 
 	for (i = 0; environ[i] != NULL; i++)
+	{
 		_puts(environ[i]);
+		_putchar('\n');
+	}
 }
 
 /**

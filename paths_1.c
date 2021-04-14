@@ -93,6 +93,7 @@ int check_paths(char **argv)
 			_puts(": ");
 			_puts(argv[0]);
 			_puts(": not found");
+			_putchar('\n');
 		}
 	wait(NULL);
 	free(pathname);

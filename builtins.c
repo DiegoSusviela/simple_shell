@@ -112,13 +112,10 @@ void cd(char **argv)
 		{
 			target = _getenv("OLDPWD");
 			_puts(target);
+			_putchar('\n');
 		}
 		else
 			target = _strdup(argv[1]);
-
-	_puts(target);
-	fflush(NULL);
-
 	update_old_pwd();
 	chdir(target);
 	update_pwd();

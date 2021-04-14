@@ -53,7 +53,10 @@ int find_and_run_command(void)
 
 	arg_aux = separator(argv);
 	if (!arg_aux)
+	{
 		_puts("syntax error");
+		_putchar('\n');
+	}
 	else
 		while (arg_aux[pos1])
 		{

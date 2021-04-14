@@ -37,7 +37,6 @@ void _puts(char *str)
 		_putchar(*(str + marker));
 		marker++;
 	}
-	_putchar('\n');
 }
 
 /**
