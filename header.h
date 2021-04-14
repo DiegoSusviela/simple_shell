@@ -1,7 +1,7 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-#define BUFFSIZE 1024
+#define BUFFSIZE 7000
 
 #include <unistd.h>
 #include <stdio.h>
