@@ -69,7 +69,7 @@ list_t *create_paths();
 int largo(int *index);
 void _puts(char *str);
 int _putchar(char c);
-char *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /*Input*/
 char *take_input();
