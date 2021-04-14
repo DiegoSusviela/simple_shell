@@ -4,7 +4,6 @@ extern list_t *paths;
 
 /**
  * take_input - Entry point
- * @name: wopa
  *
  * Description: Show a message blablabla
  * Return: Always 0 (Success)
