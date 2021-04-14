@@ -64,7 +64,7 @@ int find_and_run_command(void)
 				flag3 = 1;
 			if (!check_builtins(pos1, flag3, arg_aux))
 				if (!check_paths(arg_aux[pos1]))
-					return (0);
+					return (2);
 			pos1++;
 		}
 	free(arg_aux);
