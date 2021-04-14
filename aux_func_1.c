@@ -66,7 +66,7 @@ int _putchar(char c)
 
 char *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char *new;
+	char *new = NULL;
 	unsigned int i;
 	char *PTR = ptr;
 
