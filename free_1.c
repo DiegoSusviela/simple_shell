@@ -2,6 +2,15 @@
 
 extern list_t *paths;
 
+/**
+ * safty_nets - safety nets
+ * @checking: parameter to check
+ * @str5: character to free
+ *
+ * Return: returns 1 if not found, 0 in success.
+ *
+ */
+
 int safty_nets(char *checking, char *str5, ...)
 {
 	int pos = 0, pos1 = 0;
@@ -33,12 +42,18 @@ int safty_nets(char *checking, char *str5, ...)
 	return (1);
 }
 
+/**
+ * liberar_argv - Function to free Argv
+ * @list: list parameter
+ *
+ */
+
 void liberar_argv(va_list list)
 {
 	int word_count = 0;
 	char **argv = va_arg(list, char **);
 
-	while(argv[word_count])
+	while (argv[word_count])
 	{
 		free(argv[word_count]);
 		argv[word_count] = NULL;
@@ -47,6 +62,12 @@ void liberar_argv(va_list list)
 	free(argv);
 	argv = NULL;
 }
+
+/**
+ * liberar_paths - Function to free Paths
+ * @list: list parameter
+ *
+ */
 
 void liberar_paths(va_list list)
 {
@@ -61,14 +82,27 @@ void liberar_paths(va_list list)
 	}
 }
 
+/**
+ * liberar_buffer - Function to free buffer
+ * @list: list parameter
+ *
+ */
+
 void liberar_buffer(va_list list)
 {
 	char *c = va_arg(list, char *);
+
 	free(c);
 }
 
+/**
+ * liberar_index - Function to free index
+ * @list: list parameter
+ *
+ */
 void liberar_index(va_list list)
 {
 	int *i = va_arg(list, int *);
+
 	free(i);
 }
