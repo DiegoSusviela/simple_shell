@@ -1,6 +1,8 @@
 #include "header.h"
 
 extern list_t *paths;
+extern char *wopa;
+extern int wopa2;
 
 /**
  * create_paths - Function that creates the paths
@@ -84,7 +86,14 @@ int check_paths(char **argv)
 
 	if (fork() == 0)
 		if (execve(pathname, argv, NULL) == -1)
-			perror(argv[0]);
+		{
+			_puts(wopa);
+			_puts(": ");
+			_putchar(wopa2 + '0');
+			_puts(": ");
+			_puts(argv[0]);
+			_puts(": not found");
+		}
 	wait(NULL);
 	free(pathname);
 	return (!safty_nets(NULL, "a", argv));

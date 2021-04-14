@@ -1,6 +1,8 @@
 #include "header.h"
 
 list_t *paths;
+char *wopa;
+int wopa2;
 
 /**
  * start_new_prompt - Entry point
@@ -58,7 +60,8 @@ int find_and_run_command(void)
 			if (!_strcmp(arg_aux[pos1][0], str1))
 				flag3 = 1;
 			if (!check_builtins(pos1, flag3, arg_aux))
-				check_paths(arg_aux[pos1]);
+				if (!check_paths(arg_aux[pos1]))
+					return (0);
 			pos1++;
 		}
 	free(arg_aux);
@@ -79,7 +82,8 @@ void start_shell(void)
 		start_new_prompt();
 		write(1, "(. Y .) ", 8);
 	}
-	find_and_run_command();
+	if (!find_and_run_command())
+
 	start_shell();
 }
 
@@ -90,8 +94,10 @@ void start_shell(void)
  * Return: Always 0 (Success)
  */
 
-int main(void)
+int main(int argc, char *argv[])
 {
+	wopa = argv[0];
+	wopa2 = argc;
 	paths = create_paths();
 	if (!paths)
 	{
