@@ -64,7 +64,7 @@ int _putchar(char c)
  * Return: the pointer to the newly created space in memory
  */
 
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+char *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	char *new;
 	unsigned int i;
