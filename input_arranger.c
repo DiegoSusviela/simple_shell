@@ -89,7 +89,7 @@ int *space_remover(char *to_remove)
 char ***separator(char **argv)
 {
 	int pos = 0, pos1 = 0, pos2 = 0;
-	char str1[] = ";", *str2;
+	char str1[] = ";", str2[5];
 	char ***arg_aux;
 	char **sub_argv;
 
