@@ -1,11 +1,18 @@
 #include "header.h"
 
-extern list_t *paths;
+/**
+ * largo - Entry point
+ * @index: wopa
+ *
+ * Description: Show a message blablabla
+ * Return: Always 0 (Success)
+ */
 
 int largo(int *index)
 {
 	int ret = 1, pos = 1;
-	while(index[pos])
+
+	while (index[pos])
 	{
 		ret++;
 		pos++;
@@ -33,7 +40,8 @@ void _puts(char *str)
 	_putchar('\n');
 }
 
-/*
+/**
+ *	_putchar - Entry point
  * @c: The character to print
  *
  * Return: On success 1.
