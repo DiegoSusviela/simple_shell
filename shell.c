@@ -55,7 +55,7 @@ int find_and_run_command(void)
 	else
 		while (arg_aux[pos1])
 		{
-			if (!strcmp(arg_aux[pos1][0], str1))
+			if (!_strcmp(arg_aux[pos1][0], str1))
 				flag3 = 1;
 			if (!check_builtins(pos1, flag3, arg_aux))
 				check_paths(arg_aux[pos1]);
