@@ -106,15 +106,16 @@ void cd(char **argv)
 	char *target, str5[] = "-";
 
 	if (!argv[1])
-		target = _getenv("HOME");
+		target = _strdup(_getenv("HOME"));
 	else
 		if (!_strcmp(argv[1], str5))
 		{
-			target = _getenv("OLDPWD");
+			target = _strdup(_getenv("OLDPWD"));
 			_puts(target);
 		}
 		else
 			target = _strdup(argv[1]);
+	printf("%s\n", target);
 	update_old_pwd();
 	chdir(target);
 	update_pwd();
