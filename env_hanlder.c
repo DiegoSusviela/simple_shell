@@ -124,7 +124,7 @@ void update_pwd(void)
 		for (j = 0; environ[i][j] != '='; j++)
 		{
 		}
-		if (!_strncmp(environ[i], name, j))
+		if (!strncmp(environ[i], name, j))
 		{
 			j = 0;
 			while (name[pos2])
