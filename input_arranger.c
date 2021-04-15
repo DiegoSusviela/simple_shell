@@ -31,7 +31,7 @@ char *take_input(void)
 		buffer[readcount - 1] = '\0';
 	while (buffer[i])
 	{
-		if (buffer[i]) == '\n')
+		if (buffer[i] == '\n')
 			buffer[i] = ';';
 		if (buffer[0] == '#' || (buffer[i] == '#' && buffer[i - 1] == ' '))
 		{
@@ -145,7 +145,7 @@ char ***separator(char **argv)
 
 char **ar(char *buffer, int *index)
 {
-	char **argv, *aux;
+	char **argv;
 	int cont = 0, iter;
 
 	argv = malloc(sizeof(char *) * (largo(index) + 1));
@@ -153,7 +153,6 @@ char **ar(char *buffer, int *index)
 		return (NULL);
 	for (cont = 0; cont < largo(index); cont++)
 	{
-		aux = &buffer[index[cont]];
 		argv[cont] = malloc(sizeof(char) * BUFFSIZE);
 		if (!argv[cont])
 		{
