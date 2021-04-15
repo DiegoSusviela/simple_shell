@@ -3,6 +3,7 @@
 list_t *paths;
 char *wopa;
 int wopa2;
+int exit_errorn;
 
 /**
  * start_new_prompt - Entry point
@@ -108,5 +109,5 @@ int main(int argc, char *argv[])
 	}
 	signal(SIGINT, SIG_IGN);
 	start_shell();
-	return (0);
+	return (exit_errorn);
 }

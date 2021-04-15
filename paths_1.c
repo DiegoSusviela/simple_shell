@@ -69,6 +69,7 @@ int check_paths(char **argv)
 	list_t *path_aux = paths;
 	struct stat stats;
 	char *pathname;
+	int errorn = 0;
 
 	while (path_aux)
 	{
@@ -85,7 +86,9 @@ int check_paths(char **argv)
 		pathname =	_strdup(argv[0]);
 
 	if (fork() == 0)
-		if (execve(pathname, argv, NULL) == -1)
+	{
+		errorn = execve(pathname, argv, NULL);
+		if (errorn == -1 || errorn == 127 || errorn == 3)
 		{
 			_puts(wopa);
 			_puts(": ");
@@ -95,7 +98,9 @@ int check_paths(char **argv)
 			_puts(": not found");
 			_putchar('\n');
 		}
+	}
 	wait(NULL);
 	free(pathname);
-	return (!safty_nets(NULL, "a", argv));
+	safty_nets(NULL, "a", argv);
+	return (errorn);
 }
