@@ -1,6 +1,6 @@
 <img src="https://i.imgur.com/I6m9zIU.png" width=100%>
 <h2 align=center> 🐚 SIMPLE SHELL PROJECT🐚 </h2>
-This is a colaboration project for the end of the first tremeter at Holberton School between [**Diego**](https://github.com/DiegoSusviela) and [**Toshi**](https://github.com/toshi-uy).
+This is a colaboration project for the end of the first tremeter at Holberton School between Diego and Toshi. #Autors
 It was a 15 day project where we had to replicate a simple command line prompt inspired as much as we could on the basic "sh" shell or the "bash" shell. Our basic shell can run programs and built-in commands.
 
 ### Instalation
