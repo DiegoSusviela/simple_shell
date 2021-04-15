@@ -83,7 +83,7 @@ void start_shell(void)
 	if (isatty(STDIN_FILENO))
 	{
 		start_new_prompt();
-		write(1, "(. Y .) ", 8);
+		_puts("A sh*t here we go again -> ");
 	}
 	find_and_run_command();
 	start_shell();
