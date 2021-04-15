@@ -28,7 +28,7 @@ char *take_input(void)
 		exit(0);
 	}
 	if (buffer[readcount - 1] == '\n' || buffer[readcount - 1] == '\t')
-		buffer[readcount - 1] = '\0';
+		buffer[readcount - 1] = ' ';
 	while (buffer[i])
 	{
 		if (buffer[0] == '#' || (buffer[i] == '#' && buffer[i - 1] == ' '))
