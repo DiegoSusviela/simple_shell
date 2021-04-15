@@ -66,12 +66,19 @@ int *space_remover(char *to_remove)
 	while (to_remove[pos_rem])
 	{
 		index[pos_cont] = pos_rem;
-		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem] != ';' && to_remove[pos_rem])
-			pos_rem++;
-		if (to_remove[pos_rem] == ';')
+		if (to_remove[pos_rem] != ';')
 		{
-			pos_cont++;
-			index[pos_cont] = pos_rem;
+			while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem] != ';' && to_remove[pos_rem])
+				pos_rem++;
+			if (to_remove[pos_rem] == ';')
+			{
+				pos_cont++;
+				index[pos_cont] = pos_rem;
+				to_remove[pos_rem] = '\0';
+			}
+		}
+		else
+		{
 			to_remove[pos_rem] = '\0';
 			pos_rem++;
 		}
