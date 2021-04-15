@@ -31,7 +31,7 @@ char *take_input(void)
 		buffer[readcount - 1] = '\0';
 	while (buffer[i])
 	{
-		if (buffer[i] == '\n')
+		if (buffer[i]) == '\n')
 			buffer[i] = ';';
 		if (buffer[0] == '#' || (buffer[i] == '#' && buffer[i - 1] == ' '))
 		{
@@ -53,7 +53,7 @@ char *take_input(void)
 
 int *space_remover(char *to_remove)
 {
-	int pos_rem = 0, pos_cont = 0, count = 0, *index;
+	int pos_rem = 0, pos_cont = 0, *index;
 
 	index = malloc(sizeof(int) * BUFFSIZE);
 	if (!index)
@@ -66,14 +66,21 @@ int *space_remover(char *to_remove)
 	while (to_remove[pos_rem])
 	{
 		index[pos_cont] = pos_rem;
-		while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
+		if (to_remove[pos_rem] != ';')
+		{
+			while (to_remove[pos_rem] !=  ' ' && to_remove[pos_rem])
+				pos_rem++;
+		}
+		else
+		{
+			to_remove[pos_rem] = '\0';
 			pos_rem++;
+		}
 		while (to_remove[pos_rem] == ' ')
 		{
 			to_remove[pos_rem] = '\0';
 			pos_rem++;
 		}
-		count++;
 		pos_cont++;
 	}
 	index[pos_cont] = 0;
@@ -139,15 +146,15 @@ char ***separator(char **argv)
 char **ar(char *buffer, int *index)
 {
 	char **argv, *aux;
-	int cont = 0, iter, wopa = 0;
+	int cont = 0, iter;
 
-	argv = malloc(sizeof(char *) * 1024);
+	argv = malloc(sizeof(char *) * (largo(index) + 1));
 	if (!argv)
 		return (NULL);
-	for (cont = 0; cont < largo(index) + wopa; cont++)
+	for (cont = 0; cont < largo(index); cont++)
 	{
 		aux = &buffer[index[cont]];
-		argv[cont] = malloc(sizeof(char) * (_strlen(aux) + 1));
+		argv[cont] = malloc(sizeof(char) * BUFFSIZE);
 		if (!argv[cont])
 		{
 			while (cont >= 0)
@@ -160,24 +167,16 @@ char **ar(char *buffer, int *index)
 		iter = 0;
 		while (buffer[index[cont] + iter])
 		{
-			if (buffer[index[cont] + iter] == ';')
-			{
-				argv[cont][iter] = '\0';
-				cont++;
-				wopa++;
-				argv[cont] = malloc(sizeof(char) * 1);
-				argv[cont][0] = ';';
-				argv[cont][1] = '\0';
-				cont++;
-				wopa++;
-				iter++;
-				if (buffer[index[cont] + iter])
-					argv[cont] = malloc(sizeof(char) * 1024);
-				continue;
-			}
 			argv[cont][iter] = buffer[index[cont] + iter];
 			iter++;
 		}
+		if (!iter)
+		{
+			argv[cont][iter] = ';';
+			argv[cont][iter + 1] = '\0';
+		}
+		else
+			argv[cont][iter] = buffer[index[cont] + iter];
 	}
 	argv[cont] = NULL;
 	return (argv);
