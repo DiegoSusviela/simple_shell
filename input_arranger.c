@@ -31,7 +31,7 @@ char *take_input(void)
 		buffer[readcount - 1] = '\0';
 	while (buffer[i])
 	{
-		if (buffer[i]) == '\n')
+		if (buffer[i] == '\n')
 			buffer[i] = ';';
 		if (buffer[0] == '#' || (buffer[i] == '#' && buffer[i - 1] == ' '))
 		{
@@ -139,7 +139,7 @@ char ***separator(char **argv)
 char **ar(char *buffer, int *index)
 {
 	char **argv, *aux;
-	int cont = 0, iter, flag = 0, wopa = 0;
+	int cont = 0, iter, wopa = 0;
 
 	argv = malloc(sizeof(char *) * 1024);
 	if (!argv)
