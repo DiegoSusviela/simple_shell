@@ -1,8 +1,33 @@
 <img src="https://i.imgur.com/I6m9zIU.png" width=100%>
 <h2 align=center> 🐚 SIMPLE SHELL PROJECT🐚 </h2>
-This is a colaboration project for the end of the first tremeter at Holberton School between Diego and Toshi.
+
+## Table of Contents
+-   [Description](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#--simple-shell-project-)
+-  [Getting Started](https://github.com/FreeJules/simple_shell#getting-started)
+	-  [Task Requirments](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#task-requirements)
+	- [Instalation](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#instalation)
+	-  [EXAMPLES](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#examples)
+-  [File Contents](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#file-contents)
+-  [Builtin Commands](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#builtins-commands)
+- [Extras](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#extras)
+-  [**Authors**](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#authors)
+
+## Description
+This is a colaboration project for the end of the first tremeter at Holberton School between [Diego and Toshi.](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#authors)
 It was a 15 day project where we had to replicate a simple command line prompt inspired as much as we could on the basic "sh" shell or the "bash" shell. Our basic shell can run programs and built-in commands.
 
+## Getting Started
+### TASK REQUIREMENTS
+-   Allowed editors:  _vi_,  _vim_,  _emacs_
+-   All your files will be compiled on Ubuntu 14.04 LTS.
+-   Your programs and functions will be compiled with  _gcc 4.8.4_  using the flags  _-Wall -Werror -Wextra_  and  _-pedantic_
+-   All your files should end with a new line
+-   A  _README.md_  file, at the root of the folder of the project is mandatory
+-   Your code should use the  _Betty_  style. It will be checked using  _betty-style.pl_  and  _betty-doc.pl_
+-   No more than 5 functions per file.
+-   Your shell should not have any memory leaks.
+-   All your header files should be include guarded.
+-   Use system calls only when you need to.
 ### Instalation
 If you wish to install this you will need to have Linux OS or a virtual machine, and can run Gcc >= 4.8.4.
 #### Steps to compile and execute.
@@ -57,17 +82,6 @@ File | Description
   **string_handlers.c** | handles all strings modifiers
   **shell.c** | main function for our shell
 
-### TASK REQUIREMENTS
--   Allowed editors:  _vi_,  _vim_,  _emacs_
--   All your files will be compiled on Ubuntu 14.04 LTS.
--   Your programs and functions will be compiled with  _gcc 4.8.4_  using the flags  _-Wall -Werror -Wextra_  and  _-pedantic_
--   All your files should end with a new line
--   A  _README.md_  file, at the root of the folder of the project is mandatory
--   Your code should use the  _Betty_  style. It will be checked using  _betty-style.pl_  and  _betty-doc.pl_
--   No more than 5 functions per file.
--   Your shell should not have any memory leaks.
--   All your header files should be include guarded.
--   Use system calls only when you need to.
 ## Builtins Commands
 
 **Command** | **Description**
