@@ -31,7 +31,7 @@ char *take_input(void)
 		buffer[readcount - 1] = '\0';
 	while (buffer[i])
 	{
-		if (buffer[i]) == '\n')
+		if (buffer[i] == '\n')
 			buffer[i] = ' '; 
 		if (buffer[0] == '#' || (buffer[i] == '#' && buffer[i - 1] == ' '))
 		{
