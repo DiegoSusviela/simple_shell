@@ -3,7 +3,7 @@
 
 ## Table of Contents
 -  [Description](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#description)
--  [Getting Started](https://github.com/FreeJules/simple_shell#getting-started)
+-  [Getting Started](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#getting-started)
 	-  [Task Requirments](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#task-requirements)
 	- [Instalation](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#instalation)
 	-  [EXAMPLES](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#examples)
