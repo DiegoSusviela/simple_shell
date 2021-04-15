@@ -2,14 +2,14 @@
 <h2 align=center> 🐚 SIMPLE SHELL PROJECT🐚 </h2>
 
 ## Table of Contents
--   [Description](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#--simple-shell-project-)
+-  [Description](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#description)
 -  [Getting Started](https://github.com/FreeJules/simple_shell#getting-started)
 	-  [Task Requirments](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#task-requirements)
 	- [Instalation](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#instalation)
 	-  [EXAMPLES](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#examples)
 -  [File Contents](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#file-contents)
 -  [Builtin Commands](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#builtins-commands)
-- [Extras](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#extras)
+-  [Extras](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#extras)
 -  [**Authors**](https://github.com/DiegoSusviela/simple_shell/blob/main/README.md#authors)
 
 ## Description
